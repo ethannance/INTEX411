@@ -62,24 +62,12 @@ app.UseSession(); // Add UseSession middleware
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
 
-app.MapControllerRoute(
-    name: "pagenumandtype",
-    pattern: "{bookType}/{pageNum}",
-    defaults: new { Controller = "Home", action = "Index" });
+app.MapControllerRoute("pagenumandtype", "{bookType}/{pageNum}", new { Controller = "Home", action = "Index" });
+app.MapControllerRoute("pagination", "{pageNum}", new { Controller = "Home", action = "Index", pageNum = 1 });
+app.MapControllerRoute("bookType", "{bookType}", new { Controller = "Home", action = "Index", pageNum = 1 });
 
-app.MapControllerRoute(
-    name: "pagination",
-    pattern: "{pageNum}",
-    defaults: new { Controller = "Home", action = "Index", pageNum = 1 });
-
-app.MapControllerRoute(
-    name: "bookType",
-    pattern: "{bookType}",
-    defaults: new { Controller = "Home", action = "Index", pageNum = 1 });
 
 app.MapDefaultControllerRoute();
 app.MapRazorPages();
