@@ -1,7 +1,7 @@
 using AuthLab2.Data;
+using AuthLab2.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Sqlite;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -14,16 +14,30 @@ services.AddAuthentication().AddGoogle(googleOptions =>
 });
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
+var connectionString = configuration.GetConnectionString("DefaultConnection")
+    ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+
+services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite(connectionString));
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+services.AddDatabaseDeveloperPageExceptionFilter();
+
+services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
-builder.Services.AddControllersWithViews();
 
+services.AddControllersWithViews();
 
+services.AddDbContext<BookstoreContext>(options =>
+{
+    options.UseSqlite(configuration["ConnectionStrings:BookConnection"]);
+});
+
+services.AddScoped<IBookRepository, EFBookRepository>();
+
+services.AddRazorPages();
+
+services.AddDistributedMemoryCache();
+services.AddSession(); // Register session services
 
 var app = builder.Build();
 
@@ -35,7 +49,6 @@ if (app.Environment.IsDevelopment())
 else
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -44,11 +57,31 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-app.MapRazorPages();
+app.UseSession(); // Add UseSession middleware
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "pagenumandtype",
+    pattern: "{bookType}/{pageNum}",
+    defaults: new { Controller = "Home", action = "Index" });
+
+app.MapControllerRoute(
+    name: "pagination",
+    pattern: "{pageNum}",
+    defaults: new { Controller = "Home", action = "Index", pageNum = 1 });
+
+app.MapControllerRoute(
+    name: "bookType",
+    pattern: "{bookType}",
+    defaults: new { Controller = "Home", action = "Index", pageNum = 1 });
+
+app.MapDefaultControllerRoute();
+app.MapRazorPages();
+
 app.Run();

@@ -28,6 +28,10 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Secrets">Secrets</a>
                         </li>
+                        <li class="nav-item">
+                            <a asp-page="/Predict" class="btn btn-primary m-lg-2">Predictions</a>
+                        </li>
+
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
@@ -52,3 +56,10 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+
+
+
+
+
+

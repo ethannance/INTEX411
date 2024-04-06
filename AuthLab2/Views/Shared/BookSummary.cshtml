@@ -1,0 +1,31 @@
+﻿@using AuthLab2.Infrastructure
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model Book
+
+<div class="card m-1 p-1">
+    <h4>
+        @Model.Title
+        <span class="badge rounded-pill bg-primary text-white float-end"><small>Author: @Model.Author</small></span>
+    </h4>
+    <ul>
+        <li>Publisher: @Model.Publisher</li>
+        <li>ISBN: @Model.Isbn</li>
+        <li>Classification: @Model.Classification</li>
+        <li>Category: @Model.Category</li>
+        <li>Page Count: @Model.PageCount</li>
+        <li>Price: $@Model.Price</li>
+
+    </ul>
+
+    <form id=@Model.BookId method="post" asp-page="/Cart">
+        <input type="hidden" asp-for="BookId" />
+        <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+        <button type="submit" class="btn-outline-success btn-sm float-end">Add to Cart</button>
+    </form>
+    
+</div>
