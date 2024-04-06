@@ -1,7 +1,51 @@
 ﻿@page
-
+@model AuthLab2.Pages.PredictModel
 @{
     ViewData["Title"] = "Book Predictions";
 }
 
-<h1>Fill predictions later</h1>
+<style>
+    .table-responsive {
+        overflow-x: auto;
+    }
+
+    .table {
+        width: auto;
+        margin-bottom: 0;
+    }
+
+    .prediction-cell {
+        background-color: #e0f2f1;
+    }
+</style>
+
+<h2>Predictions</h2>
+<div class="full-width-table">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Author</th>
+                <th>Publisher</th>
+                <th>Classification</th>
+                <th>Actual Category</th>
+                <th>Predicted Category</th>
+                <th>PageCount</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.BookPredictions) // Adjust according to your actual model structure
+            {
+                <tr>
+                    <td>@item.Book.Author</td>
+                    <td>@item.Book.Publisher</td>
+                    <td>@item.Book.Classification</td>
+                    <td>@item.Book.Category</td>
+                    <td class="prediction-cell">@item.Prediction</td>
+                    <td>@item.Book.PageCount</td>
+                    <td>@item.Book.Price</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

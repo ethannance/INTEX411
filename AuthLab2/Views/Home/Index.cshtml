@@ -2,18 +2,27 @@
     ViewData["Title"] = "Home Page";
 }
 
-<!--Contains a model with other models in it-->
-@model BooksListViewModel
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar with book types -->
+        <div class="col-md-3">
+            @await Component.InvokeAsync("BookTypes")
+        </div>
 
-<h1>Books</h1>
+        <!-- Main content area for books -->
+        <div class="col-md-9">
+            <h1>Books</h1>
 
+            @foreach (Book b in Model.Books)
+            {
+                <partial name="BookSummary" model="b" />
+            }
 
-@foreach (Book b in Model.Books)
-{
-    <partial name="BookSummary" model="b" />
-}
-
-<!--Create our own tag helpers here-->
-<div page-model="@Model.PaginationInfo" page-action="Index" page-classes-enabled="true" page-class="btn"
-page-class-normal="btn-outline-dark" page-class-selected="btn-primary"
-page-url-bookType="@Model.CurrentBookType" class="btn-group pull-right m-1"></div>
+            <!-- Pagination tag helpers here -->
+            <div page-model="@Model.PaginationInfo" page-action="Index" page-classes-enabled="true" page-class="btn"
+                 page-class-normal="btn-outline-dark" page-class-selected="btn-primary"
+                 page-url-bookType="@Model.CurrentBookType" class="btn-group pull-right m-1">
+            </div>
+        </div>
+    </div>
+</div>
