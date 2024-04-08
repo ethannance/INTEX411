@@ -26,7 +26,7 @@ namespace AuthLab2.Pages
 
             // Example: Populate BookPredictions with data from your repository
             // This is a placeholder loop to demonstrate how you might convert book data to predictions
-            foreach (var book in _bookRepository.Books)
+            foreach (var book in _bookRepository.Products)
             {
                 BookPredictions.Add(new ProductPrediction
                 {

@@ -26,7 +26,7 @@ namespace AuthLab2.Components
 
             ViewBag.SelectedBookType = bookType;
 
-            var bookTypes = _bookRepo.Books
+            var bookTypes = _bookRepo.Products
                 .Select(x => x.img_link)
                 .Distinct()
                 .OrderBy(x => x);

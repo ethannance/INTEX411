@@ -1,7 +1,10 @@
-﻿namespace AuthLab2.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace AuthLab2.Models
 {
     public class Customer
     {
+        [Key]
         public int customer_ID {  get; set; }
         public string first_name { get; set; }
         public string last_name { get; set; }

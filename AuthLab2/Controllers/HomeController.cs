@@ -18,14 +18,14 @@ namespace AuthLab2.Controllers
             _repo = repo;
         }
 
-        public IActionResult Index(int pageNum = 1, string? bookType = null)
+        public IActionResult Index(int pageNum = 1, string? productType = null)
         {
             int pageSize = 3;
 
-            var viewModel = new BooksListViewModel
+            var viewModel = new ProductsListViewModel
             {
-                Books = _repo.Books
-                    .Where(x => bookType == null || x.img_link == bookType)
+                Products = _repo.Products
+                    .Where(x => productType == null || x.img_link == productType)
                     .OrderBy(x => x.name)
                     .Skip((pageNum - 1) * pageSize)
                     .Take(pageSize),
@@ -34,12 +34,12 @@ namespace AuthLab2.Controllers
                 {
                     CurrentPage = pageNum,
                     ItemsPerPage = pageSize,
-                    TotalItems = (bookType == null)
-                                  ? _repo.Books.Count()
-                                  : _repo.Books.Count(x => x.img_link == bookType)
+                    TotalItems = (productType == null)
+                                  ? _repo.Products.Count()
+                                  : _repo.Products.Count(x => x.img_link == productType)
                 },
 
-                CurrentBookType = bookType
+                CurrentBookType = productType
             };
 
             return View(viewModel);

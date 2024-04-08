@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace AuthLab2.Models;
 
 public partial class Product
 {
+    [Key]
     public int product_ID { get; set; }
 
     public string name { get; set; } = null!;

@@ -25,7 +25,7 @@ namespace AuthLab2.Pages
 
         public IActionResult OnPost(int bookId, string returnUrl)
         {
-            Product b = _repo.Books
+            Product b = _repo.Products
                 .FirstOrDefault(x => x.product_ID == bookId);
 
             if (b != null)

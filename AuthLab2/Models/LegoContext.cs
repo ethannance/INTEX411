@@ -18,15 +18,15 @@ public partial class LegoContext : DbContext
     public virtual DbSet<Product> Products { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlite("Data Source=Bookstore.sqlite");
+        => optionsBuilder.UseSqlite("Data Source=LEGO.sqlite");
 
     // Configures the model for the 'Book' entity, including indices and property mappings.
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Product>(entity =>
         {
-            entity.HasIndex(e => e.product_ID, "IX_Books_BookID").IsUnique();
-            entity.Property(e => e.product_ID).HasColumnName("BookID");
+            entity.HasIndex(e => e.product_ID, "IX_Products_ProductID").IsUnique();
+            entity.Property(e => e.product_ID).HasColumnName("product_ID");
         });
 
         OnModelCreatingPartial(modelBuilder);

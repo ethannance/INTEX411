@@ -1,9 +1,11 @@
-﻿using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿using System.ComponentModel.DataAnnotations;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AuthLab2.Models
 {
     public class Order
     {
+        [Key]
         public int transaction_ID {  get; set; }
         public int customer_ID { get; set; }
         public string day_of_week { get; set; }

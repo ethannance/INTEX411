@@ -8,6 +8,6 @@ namespace AuthLab2.Models
         {
             _context = temp;
         }
-        public IQueryable<Product> Books => _context.Products;
+        public IQueryable<Product> Products => _context.Products;
     }
 }

@@ -2,6 +2,6 @@
 {
     public interface ILegoRepository
     {
-        public IQueryable<Product> Books { get; }
+        public IQueryable<Product> Products { get; }
     }
 }
