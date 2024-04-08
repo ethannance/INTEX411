@@ -13,9 +13,9 @@
         <div class="col-md-9">
             <h1>Books</h1>
 
-            @foreach (Book b in Model.Books)
+            @foreach (Product p in Model.Products)
             {
-                <partial name="BookSummary" model="b" />
+                <partial name="BookSummary" model="p" />
             }
 
             <!-- Pagination tag helpers here -->

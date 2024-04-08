@@ -27,12 +27,12 @@ services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfi
 
 services.AddControllersWithViews();
 
-services.AddDbContext<BookstoreContext>(options =>
+services.AddDbContext<LegoContext>(options =>
 {
     options.UseSqlite(configuration["ConnectionStrings:BookConnection"]);
 });
 
-services.AddScoped<IBookRepository, EFBookRepository>();
+services.AddScoped<ILegoRepository, EFLegoRepository>();
 
 services.AddRazorPages();
 

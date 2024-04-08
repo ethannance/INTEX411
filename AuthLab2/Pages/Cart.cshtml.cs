@@ -7,9 +7,9 @@ namespace AuthLab2.Pages
 {
     public class CartModel : PageModel
     {
-        private IBookRepository _repo;
+        private ILegoRepository _repo;
 
-        public CartModel(IBookRepository temp)
+        public CartModel(ILegoRepository temp)
         {
             _repo = temp;
         }
@@ -25,8 +25,8 @@ namespace AuthLab2.Pages
 
         public IActionResult OnPost(int bookId, string returnUrl)
         {
-            Book b = _repo.Books
-                .FirstOrDefault(x => x.BookId == bookId);
+            Product b = _repo.Books
+                .FirstOrDefault(x => x.product_ID == bookId);
 
             if (b != null)
             {

@@ -5,25 +5,22 @@
 @{
 }
 
-@model Book
+@model Product
 
 <div class="card m-1 p-1">
     <h4>
-        @Model.Title
-        <span class="badge rounded-pill bg-primary text-white float-end"><small>Author: @Model.Author</small></span>
+        @Model.name
+        <span class="badge rounded-pill bg-primary text-white float-end"><small>Year: @Model.year</small></span>
     </h4>
     <ul>
-        <li>Publisher: @Model.Publisher</li>
-        <li>ISBN: @Model.Isbn</li>
-        <li>Classification: @Model.Classification</li>
-        <li>Category: @Model.Category</li>
-        <li>Page Count: @Model.PageCount</li>
-        <li>Price: $@Model.Price</li>
+        <li>Number of Parts: @Model.num_parts</li>
+        <li>Price: $ @Model.price</li>
+        <li>Image: @Model.img_link</li>
 
     </ul>
 
-    <form id=@Model.BookId method="post" asp-page="/Cart">
-        <input type="hidden" asp-for="BookId" />
+    <form id=@Model.product_ID method="post" asp-page="/Cart">
+        <input type="hidden" asp-for="product_ID" />
         <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
         <button type="submit" class="btn-outline-success btn-sm float-end">Add to Cart</button>
     </form>

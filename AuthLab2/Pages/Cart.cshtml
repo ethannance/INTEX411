@@ -19,7 +19,7 @@
         @foreach (var l in Model.Cart?.Lines ?? Enumerable.Empty<Cart.CartLine>())
         {
             <tr>
-                <td class="text-left">@l.Book.Title</td>
+                <td class="text-left">@l.Book.name</td>
                 <td class="text-center">@l.Quantity</td>
                 <td class="text-right">$25</td>
                 <td class="text-right">@((l.Quantity * 25).ToString("c"))</td>

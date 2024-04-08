@@ -4,18 +4,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AuthLab2.Models;
 
-public partial class BookstoreContext : DbContext
+public partial class LegoContext : DbContext
 {
-    public BookstoreContext() //Constructor
+    public LegoContext() //Constructor
     {
     }
 
-    public BookstoreContext(DbContextOptions<BookstoreContext> options)
+    public LegoContext(DbContextOptions<LegoContext> options)
         : base(options)
     {
     }
 
-    public virtual DbSet<Book> Books { get; set; }
+    public virtual DbSet<Product> Products { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseSqlite("Data Source=Bookstore.sqlite");
@@ -23,11 +23,10 @@ public partial class BookstoreContext : DbContext
     // Configures the model for the 'Book' entity, including indices and property mappings.
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Book>(entity =>
+        modelBuilder.Entity<Product>(entity =>
         {
-            entity.HasIndex(e => e.BookId, "IX_Books_BookID").IsUnique();
-            entity.Property(e => e.BookId).HasColumnName("BookID");
-            entity.Property(e => e.Isbn).HasColumnName("ISBN");
+            entity.HasIndex(e => e.product_ID, "IX_Books_BookID").IsUnique();
+            entity.Property(e => e.product_ID).HasColumnName("BookID");
         });
 
         OnModelCreatingPartial(modelBuilder);

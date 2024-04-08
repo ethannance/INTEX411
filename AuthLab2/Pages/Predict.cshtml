@@ -24,26 +24,23 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Author</th>
-                <th>Publisher</th>
-                <th>Classification</th>
-                <th>Actual Category</th>
-                <th>Predicted Category</th>
-                <th>PageCount</th>
+                <th>Product Name</th>
+                <th>Year Released</th>
+                <th>Number of Parts</th>
                 <th>Price</th>
+                <th>Image</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model.BookPredictions) // Adjust according to your actual model structure
             {
                 <tr>
-                    <td>@item.Book.Author</td>
-                    <td>@item.Book.Publisher</td>
-                    <td>@item.Book.Classification</td>
-                    <td>@item.Book.Category</td>
+                    <td>@item.Product.name</td>
+                    <td>@item.Product.year</td>
+                    <td>@item.Product.num_parts</td>
+                    <td>@item.Product.price</td>
                     <td class="prediction-cell">@item.Prediction</td>
-                    <td>@item.Book.PageCount</td>
-                    <td>@item.Book.Price</td>
+                    <td>@item.Product.img_link</td>
                 </tr>
             }
         </tbody>

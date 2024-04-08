@@ -4,10 +4,10 @@
     {
         public List<CartLine> Lines { get; set; } = new List<CartLine>();
 
-        public void AddItem(Book b, int quantity)
+        public void AddItem(Product b, int quantity)
         {
             CartLine? line = Lines
-                .Where(x => x.Book.BookId == b.BookId)
+                .Where(x => x.Book.product_ID == b.product_ID)
                 .FirstOrDefault();
 
             //Has this item already been aded to our cart?
@@ -25,7 +25,7 @@
             }
         }
 
-        public void RemoveLine(Book b) => Lines.RemoveAll(x => x.Book.BookId == b.BookId);
+        public void RemoveLine(Product b) => Lines.RemoveAll(x => x.Book.product_ID == b.product_ID);
 
         public void Clear() => Lines.Clear();
 
@@ -34,7 +34,7 @@
         public class CartLine
         {
             public int CartLineId { get; set; }
-            public Book Book { get; set; }
+            public Product Book { get; set; }
             public int Quantity { get; set; }
         }
     }

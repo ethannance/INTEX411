@@ -5,11 +5,11 @@ namespace AuthLab2.Components
 {
     public class BookTypesViewComponent : ViewComponent
     {
-        private IBookRepository _bookRepo;
+        private ILegoRepository _bookRepo;
 
         //Constructor
 
-        public BookTypesViewComponent(IBookRepository temp) 
+        public BookTypesViewComponent(ILegoRepository temp) 
         {
             _bookRepo = temp;
         }
@@ -27,7 +27,7 @@ namespace AuthLab2.Components
             ViewBag.SelectedBookType = bookType;
 
             var bookTypes = _bookRepo.Books
-                .Select(x => x.Classification)
+                .Select(x => x.img_link)
                 .Distinct()
                 .OrderBy(x => x);
 

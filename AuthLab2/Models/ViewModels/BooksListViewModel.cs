@@ -4,7 +4,7 @@
     public class BooksListViewModel
     {
         //Books to display
-        public IQueryable<Book> Books { get; set;}
+        public IQueryable<Product> Books { get; set;}
         public PaginationInfo PaginationInfo { get; set; } = new PaginationInfo();
 
         public string? CurrentBookType { get; set; }

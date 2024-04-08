@@ -9,10 +9,10 @@ namespace AuthLab2.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IBookRepository _repo;
+        private readonly ILegoRepository _repo;
 
         // This single constructor takes both the logger and repository as parameters
-        public HomeController(ILogger<HomeController> logger, IBookRepository repo)
+        public HomeController(ILogger<HomeController> logger, ILegoRepository repo)
         {
             _logger = logger;
             _repo = repo;
@@ -25,8 +25,8 @@ namespace AuthLab2.Controllers
             var viewModel = new BooksListViewModel
             {
                 Books = _repo.Books
-                    .Where(x => bookType == null || x.Classification == bookType)
-                    .OrderBy(x => x.Title)
+                    .Where(x => bookType == null || x.img_link == bookType)
+                    .OrderBy(x => x.name)
                     .Skip((pageNum - 1) * pageSize)
                     .Take(pageSize),
 
@@ -36,7 +36,7 @@ namespace AuthLab2.Controllers
                     ItemsPerPage = pageSize,
                     TotalItems = (bookType == null)
                                   ? _repo.Books.Count()
-                                  : _repo.Books.Count(x => x.Classification == bookType)
+                                  : _repo.Books.Count(x => x.img_link == bookType)
                 },
 
                 CurrentBookType = bookType
