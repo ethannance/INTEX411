@@ -39,7 +39,7 @@ namespace AuthLab2.Controllers
                                   : _repo.Products.Count(x => x.img_link == productType)
                 },
 
-                CurrentBookType = productType
+                CurrentProductType = productType
             };
 
             return View(viewModel);

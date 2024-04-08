@@ -7,6 +7,6 @@
         public IQueryable<Product> Products { get; set;}
         public PaginationInfo PaginationInfo { get; set; } = new PaginationInfo();
 
-        public string? CurrentBookType { get; set; }
+        public string? CurrentProductType { get; set; }
     }
 }
