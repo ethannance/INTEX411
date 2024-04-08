@@ -21,8 +21,9 @@
             <tr>
                 <td class="text-left">@l.Product.name</td>
                 <td class="text-center">@l.Quantity</td>
-                <td class="text-right">$25</td>
-                <td class="text-right">@((l.Quantity * 25).ToString("c"))</td>
+                <td class="text-right">@l.Product.price.ToString("c")</td>
+                <td class="text-right">@((l.Quantity * l.Product.price).ToString("c"))</td>
+
             </tr>
         }
     </tbody>

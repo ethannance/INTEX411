@@ -25,13 +25,13 @@ namespace AuthLab2.Pages
 
         public IActionResult OnPost(int productId, string returnUrl)
         {
-            Product b = _repo.Products
+            Product p = _repo.Products
                 .FirstOrDefault(x => x.product_ID == productId);
 
-            if (b != null)
+            if (p != null)
             {
                 Cart = HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
-                Cart.AddItem(b, 1);
+                Cart.AddItem(p, 1);
                 HttpContext.Session.SetJson("cart", Cart);
             }
 
