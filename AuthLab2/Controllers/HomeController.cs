@@ -73,6 +73,11 @@ namespace AuthLab2.Controllers
             return View();
         }
 
+        public IActionResult Test()
+        {
+            return View();
+        }
+
         public IActionResult About()
         {
             return View();
