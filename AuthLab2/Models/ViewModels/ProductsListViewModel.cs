@@ -6,8 +6,7 @@
         public PaginationInfo PaginationInfo { get; set; } = new PaginationInfo();
         public string? CurrentProductType { get; set; }
         public IEnumerable<string> ProductTypes { get; set; } = new List<string>();
-        // Add this line for color filter
-        public IEnumerable<string> ProductColors { get; set; } = new List<string>();
+
     }
 }
 
