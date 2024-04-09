@@ -9,6 +9,7 @@
     <thead>
         <tr>
             <th>Product Title</th>
+            <th>Product Image</th>
             <th>Quantity</th>
             <th class="text-right">Amount</th>
             <th class="text-right">Subtotal</th>
@@ -20,17 +21,18 @@
         {
             <tr>
                 <td class="text-left">@l.Product.name</td>
+                <td class="text-center"><img src="@l.Product.img_link" alt="Image" width="150" height="150"></td>
                 <td class="text-center">@l.Quantity</td>
                 <td class="text-right">@l.Product.price.ToString("c")</td>
                 <td class="text-right">@((l.Quantity * l.Product.price).ToString("c"))</td>
-
             </tr>
         }
+
     </tbody>
 
     <tfoot>
         <tr>
-            <td colspan="3" class="text-right">Total:</td>
+            <td colspan="4" class="text-right">Total:</td>
             <td class="text-right">@Model.Cart?.CalculateTotal().ToString("c")</td>
         </tr>
     </tfoot>
