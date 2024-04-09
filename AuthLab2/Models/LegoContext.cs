@@ -20,7 +20,7 @@ public partial class LegoContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseSqlServer("Server=tcp:myfreesqldbservergroup411.database.windows.net,1433;Initial Catalog=Group411IntexDB;Persist Security Info=False;User ID=admin411;Password=Fireplot411;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
 
-    // Configures the model for the 'Book' entity, including indices and property mappings.
+    // Configures the model for the 'Product' entity, including indices and property mappings.
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Product>(entity =>

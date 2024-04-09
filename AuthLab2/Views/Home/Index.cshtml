@@ -13,6 +13,16 @@
         <div class="col-md-9">
             <h1>Products</h1>
 
+            <form method="get" action="/Home/Index">
+                <select name="pageSize" onchange="this.form.submit()">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                </select>
+                <input type="hidden" name="pageNum" value="@Model.PaginationInfo.CurrentPage" />
+                <input type="hidden" name="productType" value="@Model.CurrentProductType" />
+            </form>
+
             @{
                 var displayedNames = new HashSet<string>();
             }
@@ -28,8 +38,9 @@
             <!-- Pagination tag helpers here -->
             <div page-model="@Model.PaginationInfo" page-action="Index" page-classes-enabled="true" page-class="btn"
                  page-class-normal="btn-outline-dark" page-class-selected="btn-primary"
-                 page-url-productType="@Model.CurrentProductType" class="btn-group pull-right m-1">
+                 page-url-productType="@Model.CurrentProductType" page-url-pageSize="@Model.PaginationInfo.ItemsPerPage" class="btn-group pull-right m-1">
             </div>
+
         </div>
     </div>
 </div>

@@ -3,6 +3,7 @@ using AuthLab2.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Drawing.Printing;
 
 namespace AuthLab2.Controllers
 {
@@ -18,9 +19,10 @@ namespace AuthLab2.Controllers
             _repo = repo;
         }
 
-        public IActionResult Index(int pageNum = 1, string? productType = null)
+        public IActionResult Index(int pageNum = 1, string? productType = null, int pageSize = 5)
         {
-            int pageSize = 5;
+            // Validate and set pageSize based on user input or default to 5 if the input is outside the allowed range
+            pageSize = (new[] { 5, 10, 20 }).Contains(pageSize) ? pageSize : 5;
 
             // Fetch all relevant products as a List<Product> initially
             var allProducts = _repo.Products
@@ -61,12 +63,17 @@ namespace AuthLab2.Controllers
             };
 
             return View(viewModel);
-
         }
 
 
 
+
         public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        public IActionResult About()
         {
             return View();
         }
