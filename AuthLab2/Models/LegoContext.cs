@@ -18,7 +18,7 @@ public partial class LegoContext : DbContext
     public virtual DbSet<Product> Products { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlite("Data Source=LEGO.sqlite");
+        => optionsBuilder.UseSqlServer("Server=tcp:myfreesqldbservergroup411.database.windows.net,1433;Initial Catalog=Group411IntexDB;Persist Security Info=False;User ID=admin411;Password=Fireplot411;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
 
     // Configures the model for the 'Book' entity, including indices and property mappings.
     protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -29,7 +29,7 @@ services.AddControllersWithViews();
 
 services.AddDbContext<LegoContext>(options =>
 {
-    options.UseSqlite(configuration["ConnectionStrings:BookConnection"]);
+    options.UseSqlServer(configuration["ConnectionStrings:DefaultConnection"]);
 });
 
 services.AddScoped<ILegoRepository, EFLegoRepository>();
