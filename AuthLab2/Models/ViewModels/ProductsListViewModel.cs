@@ -9,6 +9,8 @@
 
         // Add this line
         public IEnumerable<string> ProductTypes { get; set; } = new List<string>();
+
+
     }
 
 }
