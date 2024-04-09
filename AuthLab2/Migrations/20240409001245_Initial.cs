@@ -20,7 +20,11 @@ namespace AuthLab2.Migrations
                     year = table.Column<int>(type: "INTEGER", nullable: false),
                     num_parts = table.Column<int>(type: "INTEGER", nullable: false),
                     price = table.Column<int>(type: "INTEGER", nullable: false),
-                    img_link = table.Column<string>(type: "TEXT", nullable: false)
+                    img_link = table.Column<string>(type: "TEXT", nullable: false),
+                    primary_color = table.Column<string>(type: "TEXT", nullable: false),
+                    secondary_color = table.Column<string>(type: "TEXT", nullable: false),
+                    description = table.Column<string>(type: "TEXT", nullable: false),
+                    category = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {

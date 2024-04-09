@@ -23,6 +23,14 @@ namespace AuthLab2.Migrations
                         .HasColumnType("INTEGER")
                         .HasColumnName("product_ID");
 
+                    b.Property<string>("category")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("description")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("img_link")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -36,6 +44,14 @@ namespace AuthLab2.Migrations
 
                     b.Property<int>("price")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("primary_color")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("secondary_color")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("year")
                         .HasColumnType("INTEGER");

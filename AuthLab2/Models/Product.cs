@@ -19,4 +19,9 @@ public partial class Product
 
     public string img_link { get; set; } = null!;
 
+    public string primary_color { get; set; }
+    public string secondary_color { get; set; }
+    public string description { get; set; }
+    public string category {  get; set; }
+
 }

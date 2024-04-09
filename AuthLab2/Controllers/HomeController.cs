@@ -25,7 +25,7 @@ namespace AuthLab2.Controllers
             var viewModel = new ProductsListViewModel
             {
                 Products = _repo.Products
-                    .Where(x => productType == null || x.img_link == productType)
+                    .Where(x => productType == null || x.category == productType)
                     .OrderBy(x => x.name)
                     .Skip((pageNum - 1) * pageSize)
                     .Take(pageSize),
@@ -36,7 +36,7 @@ namespace AuthLab2.Controllers
                     ItemsPerPage = pageSize,
                     TotalItems = (productType == null)
                                   ? _repo.Products.Count()
-                                  : _repo.Products.Count(x => x.img_link == productType)
+                                  : _repo.Products.Count(x => x.category == productType)
                 },
 
                 CurrentProductType = productType
