@@ -20,30 +20,51 @@ namespace AuthLab2.Controllers
 
         public IActionResult Index(int pageNum = 1, string? productType = null)
         {
-            int pageSize = 3;
+            int pageSize = 5;
+
+            // Fetch all relevant products as a List<Product> initially
+            var allProducts = _repo.Products
+                .Where(x => productType == null || x.category == productType)
+                .OrderBy(x => x.name)
+                .ToList(); // This ensures the operation is executed and data is fetched into memory
+
+            var uniqueProductsByName = new HashSet<string>();
+            var filteredProducts = new List<Product>();
+
+            // Filter to ensure unique names
+            foreach (var product in allProducts)
+            {
+                if (uniqueProductsByName.Add(product.name))
+                {
+                    filteredProducts.Add(product);
+                }
+            }
+
+            // Now, handle pagination on the already filtered list
+            var paginatedProducts = filteredProducts
+                .Skip((pageNum - 1) * pageSize)
+                .Take(pageSize)
+                .ToList(); // Since we're working with List<Product>, no casting issue should arise
 
             var viewModel = new ProductsListViewModel
             {
-                Products = _repo.Products
-                    .Where(x => productType == null || x.category == productType)
-                    .OrderBy(x => x.name)
-                    .Skip((pageNum - 1) * pageSize)
-                    .Take(pageSize),
+                Products = paginatedProducts.AsQueryable(), // Convert the list to IQueryable
 
                 PaginationInfo = new PaginationInfo
                 {
                     CurrentPage = pageNum,
                     ItemsPerPage = pageSize,
-                    TotalItems = (productType == null)
-                                  ? _repo.Products.Count()
-                                  : _repo.Products.Count(x => x.category == productType)
+                    TotalItems = filteredProducts.Count // Use count of filtered products for total items
                 },
 
                 CurrentProductType = productType
             };
 
             return View(viewModel);
+
         }
+
+
 
         public IActionResult Privacy()
         {

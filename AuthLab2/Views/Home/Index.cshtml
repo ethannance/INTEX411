@@ -13,9 +13,16 @@
         <div class="col-md-9">
             <h1>Products</h1>
 
+            @{
+                var displayedNames = new HashSet<string>();
+            }
+
             @foreach (Product p in Model.Products)
             {
-                <partial name="ProductSummary" model="p" />
+                if (displayedNames.Add(p.name)) // Only displays the product if its name is unique so far
+                {
+                    <partial name="ProductSummary" model="p" />
+                }
             }
 
             <!-- Pagination tag helpers here -->
@@ -26,3 +33,4 @@
         </div>
     </div>
 </div>
+
