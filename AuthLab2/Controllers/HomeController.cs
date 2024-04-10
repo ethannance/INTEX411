@@ -92,6 +92,9 @@ namespace AuthLab2.Controllers
                 content_Recs = recommendations
             };
 
+            // Set the RefererUrl in the ViewBag
+            ViewBag.RefererUrl = Request.Headers["Referer"].ToString();
+
             return View(viewModel);
         }
 
