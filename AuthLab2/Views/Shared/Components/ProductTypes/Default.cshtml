@@ -1,0 +1,21 @@
+﻿@{
+    string BuildOption(string value, string display, string selectedValue)
+    {
+        var isSelected = value == selectedValue ? " selected=\"selected\"" : "";
+        return $"<option value=\"{value}\"{isSelected}>{display}</option>";
+    }
+}
+
+@model IQueryable<string>
+
+<form asp-controller="Home" asp-action="Index" method="get" class="form-inline">
+    <label for="productTypeSelect" class="mr-2">Category:</label>
+    <select id="productTypeSelect" name="productType" class="form-control mr-2" onchange="this.form.submit()">
+        <option value="">All Categories</option>
+        @foreach (string bt in Model ?? Enumerable.Empty<string>())
+        {
+            @Html.Raw(BuildOption(bt, bt, ViewBag.SelectedProductType as string))
+        }
+    </select>
+    <input type="hidden" name="pageNum" value="1" />
+</form>

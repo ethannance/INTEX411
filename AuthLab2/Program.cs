@@ -1,7 +1,7 @@
 using AuthLab2.Data;
+using AuthLab2.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Sqlite;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -13,17 +13,37 @@ services.AddAuthentication().AddGoogle(googleOptions =>
     googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
 });
 
+services.Configure<CookiePolicyOptions>(options =>
+{
+    options.CheckConsentNeeded = context => true; // This lambda determines whether user consent is needed for this request.
+    options.MinimumSameSitePolicy = SameSiteMode.None;
+});
+
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlite(connectionString));
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+var connectionString = configuration.GetConnectionString("DefaultConnection")
+    ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(connectionString));
+
+services.AddDatabaseDeveloperPageExceptionFilter();
+
+services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
-builder.Services.AddControllersWithViews();
 
+services.AddControllersWithViews();
 
+services.AddDbContext<LegoContext>(options =>
+{
+    options.UseSqlServer(configuration["ConnectionStrings:DefaultConnection"]);
+});
+
+services.AddScoped<ILegoRepository, EFLegoRepository>();
+
+services.AddRazorPages();
+
+services.AddDistributedMemoryCache();
+services.AddSession(); // Register session services
 
 var app = builder.Build();
 
@@ -35,7 +55,6 @@ if (app.Environment.IsDevelopment())
 else
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -44,11 +63,21 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-app.MapRazorPages();
+app.UseSession(); // Add UseSession middleware
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseCookiePolicy();
+
+app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllerRoute("pagenumandtype", "{bookType}/{pageNum}", new { Controller = "Home", action = "Index" });
+app.MapControllerRoute("pagination", "{pageNum}", new { Controller = "Home", action = "Index", pageNum = 1 });
+app.MapControllerRoute("bookType", "{bookType}", new { Controller = "Home", action = "Index", pageNum = 1 });
+
+
+app.MapDefaultControllerRoute();
+app.MapRazorPages();
+
 app.Run();

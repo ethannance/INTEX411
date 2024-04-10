@@ -1,0 +1,27 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@{
+    string BuildOption(string value, string display, string selectedValue)
+    {
+        var isSelected = value == selectedValue ? " selected=\"selected\"" : "";
+        return $"<option value=\"{value}\"{isSelected}>{display}</option>";
+    }
+}
+
+@model IQueryable<string>
+
+<form asp-controller="Home" asp-action="Index" method="get" class="form-inline">
+    <label for="productColorSelect" class="mr-2">Color:</label>
+    <select id="productColorSelect" name="productColor" class="form-control mr-2" onchange="this.form.submit()">
+        <option value="">All Colors</option>
+        @foreach (string bt in Model ?? Enumerable.Empty<string>())
+        {
+            @Html.Raw(BuildOption(bt, bt, ViewBag.SelectedProductColor as string))
+        }
+    </select>
+    <input type="hidden" name="pageNum" value="1" />
+</form>

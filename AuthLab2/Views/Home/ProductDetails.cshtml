@@ -1,0 +1,75 @@
+﻿@model ProductDetailsViewModel
+
+<vc:nav-bar-types user="Visitor"></vc:nav-bar-types>
+<vc:submenu-types view="Default"></vc:submenu-types>
+
+<h2>@Model.Product.name</h2>
+
+<div>
+    <br />
+    <a href="@ViewBag.RefererUrl">Back</a>
+    <br />
+    <div>
+        <img src="@Model.Product.img_link" alt="Image" height="200px" width="250px">
+    </div>
+    <br />
+    <br />
+    <br />
+    <h5>Price:</h5>
+    <div class="price">
+        <h6>$@Model.Product.price.00</h6>
+    </div>
+
+    <form method="post" asp-page="/Cart">
+        <input type="hidden" name="productId" value="@Model.Product.product_ID" />
+        <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.Path" />
+        <button type="submit" class="btn btn-primary">Add to Cart</button>
+    </form>
+</div>
+
+<h5>Item description: </h5>
+<br />
+<div class="description">
+    <p>@Model.Product.description</p>
+</div>
+
+<h5>Number of Parts: </h5>
+<div class="num-parts">
+    <p>@Model.Product.num_parts</p>
+</div>
+
+<h5>Year Released: </h5>
+<div class="year">
+    <p>@Model.Product.year</p>
+</div>
+
+<h5>Colors Included: </h5>
+<div class="colors">
+    <p>@Model.Product.primary_color/@Model.Product.secondary_color</p>
+</div>
+
+<h5>Category: </h5>
+<div class="category">
+    <p>@Model.Product.category</p>
+</div>
+
+<!-- Other code -->
+
+<h5>Recommended for you:</h5>
+<div class="row recommendations">
+    @foreach (var recommendedProduct in Model.RecommendedProducts)
+    {
+        <div class="col-md-2">
+            <a href="@Url.Action("ProductDetails", "Home", new { id = recommendedProduct.product_ID })">
+                <div class="card" style="height: 300px; width: 200px;">
+                    <img src="@recommendedProduct.img_link" class="card-img-top" alt="@recommendedProduct.name">
+                    <div class="card-body">
+                        <h6 class="card-title">@recommendedProduct.name</h6>
+                        <p class="card-text">Price: $@recommendedProduct.price.00</p>
+                        <!-- Add other product details as needed -->
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+</div>

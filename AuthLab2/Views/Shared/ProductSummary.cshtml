@@ -1,0 +1,37 @@
+﻿@using AuthLab2.Infrastructure
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@*This displays a preview of products on the products page*@
+
+@model Product
+<a asp-controller="Home" asp-action="ProductDetails" asp-route-id="@Model.product_ID" style="text-decoration: none; color: inherit;">
+    <div>
+        <br />
+        <div class="text-center" style="transition: box-shadow 0.3s ease-in-out;">
+            <img src="@Model.img_link" alt="Image" height="100px">
+        </div>
+        <br />
+        <h4>
+            @Model.name
+        </h4>
+        <br />
+        <br />
+        <div class="price-and-button-container">
+            <div class="price">
+                <h6>$@Model.price.00</h6>
+            </div>
+
+            <form id="form-@Model.product_ID" method="post" asp-page="/Cart">
+                <input type="hidden" name="productId" value="@Model.product_ID" />
+                <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+                <button type="submit" class="btn btn-primary float-end">Add to Cart</button>
+                @* <td><a class="btn btn-info" style="margin-right: 4px;" asp-controller="Home" asp-action="ProductDetails" asp-route-id="@Model.product_ID">View Details</a></td> *@
+
+            </form>
+        </div>
+    </div>
+</a>
+

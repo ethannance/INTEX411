@@ -2,53 +2,93 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - AuthLab2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>@ViewData["Title"] - Aurora Bricks</title>
+    <!-- Bootstrap CSS and Custom CSS from the theme -->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="~/css/styles.css" rel="stylesheet" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+    <!-- Your additional styles -->
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/AuthLab2.styles.css" asp-append-version="true" />
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">AuthLab2</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Secrets">Secrets</a>
-                        </li>
-                    </ul>
-                    <partial name="_LoginPartial" />
-                </div>
+<body id="page-top">
+     <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+        <div class="container">
+            <!-- Brand/logo -->
+            <img src="~/img/aurora.jpg" height="50px"/>
+            <i class="bi bi-chevron-compact-right" width="50px"></i> <!--Doesn't show up yet-->
+            <a class="navbar-brand" href="#page-top">Aurora Bricks</a>
+            <!-- Toggler/collapsible Button -->
+            <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <!-- Navbar links -->
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Secrets">Secrets</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="About">About Me</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Test">Test</a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-page="/Predict" class="nav-link">Predictions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-page="/Cart" class="nav-link">View Cart</a>
+                    </li>
+                </ul>
             </div>
-        </nav>
-    </header>
-    <div class="container">
+            <partial name="_LoginPartial" />
+        </div>
+    </nav>
+@*     <div class="masthead text-center">
+        <div class="container d-flex align-items-center flex-column">
+            <!-- Masthead Avatar Image-->
+           <img src="~/img/xavi-cabrera-kn-umdzqdjm-unsplash.jpg" alt="Legos" class="masthead-bg" height="200px" width="100%" />
+            <!-- Masthead Heading-->
+            <h1 class="masthead-heading text-uppercase mb-0">@ViewData["Title"]</h1 >
+        </div>
+    </div>  *@
+    <!-- Content -->
+    <div class="container-fluid">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - AuthLab2 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+    <!-- Bootstrap core JS-->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <!-- Core theme JS-->
+    <script src="~/js/scripts.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+<partial name="_CookieConsentPartial" />
+
+<footer>
+    
+    <div class="row">
+        <div class="copyright py-4 text-white p-4">
+            <p>Copyright &copy; Aurora Bricks 2024 | <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy Policy</a></p>
+        </div>
+    </div>
+</footer>
 </html>
