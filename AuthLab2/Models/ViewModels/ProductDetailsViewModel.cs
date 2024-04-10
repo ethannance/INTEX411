@@ -1,4 +1,6 @@
-﻿namespace AuthLab2.Models.ViewModels
+﻿using AuthLab2.Pages;
+
+namespace AuthLab2.Models.ViewModels
 {
     public class ProductDetailsViewModel
     {

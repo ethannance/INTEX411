@@ -112,15 +112,16 @@
 .card-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px; /* Adjust as needed */
+    gap: 15px; /* Adjust as needed */
 }
 
 .card {
     flex: 0 0 auto;
-    width: 300px;  Adjust as needed 
+    width: 300px;  /*Adjust as needed */
+    height: 100px;
     display: flex;
     flex-direction: column;
-     Additional card styling 
+     /*Additional card styling */
 }
 
 /*.price-and-button-container {

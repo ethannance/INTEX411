@@ -6,7 +6,8 @@
 
 @model ProductDetailsViewModel
 
-<h1>Product Details</h1>
+<vc:nav-bar-types user="Visitor"></vc:nav-bar-types>
+<vc:submenu-types view="Default"></vc:submenu-types>
 
 <h2>@Model.Product.name</h2>
 
@@ -19,24 +20,35 @@
     <br />
     <br />
     <br />
-    <div class="price-and-button-container">
+
+    <h5>Price:</h5>
         <div class="price">
             <h6>$@Model.Product.price.00</h6>
         </div>
     </div>
 
+    <h5>Item description: </h5>
+    <br />
     <div class="description">
         <p>@Model.Product.description</p>
     </div>
+
+    <h5>Number of Parts: </h5>
     <div class="num-parts">
         <p>@Model.Product.num_parts</p>
     </div>
+
+    <h5>Year Released: </h5>
     <div class="year">
         <p>@Model.Product.year</p>
     </div>
+
+    <h5>Colors Included: </h5>
     <div class="colors">
         <p>@Model.Product.primary_color/@Model.Product.secondary_color</p>
     </div>
+
+    <h5>Category: </h5>
     <div class="category">
         <p>@Model.Product.category</p>
     </div>

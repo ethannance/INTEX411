@@ -13,6 +13,12 @@ services.AddAuthentication().AddGoogle(googleOptions =>
     googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
 });
 
+services.Configure<CookiePolicyOptions>(options =>
+{
+    options.CheckConsentNeeded = context => true; // This lambda determines whether user consent is needed for this request.
+    options.MinimumSameSitePolicy = SameSiteMode.None;
+});
+
 // Add services to the container.
 var connectionString = configuration.GetConnectionString("DefaultConnection")
     ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
@@ -61,6 +67,8 @@ app.UseSession(); // Add UseSession middleware
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseCookiePolicy();
 
 app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
 
