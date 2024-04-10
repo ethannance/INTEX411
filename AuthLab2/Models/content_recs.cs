@@ -2,7 +2,7 @@
 
 namespace AuthLab2.Models
 {
-    public class content_recs
+    public partial class content_recs
     {
         [Key]
         public int ProductID { get; set; }

@@ -3,6 +3,7 @@ using AuthLab2.Models;
 using AuthLab2.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.ML.OnnxRuntime;
 using Microsoft.ML.OnnxRuntime.Tensors;
@@ -76,9 +77,25 @@ namespace AuthLab2.Controllers
 
         public IActionResult ProductDetails(int id)
         {
-            var recordToView = _repo.Products.FirstOrDefault(x => x.product_ID == id);
+            var product = _repo.Products.FirstOrDefault(x => x.product_ID == id);
+            var recommendations = _repo.content_Recs.FirstOrDefault(r => r.ProductID == id);
+
+            if (product == null || recommendations == null)
+            {
+                // Handle the case when the product or recommendations are not found
+                return NotFound();
+            }
+
+            var viewModel = new ProductDetailsViewModel
+            {
+                Product = product,
+                content_Recs = recommendations
+            };
+
+            // Set the RefererUrl in the ViewBag
             ViewBag.RefererUrl = Request.Headers["Referer"].ToString();
-            return View(recordToView);
+
+            return View(viewModel);
         }
 
         public IActionResult Privacy()

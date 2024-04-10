@@ -4,24 +4,20 @@
 @{
 }
 
-@{
-    ViewData["Title"] = "Product Details";
-}
+@model ProductDetailsViewModel
 
 <vc:nav-bar-types user="Visitor"></vc:nav-bar-types>
 <vc:submenu-types view="Default"></vc:submenu-types>
 
-@model Product
-
-<h2>@Model.name</h2>
+<h2>@Model.Product.name</h2>
 
 
 <div>
     <br />
+    <a href="@ViewBag.RefererUrl">Back</a>
+    <br />
     <div>
-        <a href="@ViewBag.RefererUrl">Back</a>
-        <br />
-        <img src="@Model.img_link" alt="Image" height="250px" width="300px">
+        <img src="@Model.Product.img_link" alt="Image" height="200px" width="250px">
     </div>
     <br />
     <br />
@@ -29,33 +25,42 @@
 
     <h5>Price:</h5>
         <div class="price">
-            <p>$@Model.price.00</p>
+            <h6>$@Model.Product.price.00</h6>
         </div>
     </div>
 
     <h5>Item description: </h5>
     <br />
     <div class="description">
-        <p>@Model.description</p>
+        <p>@Model.Product.description</p>
     </div>
 
     <h5>Number of Parts: </h5>
     <div class="num-parts">
-        <p>@Model.num_parts</p>
+        <p>@Model.Product.num_parts</p>
     </div>
 
     <h5>Year Released: </h5>
     <div class="year">
-        <p>@Model.year</p>
+        <p>@Model.Product.year</p>
     </div>
 
     <h5>Colors Included: </h5>
     <div class="colors">
-        <p>@Model.primary_color/@Model.secondary_color</p>
+        <p>@Model.Product.primary_color/@Model.Product.secondary_color</p>
     </div>
 
     <h5>Category: </h5>
     <div class="category">
-        <p>@Model.category</p>
+        <p>@Model.Product.category</p>
+    </div>
+
+    <h5>Recommended for you:</h5>
+    <div class="recommendations">
+        <p>@Model.content_Recs.Recommendation_1</p>
+        <p>@Model.content_Recs.Recommendation_2</p>
+        <p>@Model.content_Recs.Recommendation_3</p>
+        <p>@Model.content_Recs.Recommendation_4</p>
+        <p>@Model.content_Recs.Recommendation_5</p>
     </div>
 </div>
