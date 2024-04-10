@@ -78,21 +78,33 @@ namespace AuthLab2.Controllers
         public IActionResult ProductDetails(int id)
         {
             var product = _repo.Products.FirstOrDefault(x => x.product_ID == id);
-            var recommendations = _repo.content_Recs.FirstOrDefault(r => r.ProductID == id);
+            var contentRecs = _repo.content_Recs.FirstOrDefault(r => r.ProductID == id);
 
-            if (product == null || recommendations == null)
+            if (product == null || contentRecs == null)
             {
-                // Handle the case when the product or recommendations are not found
                 return NotFound();
             }
+
+            var recommendedProducts = new List<Product>();
+            if (!string.IsNullOrEmpty(contentRecs.Recommendation_1))
+                recommendedProducts.Add(_repo.Products.FirstOrDefault(x => x.name == contentRecs.Recommendation_1));
+            if (!string.IsNullOrEmpty(contentRecs.Recommendation_2))
+                recommendedProducts.Add(_repo.Products.FirstOrDefault(x => x.name == contentRecs.Recommendation_2));
+            if (!string.IsNullOrEmpty(contentRecs.Recommendation_3))
+                recommendedProducts.Add(_repo.Products.FirstOrDefault(x => x.name == contentRecs.Recommendation_3));
+            if (!string.IsNullOrEmpty(contentRecs.Recommendation_4))
+                recommendedProducts.Add(_repo.Products.FirstOrDefault(x => x.name == contentRecs.Recommendation_4));
+            if (!string.IsNullOrEmpty(contentRecs.Recommendation_5))
+                recommendedProducts.Add(_repo.Products.FirstOrDefault(x => x.name == contentRecs.Recommendation_5));
+            // Repeat for other recommendation properties
 
             var viewModel = new ProductDetailsViewModel
             {
                 Product = product,
-                content_Recs = recommendations
+                content_Recs = contentRecs,
+                RecommendedProducts = recommendedProducts
             };
 
-            // Set the RefererUrl in the ViewBag
             ViewBag.RefererUrl = Request.Headers["Referer"].ToString();
 
             return View(viewModel);

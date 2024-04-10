@@ -6,5 +6,6 @@ namespace AuthLab2.Models.ViewModels
     {
         public content_recs content_Recs { get; set; }
         public Product Product { get; set; }
+        public List<Product> RecommendedProducts { get; set; }
     }
 }

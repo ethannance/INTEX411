@@ -55,12 +55,18 @@
         <p>@Model.Product.category</p>
     </div>
 
-    <h5>Recommended for you:</h5>
-    <div class="recommendations">
-        <p>@Model.content_Recs.Recommendation_1</p>
-        <p>@Model.content_Recs.Recommendation_2</p>
-        <p>@Model.content_Recs.Recommendation_3</p>
-        <p>@Model.content_Recs.Recommendation_4</p>
-        <p>@Model.content_Recs.Recommendation_5</p>
-    </div>
+<!-- Other code -->
+
+<h5>Recommended for you:</h5>
+<div class="recommendations">
+    @foreach (var recommendedProduct in Model.RecommendedProducts)
+    {
+        <div>
+            <h6>@recommendedProduct.name</h6>
+            <img src="@recommendedProduct.img_link" alt="@recommendedProduct.name" height="100" width="100" />
+            <p>Price: $@recommendedProduct.price.00</p>
+            <!-- Add other product details as needed -->
+        </div>
+    }
+</div>
 </div>
