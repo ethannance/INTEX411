@@ -7,10 +7,6 @@
 <div class="container mt-5">
     <h2 class="mb-3">@ViewData["Title"]</h2>
 
-    <div class="form-group">
-        <label asp-for="Order.customer_ID">Enter customer ID manually (until we can get logins working)</label>
-        <input asp-for="Order.customer_ID" class="form-control" type="number" min="0" />
-    </div>
     <!-- Display Cart Items -->
     @if (Model.Cart?.Lines.Count > 0)
     {
@@ -23,11 +19,6 @@
                 </a>
             }
         </div>
-        <input type="hidden" asp-for="Order.amount" />
-        <div class="form-group">
-            <label>Subtotal: </label>
-            <p class="form-control-plaintext">@Model.Order.amount.ToString("C")</p>
-        </div>
     }
     else
     {
@@ -36,6 +27,10 @@
 
     <!-- Display the Form with Non-Editable Amount -->
     <form method="post">
+        <div class="form-group">
+            <label asp-for="Order.customer_ID">Customer ID</label>
+            <input asp-for="Order.customer_ID" class="form-control" type="number" min="0" />
+        </div>
 
         <input type="hidden" asp-for="Order.time" />
 @*         <div class="form-group">
@@ -63,7 +58,6 @@
             <label asp-for="Order.country_of_transaction">Country of Transaction</label>
             <input asp-for="Order.country_of_transaction" class="form-control" type="text" />
         </div>
-
         <div class="form-group">
             <label asp-for="Customer.country_of_residence">Country of Residence</label>
             <input asp-for="Customer.country_of_residence" class="form-control" type="text" />
