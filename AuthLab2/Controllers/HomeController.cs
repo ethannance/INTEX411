@@ -137,7 +137,10 @@ namespace AuthLab2.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-
+        public IActionResult UsersListAdmin()
+        {
+            return View("~/Views/Admin/UsersListAdmin.cshtml");
+        }
 
     }
 }
