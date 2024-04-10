@@ -1,75 +1,188 @@
 ﻿@model ProductDetailsViewModel
 
+@{
+    ViewData["Title"] = "Item Details";
+}
+
 <vc:nav-bar-types user="Visitor"></vc:nav-bar-types>
 <vc:submenu-types view="Default"></vc:submenu-types>
 
-<h2>@Model.Product.name</h2>
-
-<div>
-    <br />
-    <a href="@ViewBag.RefererUrl">Back</a>
-    <br />
-    <div>
-        <img src="@Model.Product.img_link" alt="Image" height="200px" width="250px">
-    </div>
-    <br />
-    <br />
-    <br />
-    <h5>Price:</h5>
-    <div class="price">
-        <h6>$@Model.Product.price.00</h6>
-    </div>
-
-    <form method="post" asp-page="/Cart">
-        <input type="hidden" name="productId" value="@Model.Product.product_ID" />
-        <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.Path" />
-        <button type="submit" class="btn btn-primary">Add to Cart</button>
-    </form>
-</div>
-
-<h5>Item description: </h5>
-<br />
-<div class="description">
-    <p>@Model.Product.description</p>
-</div>
-
-<h5>Number of Parts: </h5>
-<div class="num-parts">
-    <p>@Model.Product.num_parts</p>
-</div>
-
-<h5>Year Released: </h5>
-<div class="year">
-    <p>@Model.Product.year</p>
-</div>
-
-<h5>Colors Included: </h5>
-<div class="colors">
-    <p>@Model.Product.primary_color/@Model.Product.secondary_color</p>
-</div>
-
-<h5>Category: </h5>
-<div class="category">
-    <p>@Model.Product.category</p>
-</div>
-
-<!-- Other code -->
-
-<h5>Recommended for you:</h5>
-<div class="row recommendations">
-    @foreach (var recommendedProduct in Model.RecommendedProducts)
-    {
-        <div class="col-md-2">
-            <a href="@Url.Action("ProductDetails", "Home", new { id = recommendedProduct.product_ID })">
-                <div class="card" style="height: 300px; width: 200px;">
-                    <img src="@recommendedProduct.img_link" class="card-img-top" alt="@recommendedProduct.name">
-                    <div class="card-body">
-                        <h6 class="card-title">@recommendedProduct.name</h6>
-                        <p class="card-text">Price: $@recommendedProduct.price.00</p>
-                        <!-- Add other product details as needed -->
-                    </div>
-                </div>
-            </a>
-        </div>
+<style>
+    .product-detail {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 20px;
     }
+
+    .back-link a {
+        color: #007bff;
+        text-decoration: none;
+        font-size: 16px;
+    }
+
+    .product-image img {
+        margin: 20px 0;
+    }
+
+    .product-info {
+        text-align: center;
+    }
+
+    .price h5 span {
+        color: #28a745;
+        font-weight: bold;
+    }
+
+    .add-to-cart-form button {
+        margin-top: 20px;
+    }
+
+    .item-description, .additional-info {
+        margin-top: 20px;
+    }
+
+    .additional-info h5 {
+        margin-top: 15px;
+    }
+
+    .back-button {
+        display: inline-block;
+        padding: 8px 12px;
+        background-color: #007bff; /* Bootstrap primary color */
+        color: #ffffff !important; /* Force white text */
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 16px;
+        transition: background-color 0.2s;
+    }
+
+        .back-button:hover {
+            background-color: #0056b3; /* A darker shade for hover */
+            color: #ffffff !important; /* Keep text white on hover */
+        }
+
+
+
+    .product-title {
+        text-align: center;
+    }
+
+    .recommendations {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+        .recommendations .col-lg-2, .recommendations .col-md-3, .recommendations .col-sm-4, .recommendations .col-6 {
+            display: flex;
+            flex: 1 0 auto;
+        }
+
+    .card {
+        width: 100%; /* Makes sure the card takes up the space of its flex container */
+        display: flex;
+        flex-direction: column; /* Aligns content from top to bottom */
+    }
+
+    .card-body {
+        flex-grow: 1; /* Allows the card body to expand and push down the footer/content below */
+    }
+
+
+
+
+</style>
+
+<br />
+
+<div class="back-link">
+    <a href="@ViewBag.RefererUrl" class="back-button">← Back</a>
 </div>
+
+<h2 class="product-title">@Model.Product.name</h2>
+
+
+<div class="product-detail">
+
+    <div class="product-image">
+        <img src="@Model.Product.img_link" alt="Image" style="height: 400px; width: 400px;">
+    </div>
+
+    <div class="product-info">
+        <div class="price">
+            <h5>Price: <span>$@Model.Product.price.00</span></h5>
+        </div>
+
+        <form method="post" asp-page="/Cart" class="add-to-cart-form">
+            <input type="hidden" name="productId" value="@Model.Product.product_ID" />
+            <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.Path" />
+            <button type="submit" class="btn btn-primary">Add to Cart</button>
+        </form>
+
+        <div class="item-description">
+            <h5>Item description:</h5>
+            <p>@Model.Product.description</p>
+        </div>
+
+        <div class="additional-info">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th colspan="2" class="text-center">Additional Product Information</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">Number of Parts</th>
+                        <td>@Model.Product.num_parts</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Year Released</th>
+                        <td>@Model.Product.year</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Colors Included</th>
+                        <td>@Model.Product.primary_color/@Model.Product.secondary_color</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Category</th>
+                        <td>@Model.Product.category</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+</div>
+
+
+<!-- Recommendations code -->
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-lg-10 col-md-12">
+            <h5 class="text-center mb-4">Recommended for you:</h5>
+            <div class="row recommendations">
+                @foreach (var recommendedProduct in Model.RecommendedProducts)
+                {
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-4">
+                        <a href="@Url.Action("ProductDetails", "Home", new { id = recommendedProduct.product_ID })" class="text-decoration-none">
+                            <div class="card">
+                                <img src="@recommendedProduct.img_link" class="card-img-top" alt="@recommendedProduct.name">
+                                <div class="card-body">
+                                    <h6 class="card-title">@recommendedProduct.name</h6>
+                                    <p class="card-text">Price: $@recommendedProduct.price.00</p>
+                                    <!-- Add other product details as needed -->
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
