@@ -4,9 +4,14 @@
 @{
 }
 
-@model Product
+@{
+    ViewData["Title"] = "Product Details";
+}
 
-<h1>Product Details</h1>
+<vc:nav-bar-types user="Visitor"></vc:nav-bar-types>
+<vc:submenu-types view="Default"></vc:submenu-types>
+
+@model Product
 
 <h2>@Model.name</h2>
 
