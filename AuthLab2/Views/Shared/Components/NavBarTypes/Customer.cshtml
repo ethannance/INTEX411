@@ -3,45 +3,55 @@
 *@
 @{
 }
-@* @using Microsoft.AspNetCore.Identity
-@inject SignInManager<ToaProUser> SignInManager
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
 
-<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-custom-color border-bottom box-shadow mb-3">
-    <div class="container-fluid">
-        <img src="https://brightspotcdn.byu.edu/e4/0a/b679ee0a41d9b1675fc78cd03239/byu-logo-white-small.svg" class="img-fluid" alt="byu logo">
-        <!-- Replace "#" with the actual path -->
-        <a class="toa-pro-nav" asp-controller="Home" asp-action="Index">|     ToaPro</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+    <div class="container">
+        <!-- Brand/logo -->
+        <img src="~/img/aurora.jpg" height="50px" />
+        <i class="bi bi-chevron-compact-right" width="50px"></i> <!--Doesn't show up yet-->
+        <a class="navbar-brand" href="#page-top">Aurora Bricks</a>
+        <!-- Toggler/collapsible Button -->
+        <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
         </button>
-        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
-            <ul class="navbar-nav">
-                <!-- Replace "#" with the actual path -->
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Home</a>
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" asp-controller="StudentSubmissions" asp-action="Submission">Submit</a>
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Schedule</a>
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Secrets">Secrets</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Peer Evaluation</a>
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="About">About Me</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Grades</a>
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Test">Test</a>
                 </li>
-                @if (SignInManager.IsSignedIn(User))
-                {
-                    <li class="nav-item">
-                        <form asp-controller="Home" asp-action="Logout" method="post">
-                            <button type="submit" class="nav-link">Logout</button>
-                        </form>
-                    </li>
-                }
+                <li class="nav-item">
+                    <a asp-page="/Predict" class="nav-link">Predictions</a>
+                </li>
+                <li class="nav-item">
+                    <a asp-page="/Cart" class="nav-link">View Cart</a>
+                </li>
             </ul>
         </div>
+        <partial name="_LoginPartial" />
     </div>
-</nav> *@
+</nav>
+<div class="masthead text-center">
+    <div class="container d-flex align-items-center flex-column">
+        <!-- Masthead Avatar Image-->
+        <img src="~/img/xavi-cabrera-kn-umdzqdjm-unsplash.jpg" alt="Legos" class="masthead-bg" height="200px" width="100%" />
+        <!-- Masthead Heading-->
+        <h1 class="masthead-heading text-uppercase mb-0">@ViewData["Title"]</h1>
+    </div>
+</div>
