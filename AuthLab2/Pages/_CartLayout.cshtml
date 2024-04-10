@@ -2,131 +2,91 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - AuthLab2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>@ViewData["Title"] - Aurora Bricks</title>
+    <!-- Bootstrap CSS and Custom CSS from the theme -->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="~/css/styles.css" rel="stylesheet" />
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
-    <style>
-        /* Additional styles to match the Freelancer theme provided */
-        body {
-            font-family: 'Montserrat', 'Arial', sans-serif;
-            margin-top: 100px; /* Adjust the value to match the height of your navbar */
-        }
-
-        #mainNav {
-            background-color: #2c3e50; /* This sets the background color */
-            padding: 10px;
-        }
-
-            #mainNav .navbar-brand {
-                color: #fed136; /* This sets the color of the brand/logo */
-            }
-
-            #mainNav .navbar-nav .nav-link {
-                font-family: 'Lato', 'Arial', sans-serif;
-                color: #ffffff; /* This sets the color of the nav links */
-            }
-
-        footer.footer {
-            background-color: #2c3e50; /* Footer background color */
-            color: #ffffff; /* Footer text color */
-        }
-
-            footer.footer a {
-                color: #fed136; /* Footer link color */
-            }
-        /* Additional custom styles */
-        .masthead {
-            background-color: #2c3e50;
-            padding: 30px 0;
-            color: white;
-        }
-
-            .masthead h1 {
-                font-size: 2em;
-                margin: 0;
-            }
-
-            .masthead p {
-                font-family: 'Lato', 'Arial', sans-serif;
-                font-weight: 400;
-                font-style: italic;
-            }
-        /* Use this for the dividing lines with icons, if needed */
-        .divider-custom {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-            .divider-custom .divider-custom-line {
-                width: 100px;
-                height: 1px;
-                background-color: #fed136; /* Color of the lines */
-                margin: 8px;
-            }
-
-            .divider-custom .divider-custom-icon {
-                color: #fed136; /* Color of the icon */
-            }
-    </style>
+    <!-- Your additional styles -->
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/AuthLab2.styles.css" asp-append-version="true" />
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm fixed-top" id="mainNav">
-            <div class="container">
-                <!-- Brand/logo -->
-                <a class="navbar-brand" href="#page-top">AuthLab2</a>
-                <!-- Toggler/collapsible Button -->
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <!-- Navbar links -->
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Secrets">Secrets</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="About">About Me</a>
-                        </li>
-                        <li class="nav-item">
-                            <a asp-page="/Predict" class="nav-link">Predictions</a>
-                        </li>
-                        <li class="nav-item">
-                            <a asp-page="/Cart" class="nav-link">View Cart</a>
-                        </li>
-                    </ul>
-                </div>
-                <partial name="_LoginPartial" />
+<body id="page-top">
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+        <div class="container">
+            <!-- Brand/logo -->
+            <img src="~/img/aurora.jpg" height="50px" />
+            <i class="bi bi-chevron-compact-right" width="50px"></i> <!--Doesn't show up yet-->
+            <a class="navbar-brand" href="#page-top">Aurora Bricks</a>
+            <!-- Toggler/collapsible Button -->
+            <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <!-- Navbar links -->
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Secrets">Secrets</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="About">About Me</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Test">Test</a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-page="/Predict" class="nav-link">Predictions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-page="/Cart" class="nav-link">View Cart</a>
+                    </li>
+                </ul>
             </div>
-        </nav>
-    </header>
+            <partial name="_LoginPartial" />
+        </div>
+    </nav>
+    <div class="masthead text-center">
+        <div class="container d-flex align-items-center flex-column">
+            <!-- Masthead Avatar Image-->
+            <img src="~/img/xavi-cabrera-kn-umdzqdjm-unsplash.jpg" alt="Legos" class="masthead-bg" height="200px" width="100%" />
+            <!-- Masthead Heading-->
+            <h1 class="masthead-heading text-uppercase mb-0">@ViewData["Title"]</h1>
+        </div>
+    </div>
+    <!-- Content -->
     <div class="container-fluid">
-        <main role="main" class="py-3">
+        <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-    <footer class="footer text-center">
-        <div class="container">
-            &copy; 2024 - AuthLab2 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+    <!-- Bootstrap core JS-->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <!-- Core theme JS-->
+    <script src="~/js/scripts.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+<footer>
+    <div class="row">
+        <div class="copyright py-4 text-white p-4">
+            <small>Copyright &copy; Aurora Bricks 2024</small>
+            <small asp-controller="Home" asp-action="Privacy">  |  Privacy Policy</small>
+        </div>
+    </div>
+</footer>
 </html>
