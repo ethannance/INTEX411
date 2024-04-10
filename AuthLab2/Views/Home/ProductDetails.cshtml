@@ -10,40 +10,33 @@
 <style>
     .product-detail {
         display: flex;
-        flex-direction: column;
-        align-items: center;
+        align-items: flex-start; /* Align items to the top */
         margin: 20px;
+    }
+
+    .product-image {
+        margin-right: 20px; /* Add some space between image and product info */
+    }
+
+    .product-info {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start; /* Align items to the start (left) */
+    }
+
+    .price {
+        align-self: flex-start; /* Align price to the start (left) */
+        margin-bottom: 10px; /* Add some space below the price */
+    }
+
+    .add-to-cart-form button {
+        align-self: flex-start; /* Align button to the start (left) */
     }
 
     .back-link a {
         color: #007bff;
         text-decoration: none;
         font-size: 16px;
-    }
-
-    .product-image img {
-        margin: 20px 0;
-    }
-
-    .product-info {
-        text-align: center;
-    }
-
-    .price h5 span {
-        color: #28a745;
-        font-weight: bold;
-    }
-
-    .add-to-cart-form button {
-        margin-top: 20px;
-    }
-
-    .item-description, .additional-info {
-        margin-top: 20px;
-    }
-
-    .additional-info h5 {
-        margin-top: 15px;
     }
 
     .back-button {
@@ -61,8 +54,6 @@
             background-color: #0056b3; /* A darker shade for hover */
             color: #ffffff !important; /* Keep text white on hover */
         }
-
-
 
     .product-title {
         text-align: center;
@@ -88,8 +79,10 @@
         flex-grow: 1; /* Allows the card body to expand and push down the footer/content below */
     }
 
-
-
+    .green-price {
+        color: #28a745; /* Green color */
+        font-weight: bold;
+    }
 
 </style>
 
@@ -101,16 +94,14 @@
 
 <h2 class="product-title">@Model.Product.name</h2>
 
-
 <div class="product-detail">
-
     <div class="product-image">
         <img src="@Model.Product.img_link" alt="Image" style="height: 400px; width: 400px;">
     </div>
 
     <div class="product-info">
         <div class="price">
-            <h5>Price: <span>$@Model.Product.price.00</span></h5>
+            <h5>Price: <span class="green-price">$@Model.Product.price.00</span></h5>
         </div>
 
         <form method="post" asp-page="/Cart" class="add-to-cart-form">
@@ -118,6 +109,7 @@
             <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.Path" />
             <button type="submit" class="btn btn-primary">Add to Cart</button>
         </form>
+        <br />
 
         <div class="item-description">
             <h5>Item description:</h5>
@@ -151,18 +143,15 @@
                 </tbody>
             </table>
         </div>
-
-
     </div>
 </div>
 
-
 <!-- Recommendations code -->
-
+<br />
 <div class="container-fluid">
     <div class="row justify-content-center">
         <div class="col-lg-10 col-md-12">
-            <h5 class="text-center mb-4">Recommended for you:</h5>
+            <h3 class="text-center mb-4">Recommended for you:</h3>
             <div class="row recommendations">
                 @foreach (var recommendedProduct in Model.RecommendedProducts)
                 {
@@ -183,6 +172,7 @@
         </div>
     </div>
 </div>
+
 
 
 
