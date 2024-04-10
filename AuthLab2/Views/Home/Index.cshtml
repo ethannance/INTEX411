@@ -6,23 +6,16 @@
     <br />
     <div class="row">
         <!-- Sidebar with product types -->
+        
         <br />
         <br />
         <br />
         <br />
         <div class="col-md-3">
-            <br />
-            <br />
-            <br />
-            <br />
-            @await Component.InvokeAsync("ProductTypes")
-        </div>
-
-        <!-- Main content area for products -->
-        <div class="col-md-9">
-
             <form method="get" action="/Home/Index">
+                <label class="mr-2">Number of Products:     </label>
                 <select name="pageSize" onchange="this.form.submit()">
+                    <option value="">Select</option>
                     <option value="5">5</option>
                     <option value="10">10</option>
                     <option value="20">20</option>
@@ -30,6 +23,15 @@
                 <input type="hidden" name="pageNum" value="@Model.PaginationInfo.CurrentPage" />
                 <input type="hidden" name="productType" value="@Model.CurrentProductType" />
             </form>
+            <br />
+            <br />
+            @await Component.InvokeAsync("ProductTypes")
+        </div>
+
+        <!-- Main content area for products -->
+        <div class="col-md-9">
+            
+            
 
             @{
                 var displayedNames = new HashSet<string>();
@@ -55,5 +57,6 @@
 
         </div>
     </div>
+    
 </div>
 
