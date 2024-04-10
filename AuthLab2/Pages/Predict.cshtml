@@ -4,59 +4,74 @@
     ViewData["Title"] = "Fraud Predictions";
 }
 
-<h2>@ViewData["Title"]</h2>
+<div class="container mt-5">
+    <h2 class="mb-3">@ViewData["Title"]</h2>
 
-<form method="post">
-    <div>
-        <label asp-for="Order.customer_ID">Customer ID</label>
-        <input asp-for="Order.customer_ID" type="number" min="0" value="12345" />
-    </div>
-    <div>
-        <label asp-for="Order.time">Time (24h format)</label>
-        <input asp-for="Order.time" type="number" min="0" max="2359" placeholder="15" />
-    </div>
-    <div>
-        <label asp-for="Order.amount">Amount</label>
-        <input asp-for="Order.amount" type="number" min="0" step="0.01" value="100.00" />
-    </div>
-    <div>
-        <label asp-for="Order.date">Month of Transaction</label>
-        <select asp-for="Order.date">
-            <option value="1">January</option>
-            <option value="2">February</option>
-            <option value="3">March</option>
-            <option value="4">April</option>
-            <option value="5">May</option>
-            <option value="6">June</option>
-            <option value="7">July</option>
-            <option value="8">August</option>
-            <option value="9">September</option>
-            <option value="10">October</option>
-            <option value="11">November</option>
-            <option value="12">December</option>
-            <!-- Add options for all months -->
-        </select>
-    </div>
+    <!-- Display Cart Items -->
+    @if (Model.Cart?.Lines.Count > 0)
+    {
+        <h3>Items in Your Cart:</h3>
+        <div class="list-group mb-3">
+            @foreach (var line in Model.Cart.Lines)
+            {
+                <a href="#" class="list-group-item list-group-item-action">
+                    @line.Product.name - Quantity: @line.Quantity
+                </a>
+            }
+        </div>
+    }
+    else
+    {
+        <p>Your cart is empty.</p>
+    }
 
-    <div>
-        <label asp-for="Order.entry_mode">Entry Mode</label>
-        <select asp-for="Order.entry_mode">
-            <option value="PIN" selected>PIN</option>
-            <option value="Other">Other</option>
-        </select>
-    </div>
-    <div>
-        <label asp-for="Order.country_of_transaction">Country of Transaction</label>
-        <input asp-for="Order.country_of_transaction" type="text" value="United Kingdom" />
-    </div>
-    <div>
-        <label asp-for="Customer.country_of_residence">Country of Residence</label>
-        <input asp-for="Customer.country_of_residence" type="text" value="United Kingdom" />
-    </div>
-    <button type="submit">Predict</button>
-</form>
+    <!-- Display the Form with Non-Editable Amount -->
+    <form method="post">
+        <div class="form-group">
+            <label asp-for="Order.customer_ID">Customer ID</label>
+            <input asp-for="Order.customer_ID" class="form-control" type="number" min="0" />
+        </div>
+        <input type="hidden" asp-for="Order.time" />
+        <div class="form-group">
+            <label>Time of Checkout (24h format)</label>
+            <p class="form-control-plaintext">@Model.Order.time</p>
+        </div>
+        <input type="hidden" asp-for="Order.amount" />
+        <div class="form-group">
+            <label>Amount</label>
+            <p class="form-control-plaintext">@Model.Order.amount.ToString("C")</p>
+        </div>
+        <input type="hidden" asp-for="Order.date" />
+        <div class="form-group">
+            <label>Month of Transaction</label>
+            <p class="form-control-plaintext">@Model.Order.date</p>
+        </div>
+        <div class="form-group">
+            <label asp-for="Order.entry_mode">Entry Mode</label>
+            <select asp-for="Order.entry_mode" class="form-control">
+                <option value="PIN">PIN</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label asp-for="Order.country_of_transaction">Country of Transaction</label>
+            <input asp-for="Order.country_of_transaction" class="form-control" type="text" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Customer.country_of_residence">Country of Residence</label>
+            <input asp-for="Customer.country_of_residence" class="form-control" type="text" />
+        </div>
+        <button type="submit" class="btn btn-primary">Place Order</button>
+    </form>
+</div>
 
 @if (Model.Prediction != null)
 {
-    <h3>Prediction result: @Model.Prediction</h3>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var prediction = '@Model.Prediction';
+            var message = prediction === 'Fraud' ? 'This order is fraud.' : 'This order is NOT fraud.';
+            alert(message);
+        });
+    </script>
 }
