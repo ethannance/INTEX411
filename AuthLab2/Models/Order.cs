@@ -8,6 +8,7 @@ namespace AuthLab2.Models
         [Key]
         public int transaction_ID {  get; set; }
         public int customer_ID { get; set; }
+        public string date { get; set; }
         public string day_of_week { get; set; }
         public int time {  get; set; }
         public string entry_mode { get; set; }

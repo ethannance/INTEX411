@@ -1,39 +1,71 @@
 using AuthLab2.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.ML.OnnxRuntime;
+using Microsoft.ML.OnnxRuntime.Tensors;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AuthLab2.Pages
 {
     public class PredictModel : PageModel
     {
-        // Assuming you have a repository or some data service to fetch books
-        private readonly ILegoRepository _bookRepository;
+        private readonly InferenceSession _session;
 
-        public PredictModel(ILegoRepository bookRepository)
+        public PredictModel()
         {
-            _bookRepository = bookRepository;
+            // Initialize the inference session with the path to your ONNX model
+            _session = new InferenceSession("FRAUD.onnx");
         }
 
-        // Define a property to hold your book predictions
-        public List<ProductPrediction> BookPredictions { get; set; }
+        [BindProperty]
+        public Order Order { get; set; }
+
+        public Customer Customer { get; set; }
+
+        public string Prediction { get; set; }
 
         public void OnGet()
         {
-            // Initialize your BookPredictions list here
-            // This example just initializes an empty list for demonstration purposes
-            // In practice, you would fetch and populate actual predictions based on your logic
-            BookPredictions = new List<ProductPrediction>();
+        }
 
-            // Example: Populate BookPredictions with data from your repository
-            // This is a placeholder loop to demonstrate how you might convert book data to predictions
-            foreach (var book in _bookRepository.Products)
+        public IActionResult OnPost()
+        {
+            // Directly using the month from the form, assuming it's been adjusted to be an integer.
+            int month_of_the_year = int.Parse(Order.date); // Make sure to validate this to avoid exceptions.
+
+            string country_of_residence = Customer?.country_of_residence ?? "United Kingdom";
+
+            var features = new List<float>
             {
-                BookPredictions.Add(new ProductPrediction
-                {
-                    Product = book,
-                    Prediction = "YourPredictionLogicHere" // Replace with actual prediction logic
-                });
-            }
+                Order.customer_ID,
+                Order.time,
+                Order.amount,
+                month_of_the_year,
+                Order.entry_mode == "PIN" ? 1f : 0f,
+                Order.country_of_transaction == "United Kingdom" ? 1f : 0f,
+                country_of_residence == "United Kingdom" ? 1f : 0f,
+            };
+
+            // Convert the feature list to a tensor, assuming the model expects a single instance with a feature vector
+            var inputTensor = new DenseTensor<float>(features.ToArray(), new[] { 1, features.Count });
+            var inputs = new List<NamedOnnxValue>
+            {
+                NamedOnnxValue.CreateFromTensor("float_input", inputTensor)
+            };
+
+            // Run the model with the prepared input
+            using var results = _session.Run(inputs);
+
+            // Extract the prediction result, assuming a single output from the model
+            var prediction = results.FirstOrDefault()?.AsTensor<float>().ToArray();
+
+            // Interpret the model's prediction (assuming binary classification: 0 for "Not Fraud", 1 for "Fraud")
+            Prediction = prediction?[0] >= 0.5 ? "Fraud" : "Not Fraud";
+
+            return Page();
         }
     }
 }
+

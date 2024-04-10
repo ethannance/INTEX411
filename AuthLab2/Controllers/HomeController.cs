@@ -2,22 +2,27 @@ using AuthLab2.Models;
 using AuthLab2.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.ML.OnnxRuntime;
+using Microsoft.ML.OnnxRuntime.Tensors;
 using System.Diagnostics;
 using System.Drawing.Printing;
 
 namespace AuthLab2.Controllers
 {
+
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ILegoRepository _repo;
+        private readonly InferenceSession _session;
 
-        // This single constructor takes both the logger and repository as parameters
         public HomeController(ILogger<HomeController> logger, ILegoRepository repo)
         {
             _logger = logger;
             _repo = repo;
         }
+
+
 
         public IActionResult Index(int pageNum = 1, string? productType = null, int pageSize = 5)
         {
@@ -67,7 +72,6 @@ namespace AuthLab2.Controllers
 
 
 
-
         public IActionResult Privacy()
         {
             return View();
@@ -94,5 +98,8 @@ namespace AuthLab2.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+
+
     }
 }
