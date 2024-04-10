@@ -34,16 +34,18 @@
             @{
                 var displayedNames = new HashSet<string>();
             }
-
-            @foreach (Product p in Model.Products)
-            {
-                if (displayedNames.Add(p.name)) // Only displays the product if its name is unique so far
+            <div class="card-container">
+                @foreach (Product p in Model.Products)
                 {
-                    <div class="card-container">
-                        <partial name="ProductSummary" model="p" />
-                    </div>
+                    if (displayedNames.Add(p.name)) // Only displays the product if its name is unique so far
+                    {
+                        <div class="card m-1 p-1 bg-light">
+                            <partial name="ProductSummary" model="p" />
+                        </div>
+                    }
                 }
-            }
+            </div>
+            
 
             <!-- Pagination tag helpers here -->
             <div page-model="@Model.PaginationInfo" page-action="Index" page-classes-enabled="true" page-class="btn"

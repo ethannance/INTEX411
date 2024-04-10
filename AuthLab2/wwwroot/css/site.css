@@ -111,17 +111,42 @@
 
 .card-container {
     display: flex;
-    flex-wrap: wrap; /* Enable wrapping behavior */
-    gap: 10px; /* Adjust the gap between cards */
-    justify-content: flex-start; /* Align cards to the left */
-    padding: 10px; /* Optional: Add padding to the container */
-    width: 100%; /* Optional: Set the width to 100% for responsiveness */
+    flex-wrap: wrap;
+    gap: 10px; /* Adjust as needed */
 }
 
 .card {
-    flex: 0 0 auto; /* Allow cards to shrink or grow as needed */
-    width: 300px; /* Set a fixed width for each card */
-    /* Optionally, you can add other styles for the card */
+    flex: 0 0 auto;
+    width: 300px;  Adjust as needed 
+    display: flex;
+    flex-direction: column;
+     Additional card styling 
+}
+
+/*.price-and-button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+}*/
+
+/*.card {*/
+    /* Other card styles */
+    /*display: flex;
+    flex-direction: column;
+    justify-content: space-between;*/ /* Distribute content evenly along the vertical axis */
+    /*height: 100%;*/ /* Ensure the card takes up the full height of its parent */
+    /*position: relative;*/ /* Set position to relative */
+/*}*/
+
+.price-and-button-container {
+    position: absolute; /* Set position to absolute */
+    bottom: 0; /* Align to the bottom of the card */
+    left: 0; /* Align to the left side of the card */
+    width: 100%; /* Ensure the container spans the entire width of the card */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 
