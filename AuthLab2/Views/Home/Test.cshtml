@@ -55,8 +55,8 @@
         <div class="container">
             <!-- About Section Content-->
             <div class="row">
-                <div class="col-lg-4 ms-auto text-center">
-                    <p class="lead">
+                <div class="col-lg-8 mx-auto text-center">
+                    <p class="lead" style="margin-left: 0px;">
                         Welcome to Aurora Bricks, where you can find a curated selection of my favorite Lego sets. Explore, purchase, and dive into the colorful world of Lego with me!
                     </p>
                 </div>
@@ -69,17 +69,19 @@
             </div>
         </div>
     </section>
+    <!-- Icon Divider-->
+    <div class="divider-custom">
+        <div class="divider-custom-line"></div>
+        <div class="divider-custom-icon"><img src="~/img/lego brick.png" width="50px" /></div>
+        <div class="divider-custom-line"></div>
+    </div>
     <!-- Portfolio Section-->
     <section class="page-section portfolio" id="portfolio">
         <div class="container">
             <!-- Portfolio Section Heading-->
-            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">This Week's Top Picks</h2>
-            <!-- Icon Divider-->
-            <div class="divider-custom">
-                <div class="divider-custom-line"></div>
-                <div class="divider-custom-icon"><img src="~/img/lego brick.png" width="50px" /></div>
-                <div class="divider-custom-line"></div>
-            </div>
+            <h2 class="page-section-heading text-center text-uppercase text-black mb-0">This Week's Top Picks</h2>
+            
+            
             <!-- INSERT PRODUCT ITEMS HERE-->
             @{
                 var displayedNames = new HashSet<string>();
