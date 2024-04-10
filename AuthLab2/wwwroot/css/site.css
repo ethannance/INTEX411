@@ -117,11 +117,16 @@
 
 .card {
     flex: 0 0 auto;
-    width: 300px;  /*Adjust as needed */
+    width: 300px; /*Adjust as needed */
     height: 100px;
     display: flex;
     flex-direction: column;
-     /*Additional card styling */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /*Additional card styling */
+}
+
+.card:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 /*.price-and-button-container {
