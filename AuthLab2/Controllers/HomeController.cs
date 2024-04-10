@@ -2,6 +2,7 @@ using AuthLab2.Models;
 using AuthLab2.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.ML.OnnxRuntime;
 using Microsoft.ML.OnnxRuntime.Tensors;
 using System.Diagnostics;
@@ -70,7 +71,13 @@ namespace AuthLab2.Controllers
             return View(viewModel);
         }
 
+        public IActionResult ProductDetails(int id)
+        {
+            var recordToView = _repo.Products
+                .FirstOrDefault(x => x.product_ID == id);
 
+            return View(recordToView);
+        }
 
         public IActionResult Privacy()
         {
