@@ -23,20 +23,32 @@ namespace AuthLab2.Pages
        
         }
 
-        public IActionResult OnPost(int productId, string returnUrl)
+        public IActionResult OnPost(int productId, string returnUrl, bool removeItem = false)
         {
-            Product p = _repo.Products
-                .FirstOrDefault(x => x.product_ID == productId);
+            Product p = _repo.Products.FirstOrDefault(x => x.product_ID == productId);
 
             if (p != null)
             {
                 Cart = HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
-                Cart.AddItem(p, 1);
+
+                if (removeItem)
+                {
+                    Cart.RemoveLine(p); // Assume this method exists in your Cart class to remove the specified product
+                }
+                else
+                {
+                    Cart.AddItem(p, 1);
+                }
+
                 HttpContext.Session.SetJson("cart", Cart);
             }
 
-            return RedirectToPage (new {returnUrl = returnUrl});
+            return RedirectToPage(new { returnUrl = returnUrl });
         }
+
+
+
+
     }
 }
 
