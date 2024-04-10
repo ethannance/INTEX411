@@ -1,0 +1,59 @@
+﻿@{
+    ViewData["Title"] = "All Products";
+}
+
+@model List<Product>
+
+<vc:nav-bar-types user="Admin"></vc:nav-bar-types>
+<vc:submenu-types view="Default"></vc:submenu-types>
+
+<div class="container-fluid m-2">
+    <br />
+
+    <div class="text-center">
+        <a class="btn btn-primary btn-xl" asp-controller="Home" asp-action="ProductsAddAdmin">
+            Add Product
+        </a>
+    </div>
+    <br />
+    <br />
+    <table class="table table-bordered table-striped">
+        <thead class="fw-bold text-center">
+            <tr>
+                <td>Name</td>
+                <td>Year</td>
+                <td>Price</td>
+                <td>Link</td>
+                <td>Colors</td>
+                <td>Category</td>
+                <td>Edit</td>
+                <td>Delete</td>
+            </tr>
+            
+        </thead>
+            @foreach (Product p in Model)
+            {
+                <tbody>
+                    <tr>
+                        <td>@p.name</td>
+                        <td>@p.year</td>
+                        <td>@p.price</td>
+                        <td>@p.img_link</td>
+                        <td>@p.primary_color / @p.secondary_color</td>
+                        <td>@p.category</td>
+                        <td>
+                            <a class="btn btn-info" style="text-white" asp-controller="Home" asp-action="EditProduct">Edit</a>
+                        </td>
+                        <td>
+                            <a class="btn btn-danger" asp-controller="Home" asp-action="DeleteProduct">Delete</a>
+                        </td>
+                        
+                    </tr>
+                </tbody>
+
+                
+            }
+    </table>
+    <br />
+</div>
+

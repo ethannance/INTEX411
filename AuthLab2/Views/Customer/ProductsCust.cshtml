@@ -8,31 +8,35 @@
 <div class="container-fluid">
     <br />
     <div class="row">
-        <!-- Sidebar with product types -->
+        <!-- Sidebar with filters -->
+
         <br />
         <br />
         <br />
         <br />
         <div class="col-md-3">
+            <h3>Filter Products:</h3>
             <br />
-            <br />
-            <br />
-            <br />
-            @await Component.InvokeAsync("ProductTypes")
-        </div>
-
-        <!-- Main content area for products -->
-        <div class="col-md-9">
-
             <form method="get" action="/Home/Index">
+                <label class="mr-2">Results:     </label>
                 <select name="pageSize" onchange="this.form.submit()">
+                    <option value="">Select an option</option>
                     <option value="5">5</option>
                     <option value="10">10</option>
                     <option value="20">20</option>
                 </select>
                 <input type="hidden" name="pageNum" value="@Model.PaginationInfo.CurrentPage" />
                 <input type="hidden" name="productType" value="@Model.CurrentProductType" />
+                <input type="hidden" name="productColor" value="@Model.CurrentProductColor" />
             </form>
+            <br />
+            @await Component.InvokeAsync("ProductColors")
+            <br />
+            @await Component.InvokeAsync("ProductTypes")
+        </div>
+
+        <!-- Main content area for products -->
+        <div class="col-md-9">
 
             @{
                 var displayedNames = new HashSet<string>();
@@ -48,7 +52,7 @@
                     }
                 }
             </div>
-            
+
 
             <!-- Pagination tag helpers here -->
             <div page-model="@Model.PaginationInfo" page-action="Index" page-classes-enabled="true" page-class="btn"
@@ -58,5 +62,6 @@
 
         </div>
     </div>
+
 </div>
 

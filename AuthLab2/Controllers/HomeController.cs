@@ -131,6 +131,25 @@ namespace AuthLab2.Controllers
             return View();
         }
 
+        public IActionResult ProductsAdmin() //Lists all of the products to the admin
+        {
+            var products = _repo.Products.ToList();
+
+            var productEqualityComparer = new ProductEqualityComparer();
+            
+            ViewBag.Products = _repo.Products
+                .OrderBy(x => x.name)
+                .ToList();
+
+            //Linq
+            products = products
+                .OrderBy(x => x.name)
+                .Distinct(productEqualityComparer)
+                .ToList();
+
+            return View(products);
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
