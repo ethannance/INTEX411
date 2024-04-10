@@ -16,8 +16,8 @@
     <br />
     <a href="@ViewBag.RefererUrl">Back</a>
     <br />
-    <div class="text-center">
-        <img src="@Model.Product.img_link" alt="Image" height="100px">
+    <div>
+        <img src="@Model.Product.img_link" alt="Image" height="200px" width="250px">
     </div>
     <br />
     <br />
@@ -54,7 +54,13 @@
     <div class="category">
         <p>@Model.Product.category</p>
     </div>
+
+    <h5>Recommended for you:</h5>
     <div class="recommendations">
         <p>@Model.content_Recs.Recommendation_1</p>
+        <p>@Model.content_Recs.Recommendation_2</p>
+        <p>@Model.content_Recs.Recommendation_3</p>
+        <p>@Model.content_Recs.Recommendation_4</p>
+        <p>@Model.content_Recs.Recommendation_5</p>
     </div>
 </div>
