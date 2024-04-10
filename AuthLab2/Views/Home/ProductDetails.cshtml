@@ -58,15 +58,18 @@
 <!-- Other code -->
 
 <h5>Recommended for you:</h5>
-<div class="recommendations">
+<div class="row recommendations">
     @foreach (var recommendedProduct in Model.RecommendedProducts)
     {
-        <div>
-            <h6>@recommendedProduct.name</h6>
-            <img src="@recommendedProduct.img_link" alt="@recommendedProduct.name" height="100" width="100" />
-            <p>Price: $@recommendedProduct.price.00</p>
-            <!-- Add other product details as needed -->
+        <div class="col-md-2">
+            <div class="card" style="height: 300px; width: 200px;">
+                <img src="@recommendedProduct.img_link" class="card-img-top" alt="@recommendedProduct.name">
+                <div class="card-body">
+                    <h6 class="card-title">@recommendedProduct.name</h6>
+                    <p class="card-text">Price: $@recommendedProduct.price.00</p>
+                    <!-- Add other product details as needed -->
+                </div>
+            </div>
         </div>
     }
-</div>
 </div>
