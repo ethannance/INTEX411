@@ -2,7 +2,7 @@
 
 namespace AuthLab2.Models.ViewModels
 {
-    public class UserRecViewModel
+    public class TestViewModel
     
     {
         public user_recommendations user_recommendations { get; set; }

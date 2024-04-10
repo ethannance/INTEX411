@@ -115,11 +115,6 @@ namespace AuthLab2.Controllers
             return View();
         }
 
-        public IActionResult Test()
-        {
-            return View();
-        }
-
         public IActionResult About()
         {
             return View();
@@ -157,7 +152,7 @@ namespace AuthLab2.Controllers
         }
 
 
-        public IActionResult UserRec()
+        public IActionResult Test()
         {
             var userId = 1;
             var userRecs = _repo.user_recommendations.FirstOrDefault(ur => ur.customer_ID == userId);
@@ -177,7 +172,7 @@ namespace AuthLab2.Controllers
         _repo.Products.FirstOrDefault(p => p.product_ID == userRecs.Recommendation_5)
     }.Where(p => p != null).ToList();
 
-            var viewModel = new UserRecViewModel
+            var viewModel = new TestViewModel
             {
                 user_recommendations = userRecs,
                 Product = likedProduct,
