@@ -33,7 +33,21 @@ namespace AuthLab2.Pages
 
                 if (removeItem)
                 {
-                    Cart.RemoveLine(p); // Assume this method exists in your Cart class to remove the specified product
+                    // Find the cart line for the specified product
+                    var line = Cart.Lines.FirstOrDefault(l => l.Product.product_ID == productId);
+                    if (line != null)
+                    {
+                        if (line.Quantity > 1)
+                        {
+                            // If quantity is greater than 1, decrease it by 1
+                            Cart.DecreaseItemQuantity(p, 1); // Make sure this method exists and correctly updates the quantity in your Cart class
+                        }
+                        else
+                        {
+                            // If quantity is 1, remove the item from the cart
+                            Cart.RemoveLine(p);
+                        }
+                    }
                 }
                 else
                 {
@@ -45,6 +59,7 @@ namespace AuthLab2.Pages
 
             return RedirectToPage(new { returnUrl = returnUrl });
         }
+
 
 
 
