@@ -1,6 +1,7 @@
 using AuthLab2.Components;
 using AuthLab2.Models;
 using AuthLab2.Models.ViewModels;
+using Azure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis;
@@ -148,6 +149,25 @@ namespace AuthLab2.Controllers
                 .ToList();
 
             return View(products);
+        }
+
+        public IActionResult ProductsAddAdmin()
+        {
+            return View(new Product());
+        }
+        [HttpPost]
+        public IActionResult ProductsAddAdmin(Product response)
+        {
+            if (ModelState.IsValid) //fix this
+            {
+                _repo.AddProduct(response);
+
+                return View("ConfirmationAdmin", response);
+            }
+            else
+            {
+                return View(response);
+            }
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
