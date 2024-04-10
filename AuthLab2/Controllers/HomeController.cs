@@ -1,3 +1,4 @@
+using AuthLab2.Components;
 using AuthLab2.Models;
 using AuthLab2.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -25,14 +26,15 @@ namespace AuthLab2.Controllers
 
 
 
-        public IActionResult Index(int pageNum = 1, string? productType = null, int pageSize = 5)
+        public IActionResult Index(int pageNum = 1, string? productType = null, int pageSize = 5, string? productColor = null)
         {
             // Validate and set pageSize based on user input or default to 5 if the input is outside the allowed range
             pageSize = (new[] { 5, 10, 20 }).Contains(pageSize) ? pageSize : 5;
 
             // Fetch all relevant products as a List<Product> initially
             var allProducts = _repo.Products
-                .Where(x => productType == null || x.category == productType)
+                .Where(x => (productType == null || x.category == productType) &&
+                       (productColor == null || x.primary_color == productColor))
                 .OrderBy(x => x.name)
                 .ToList(); // This ensures the operation is executed and data is fetched into memory
 
@@ -65,7 +67,8 @@ namespace AuthLab2.Controllers
                     TotalItems = filteredProducts.Count // Use count of filtered products for total items
                 },
 
-                CurrentProductType = productType
+                CurrentProductType = productType,
+                CurrentProductColor = productColor
             };
 
             return View(viewModel);
