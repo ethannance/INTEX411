@@ -5,7 +5,7 @@
 <div class="container-fluid">
     <br />
     <div class="row">
-        <!-- Sidebar with product types -->
+        <!-- Sidebar with filters -->
         
         <br />
         <br />
@@ -22,16 +22,16 @@
                 </select>
                 <input type="hidden" name="pageNum" value="@Model.PaginationInfo.CurrentPage" />
                 <input type="hidden" name="productType" value="@Model.CurrentProductType" />
+                <input type="hidden" name="productColor" value="@Model.CurrentProductColor" />
             </form>
             <br />
+            @await Component.InvokeAsync("ProductColors")
             <br />
             @await Component.InvokeAsync("ProductTypes")
         </div>
 
         <!-- Main content area for products -->
         <div class="col-md-9">
-            
-            
 
             @{
                 var displayedNames = new HashSet<string>();
