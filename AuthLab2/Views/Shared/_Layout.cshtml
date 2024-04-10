@@ -82,12 +82,13 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 <partial name="_CookieConsentPartial" />
+
 <footer>
     
     <div class="row">
         <div class="copyright py-4 text-white p-4">
-            <small>Copyright &copy; Aurora Bricks 2024</small>
-            <small asp-controller="Home" asp-action="Privacy">  |  Privacy Policy</small>
+            <p>Copyright &copy; Aurora Bricks 2024</p>
+            <a asp-area="" asp-controller="Home" asp-action="Privacy"> | Privacy Policy</a>
         </div>
     </div>
 </footer>
