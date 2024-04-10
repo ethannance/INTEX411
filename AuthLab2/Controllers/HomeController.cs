@@ -157,6 +157,39 @@ namespace AuthLab2.Controllers
         }
 
 
+        public IActionResult UserRec()
+        {
+            var userId = 1;
+            var userRecs = _repo.user_recommendations.FirstOrDefault(ur => ur.customer_ID == userId);
+
+            if (userRecs == null)
+            {
+                return NotFound();
+            }
+
+            var likedProduct = _repo.Products.FirstOrDefault(p => p.product_ID == userRecs.if_you_liked);
+            var uRecommendedProducts = new List<Product>
+    {
+        _repo.Products.FirstOrDefault(p => p.product_ID == userRecs.Recommendation_1),
+        _repo.Products.FirstOrDefault(p => p.product_ID == userRecs.Recommendation_2),
+        _repo.Products.FirstOrDefault(p => p.product_ID == userRecs.Recommendation_3),
+        _repo.Products.FirstOrDefault(p => p.product_ID == userRecs.Recommendation_4),
+        _repo.Products.FirstOrDefault(p => p.product_ID == userRecs.Recommendation_5)
+    }.Where(p => p != null).ToList();
+
+            var viewModel = new UserRecViewModel
+            {
+                user_recommendations = userRecs,
+                Product = likedProduct,
+                uRecommendedProducts = uRecommendedProducts
+            };
+
+            ViewBag.RefererUrl = Request.Headers["Referer"].ToString();
+
+            return View(viewModel);
+        }
+
+
 
     }
 }

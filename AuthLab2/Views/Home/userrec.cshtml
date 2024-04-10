@@ -1,44 +1,31 @@
-﻿@{
-    ViewData["Title"] = "User Based Recommendations";
-}
-
+﻿
+@model AuthLab2.Models.ViewModels.UserRecViewModel
+<!--newhere-->
 <vc:nav-bar-types user="Visitor"></vc:nav-bar-types>
 <vc:submenu-types view="Default"></vc:submenu-types>
 
-<div class="container-fluid">
+
+<h2>Because you liked @Model.Product.name:</h2>
+
+<div>
     <br />
-    <div class="row">
-        <!-- Sidebar with filters -->
-
-        
-
-        <!-- Main content area for products -->
-        <div class="col-md-9">
-
-            @{
-                var displayedNames = new HashSet<int>();
-            }
-            <div class="card-container">
-                @foreach (user_recommendation p in Model.user_recommendations)
-                {
-                    if (displayedNames.Add(p.if_you_liked)) // Only displays the product if its name is unique so far
-                    {
-                        <div class="card m-1 p-1 bg-light">
-                            <partial name="ProductSummary" model="p" />
-                        </div>
-                    }
-                }
-            </div>
-
-
-            <!-- Pagination tag helpers here -->
-            <div page-model="@Model.PaginationInfo" page-action="Index" page-classes-enabled="true" page-class="btn"
-                 page-class-normal="btn-outline-dark" page-class-selected="btn-primary"
-                 page-url-productType="@Model.CurrentProductType" page-url-pageSize="@Model.PaginationInfo.ItemsPerPage" class="btn-group pull-right m-1">
-            </div>
-
-        </div>
-    </div>
-
+    <a href="@ViewBag.RefererUrl">Back</a>
+    <br />
 </div>
-
+<div class="row recommendations">
+    @foreach (var recommendedProduct in Model.uRecommendedProducts)
+    {
+        <div class="col-md-2">
+            <a href="@Url.Action("ProductDetails", "Home", new { id = recommendedProduct.product_ID })">
+                <div class="card" style="height: 300px; width: 200px;">
+                    <img src="@recommendedProduct.img_link" class="card-img-top" alt="@recommendedProduct.name">
+                    <div class="card-body">
+                        <h6 class="card-title">@recommendedProduct.name</h6>
+                        <p class="card-text">Price: $@recommendedProduct.price.00</p>
+                        <!-- Add other product details as needed -->
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+</div>
