@@ -76,9 +76,8 @@ namespace AuthLab2.Controllers
 
         public IActionResult ProductDetails(int id)
         {
-            var recordToView = _repo.Products
-                .FirstOrDefault(x => x.product_ID == id);
-
+            var recordToView = _repo.Products.FirstOrDefault(x => x.product_ID == id);
+            ViewBag.RefererUrl = Request.Headers["Referer"].ToString();
             return View(recordToView);
         }
 
