@@ -14,26 +14,39 @@
     @if (Model.Cart?.Lines.Count > 0)
     {
         <h3>Items in Your Cart:</h3>
-        <div class="list-group mb-3">
-            @foreach (var line in Model.Cart.Lines)
-            {
-                <a href="#" class="list-group-item list-group-item-action">
-                    @line.Product.name - Quantity: @line.Quantity
-                </a>
-            }
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var line in Model.Cart.Lines)
+                    {
+                        <tr>
+                            <td>@line.Product.name</td>
+                            <td>@line.Quantity</td>
+                        </tr>
+                    }
+                    <tr>
+                        <td><b>Subtotal:</b></td>
+                        <td><b>@Model.Order.amount.ToString("C")</b></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        <div class="form-group">
-            <label><b>Subtotal:</b> </label>
-            <p class="form-control-plaintext"><b>@Model.Order.amount.ToString("C")</b></p>
-        </div>
+
 
         <h3>Additional Information Required:</h3>
         <!-- Display the Form with Non-Editable Amount -->
         <form method="post">
             <div class="form-group">
-                <label asp-for="Order.customer_ID">Customer ID</label>
+                <label asp-for="Order.customer_ID">Enter Customer ID Manually (until we can add users)</label>
                 <input asp-for="Order.customer_ID" class="form-control" type="number" min="0" required />
             </div>
+            <br />
 
             <input type="hidden" asp-for="Order.time" />
 
@@ -42,9 +55,9 @@
             <input type="hidden" asp-for="Order.amount" />
 
             <div class="form-group">
-                <label asp-for="Order.entry_mode">Entry Mode</label>
+                <label asp-for="Order.entry_mode">Type of Transaction</label>
                 <select asp-for="Order.entry_mode" class="form-control" required>
-                    <option value="">Select Entry Mode</option>
+                    <option value="">Select Type of Transaction</option>
                     <option value="PIN">PIN</option>
                     <option value="Other">Tap</option>
                     <option value="Other">CVC</option>
@@ -52,17 +65,20 @@
                 </select>
                 <div class="invalid-feedback">Please select an entry mode.</div>
             </div>
+            <br />
 
             <div class="form-group">
                 <label asp-for="Order.country_of_transaction">In which country are you making this purchase?</label>
                 <input asp-for="Order.country_of_transaction" class="form-control" type="text" required />
                 <div class="invalid-feedback">Please provide the country of transaction.</div>
             </div>
+            <br />
             <div class="form-group">
                 <label asp-for="Customer.country_of_residence">In which country to you live in?</label>
                 <input asp-for="Customer.country_of_residence" class="form-control" type="text" required />
                 <div class="invalid-feedback">Please provide the country of residence.</div>
             </div>
+            <br />
             <button type="submit" class="btn btn-primary">Place Order</button>
         </form>
     }
