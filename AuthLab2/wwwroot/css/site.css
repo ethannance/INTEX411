@@ -109,6 +109,23 @@
     z-index: -1; /* Place the background image behind other content */
 }
 
+.card-container {
+    display: flex;
+    flex-wrap: wrap; /* Enable wrapping behavior */
+    gap: 10px; /* Adjust the gap between cards */
+    justify-content: flex-start; /* Align cards to the left */
+    padding: 10px; /* Optional: Add padding to the container */
+    width: 100%; /* Optional: Set the width to 100% for responsiveness */
+}
+
+.card {
+    flex: 0 0 auto; /* Allow cards to shrink or grow as needed */
+    width: 300px; /* Set a fixed width for each card */
+    /* Optionally, you can add other styles for the card */
+}
+
+
+
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);

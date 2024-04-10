@@ -4,14 +4,18 @@
 @{
 }
 
+@{
+    ViewData["Title"] = "About Aurora";
+}
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About Aurora</title>
 <style>
-  body {
+/*   body {
     font-family: Arial, sans-serif;
   }
   .header {
@@ -37,7 +41,7 @@
     color: black;
   }
   .content {
-    padding: 20px;
+    padding: 10px;
     max-width: 800px;
     margin: auto;
   }
@@ -55,23 +59,32 @@
     border-radius: 50%; /* Makes the image round */
     display: block;
     margin: auto;
-  }
+  } */
 </style>
 </head>
 <body>
 
-<div class="header">
-  <h1>Aurora Bricks</h1>
-</div>
+    <!-- Icon Divider-->
+    <div class="divider-custom">
+        <div class="divider-custom-line"></div>
+        <div class="divider-custom-icon"><img src="~/img/lego brick.png" width="50px" /></div>
+        <div class="divider-custom-line"></div>
+    </div>
 
-
-<div class="content">
-  <h2>ABOUT AURORA</h2>
-  <img src="path_to_your_image" alt="Aurora Brickwell" class="profile-pic">
-  <p>Aurora Brickwell is a famous collector of Legos™ and a master builder. She has a large social media following where she uses her distributor license with The Lego Group™ to sell products. She takes orders over her various social media channels, in-person at various trade shows, and this website.</p>
-  <p>Join Aurora on her journey of becoming a master builder and famous collector of Lego!</p>
-</div>
-
+    <div class="content row">
+        <div class="col-5">
+                <img src="~/img/aurora.jpg" width="250px"/>
+        </div>
+        <div class="col-1">
+        </div>
+        <div class="col-6">
+                <p>Aurora Brickwell is a famous collector of Legos™ and a master builder. She has a large social media following where she uses her distributor license with The Lego Group™ to sell products. She takes orders over her various social media channels, in-person at various trade shows, and this website.</p>
+                <p>Join Aurora on her journey of becoming a master builder and famous collector of Lego!</p>
+            <div class="text-center">
+                <a class="btn btn-primary btn-social mx-1" href="#!"><i class="fab fa-fw fa-tiktok"></i></a>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>

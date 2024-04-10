@@ -4,6 +4,11 @@
 @{
 }
 
+@{
+    ViewData["Title"] = "Welcome, LEGO Fans!";
+}
+
+@model Product
 
 <!DOCTYPE html>
 <html lang="en">
@@ -42,23 +47,6 @@
             </div>
         </div>
     </nav>
-    <!-- Masthead-->
-    <div class="masthead text-center">
-        <div class="container d-flex align-items-center flex-column">
-            <!-- Masthead Avatar Image-->
-            <img src="~/img/xavi-cabrera-kn-umdzqdjm-unsplash.jpg" alt="Legos" class="masthead-bg" height="200px" width="100%"/>
-            <!-- Masthead Heading-->
-            <h1 class="masthead-heading text-uppercase mb-0">Welcome, Lego Fan!</h1>
-            <!-- Icon Divider-->
-            @* <div class="divider-custom divider-light">
-                <div class="divider-custom-line"></div>
-                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                <div class="divider-custom-line"></div>
-            </div>
-            <!-- Masthead Subheading-->
-            <p class="masthead-subheading font-weight-light mb-0">Graphic Artist - Web Designer - Illustrator</p> *@
-        </div>
-    </div>
     <!-- About Section-->
     <section class="page-section bg-white text-black mb-0" id="about">
         <div class="container">
@@ -82,7 +70,7 @@
     <section class="page-section portfolio" id="portfolio">
         <div class="container">
             <!-- Portfolio Section Heading-->
-            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Top Picks</h2>
+            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">This Week's Top Picks</h2>
             <!-- Icon Divider-->
             <div class="divider-custom">
                 <div class="divider-custom-line"></div>
@@ -90,32 +78,26 @@
                 <div class="divider-custom-line"></div>
             </div>
             <!-- INSERT PRODUCT ITEMS HERE-->
+            @{
+                var displayedNames = new HashSet<string>();
+            }
+
             <p>Insert product details here</p>
+            @* <div>
+                @foreach (Product p in Model.Products)
+                {
+                    if (displayedNames.Add(p.name)) // Only displays the product if its name is unique so far
+                    {
+                        <div class="card-container">
+                            <partial name="ProductSummary" model="p" />
+                        </div>
+                    }
+                }
+            </div> *@
+            
 
         </div>
     </section>
-    <!-- Footer-->
-    <footer class="footer text-center">
-        <div class="container">
-            <div class="row">
-                <!-- Footer Location-->
-                <div class="col-lg-4 mb-5 mb-lg-0">
-                    <h4 class="text-uppercase mb-4" asp-controller="Home" asp-action="Privacy">Privacy Policy</h4>
-                </div>
-                <!-- Footer Social Icons-->
-                <div class="col-lg-4 mb-5 mb-lg-0">
-                </div>
-                <!-- Footer About Text-->
-                <div class="col-lg-4">
-                    <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-tiktok"></i></a>
-                </div>
-            </div>
-        </div> 
-        <!-- Copyright Section-->
-        <div class="copyright py-4 text-center text-white">
-            <div class="container"><small>Copyright &copy; Aurora Bricks 2024</small></div>
-        </div>
-    </footer>
    
     <!-- Portfolio Modals-->
     <!-- Portfolio Modal 1-->

@@ -60,6 +60,14 @@
             <partial name="_LoginPartial" />
         </div>
     </nav>
+    <div class="masthead text-center">
+        <div class="container d-flex align-items-center flex-column">
+            <!-- Masthead Avatar Image-->
+            <img src="~/img/xavi-cabrera-kn-umdzqdjm-unsplash.jpg" alt="Legos" class="masthead-bg" height="200px" width="100%" />
+            <!-- Masthead Heading-->
+            <h1 class="masthead-heading text-uppercase mb-0">@ViewData["Title"]</h1>
+        </div>
+    </div>
     <!-- Content -->
     <div class="container-fluid">
         <main role="main" class="pb-3">
@@ -73,4 +81,12 @@
     <script src="~/js/scripts.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+<footer>
+    <div class="row">
+        <div class="copyright py-4 text-white p-4">
+            <small>Copyright &copy; Aurora Bricks 2024</small>
+            <small asp-controller="Home" asp-action="Privacy">  |  Privacy Policy</small>
+        </div>
+    </div>
+</footer>
 </html>
