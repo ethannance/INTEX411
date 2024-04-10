@@ -4,40 +4,43 @@
 @{
 }
 
-@model Product
+@model ProductDetailsViewModel
 
 <h1>Product Details</h1>
 
-<h2>@Model.name</h2>
+<h2>@Model.Product.name</h2>
 
 
 <div>
     <br />
     <div class="text-center">
-        <img src="@Model.img_link" alt="Image" height="100px">
+        <img src="@Model.Product.img_link" alt="Image" height="100px">
     </div>
     <br />
     <br />
     <br />
     <div class="price-and-button-container">
         <div class="price">
-            <h6>$@Model.price.00</h6>
+            <h6>$@Model.Product.price.00</h6>
         </div>
     </div>
 
     <div class="description">
-        <p>@Model.description</p>
+        <p>@Model.Product.description</p>
     </div>
     <div class="num-parts">
-        <p>@Model.num_parts</p>
+        <p>@Model.Product.num_parts</p>
     </div>
     <div class="year">
-        <p>@Model.year</p>
+        <p>@Model.Product.year</p>
     </div>
     <div class="colors">
-        <p>@Model.primary_color/@Model.secondary_color</p>
+        <p>@Model.Product.primary_color/@Model.Product.secondary_color</p>
     </div>
     <div class="category">
-        <p>@Model.category</p>
+        <p>@Model.Product.category</p>
+    </div>
+    <div class="recommendations">
+        <p>@Model.content_Recs.Recommendation_1</p>
     </div>
 </div>

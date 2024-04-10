@@ -16,6 +16,7 @@ public partial class LegoContext : DbContext
     }
 
     public virtual DbSet<Product> Products { get; set; }
+    public DbSet<content_recs> content_recs { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseSqlServer("Server=tcp:myfreesqldbservergroup411.database.windows.net,1433;Initial Catalog=Group411IntexDB;Persist Security Info=False;User ID=admin411;Password=Fireplot411;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
