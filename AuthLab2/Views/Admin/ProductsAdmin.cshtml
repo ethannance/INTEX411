@@ -2,10 +2,44 @@
     ViewData["Title"] = "All Products";
 }
 
+@model ProductDetailsViewModel
+
 <vc:nav-bar-types user="Admin"></vc:nav-bar-types>
 <vc:submenu-types view="Default"></vc:submenu-types>
 
 <div class="container-fluid">
+    <div class="text-center">
+        <a class="btn btn-primary btn-xl" asp-controller="Home" asp-action="ProductsAddAdmin">
+            Add Product
+        </a>
+    </div>
+    <br />
+    <table class="table table-bordered">
+        <thead>
+            <td>Name</td>
+            <td>Year</td>
+            <td>Price</td>
+            <td>Link</td>
+            <td>Colors</td>
+            <td>Category</td>
+            <td>Edit/Delete</td>
+        </thead>
+        <tbody>
+            @* @foreach (Product p in Model.Products)
+            {
+                <tr>@p.name</tr>
+                <tr>@p.year</tr>
+                <tr>@p.price</tr>
+                <tr>@p.img_link</tr>
+                <tr>@p.primary_color / @p.secondary_color</tr>
+                <tr>@p.category</tr>
+                <a class="btn btn-info" asp-controller="Home" asp-action="EditProduct">Edit</a>
+                <a class="btn btn-danger" asp-controller="Home" asp-action="DeleteProduct">Delete</a>
+            } *@
+        </tbody>
+    </table>
+</div>
+@* <div class="container-fluid">
     <br />
     <div class="row">
         <!-- Sidebar with product types -->
@@ -58,5 +92,5 @@
 
         </div>
     </div>
-</div>
+</div> *@
 
