@@ -1,4 +1,5 @@
-﻿namespace AuthLab2.Models
+﻿
+namespace AuthLab2.Models
 {
     public class Cart
     {
@@ -30,6 +31,21 @@
         public void Clear() => Lines.Clear();
 
         public decimal CalculateTotal() => Lines.Sum(x => x.Product.price * x.Quantity);
+
+        public void DecreaseItemQuantity(Product product, int quantity)
+        {
+            var line = Lines.FirstOrDefault(l => l.Product.product_ID == product.product_ID);
+
+            if (line != null)
+            {
+                line.Quantity -= quantity;
+                if (line.Quantity <= 0)
+                {
+                    Lines.RemoveAll(l => l.Product.product_ID == product.product_ID);
+                }
+            }
+        }
+
 
         public class CartLine
         {

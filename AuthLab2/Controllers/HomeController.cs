@@ -115,11 +115,6 @@ namespace AuthLab2.Controllers
             return View();
         }
 
-        public IActionResult Test()
-        {
-            return View();
-        }
-
         public IActionResult About()
         {
             return View();
@@ -131,16 +126,65 @@ namespace AuthLab2.Controllers
             return View();
         }
 
+        public IActionResult ProductsAdmin() //Lists all of the products to the admin
+        {
+            var products = _repo.Products.ToList();
+
+            var productEqualityComparer = new ProductEqualityComparer();
+            
+            ViewBag.Products = _repo.Products
+                .OrderBy(x => x.name)
+                .ToList();
+
+            //Linq
+            products = products
+                .OrderBy(x => x.name)
+                .Distinct(productEqualityComparer)
+                .ToList();
+
+            return View(products);
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IActionResult UsersListAdmin()
+
+        public IActionResult Test()
         {
-            return View("~/Views/Admin/UsersListAdmin.cshtml");
+            var userId = 1;
+            var userRecs = _repo.user_recommendations.FirstOrDefault(ur => ur.customer_ID == userId);
+
+            if (userRecs == null)
+            {
+                return NotFound();
+            }
+
+            var likedProduct = _repo.Products.FirstOrDefault(p => p.product_ID == userRecs.if_you_liked);
+            var uRecommendedProducts = new List<Product>
+    {
+        _repo.Products.FirstOrDefault(p => p.product_ID == userRecs.Recommendation_1),
+        _repo.Products.FirstOrDefault(p => p.product_ID == userRecs.Recommendation_2),
+        _repo.Products.FirstOrDefault(p => p.product_ID == userRecs.Recommendation_3),
+        _repo.Products.FirstOrDefault(p => p.product_ID == userRecs.Recommendation_4),
+        _repo.Products.FirstOrDefault(p => p.product_ID == userRecs.Recommendation_5)
+    }.Where(p => p != null).ToList();
+
+            var viewModel = new TestViewModel
+            {
+                user_recommendations = userRecs,
+                Product = likedProduct,
+                uRecommendedProducts = uRecommendedProducts
+            };
+
+            ViewBag.RefererUrl = Request.Headers["Referer"].ToString();
+
+            return View(viewModel);
         }
+
+
 
     }
 }

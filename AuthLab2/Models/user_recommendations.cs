@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace AuthLab2.Models
 {
-    public partial class user_recommendation
+    public partial class user_recommendations
     {
+        
         [Key]
         public int customer_ID { get; set; }
 
@@ -20,5 +19,6 @@ namespace AuthLab2.Models
         public int Recommendation_4 { get; set; }
 
         public int Recommendation_5 { get; set; }
-    }
+    
+}
 }

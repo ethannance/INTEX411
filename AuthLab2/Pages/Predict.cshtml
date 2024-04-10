@@ -1,75 +1,92 @@
 ﻿@page
 @model AuthLab2.Pages.PredictModel
 @{
-    ViewData["Title"] = "Fraud Predictions";
+    // ViewData["Title"] = "Fraud Predictions";
 }
 
 <div class="container mt-5">
+
+    <!-- Back button -->
+    <a href="javascript:history.back()" class="btn btn-secondary mb-3">Back to Cart</a>
     <h2 class="mb-3">@ViewData["Title"]</h2>
 
-    <div class="form-group">
-        <label asp-for="Order.customer_ID">Enter customer ID manually (until we can get logins working)</label>
-        <input asp-for="Order.customer_ID" class="form-control" type="number" min="0" />
-    </div>
     <!-- Display Cart Items -->
     @if (Model.Cart?.Lines.Count > 0)
     {
         <h3>Items in Your Cart:</h3>
-        <div class="list-group mb-3">
-            @foreach (var line in Model.Cart.Lines)
-            {
-                <a href="#" class="list-group-item list-group-item-action">
-                    @line.Product.name - Quantity: @line.Quantity
-                </a>
-            }
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var line in Model.Cart.Lines)
+                    {
+                        <tr>
+                            <td>@line.Product.name</td>
+                            <td>@line.Quantity</td>
+                        </tr>
+                    }
+                    <tr>
+                        <td><b>Subtotal:</b></td>
+                        <td><b>@Model.Order.amount.ToString("C")</b></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        <input type="hidden" asp-for="Order.amount" />
-        <div class="form-group">
-            <label>Subtotal: </label>
-            <p class="form-control-plaintext">@Model.Order.amount.ToString("C")</p>
-        </div>
+
+
+        <h3>Additional Information Required:</h3>
+        <!-- Display the Form with Non-Editable Amount -->
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="Order.customer_ID">Enter Customer ID Manually (until we can add users)</label>
+                <input asp-for="Order.customer_ID" class="form-control" type="number" min="0" required />
+            </div>
+            <br />
+
+            <input type="hidden" asp-for="Order.time" />
+
+            <input type="hidden" asp-for="Order.date" />
+
+            <input type="hidden" asp-for="Order.amount" />
+
+            <div class="form-group">
+                <label asp-for="Order.entry_mode">Type of Transaction</label>
+                <select asp-for="Order.entry_mode" class="form-control" required>
+                    <option value="">Select Type of Transaction</option>
+                    <option value="PIN">PIN</option>
+                    <option value="Other">Tap</option>
+                    <option value="Other">CVC</option>
+                    <option value="Other">Other</option>
+                </select>
+                <div class="invalid-feedback">Please select an entry mode.</div>
+            </div>
+            <br />
+
+            <div class="form-group">
+                <label asp-for="Order.country_of_transaction">In which country are you making this purchase?</label>
+                <input asp-for="Order.country_of_transaction" class="form-control" type="text" required />
+                <div class="invalid-feedback">Please provide the country of transaction.</div>
+            </div>
+            <br />
+            <div class="form-group">
+                <label asp-for="Customer.country_of_residence">In which country to you live in?</label>
+                <input asp-for="Customer.country_of_residence" class="form-control" type="text" required />
+                <div class="invalid-feedback">Please provide the country of residence.</div>
+            </div>
+            <br />
+            <button type="submit" class="btn btn-primary">Place Order</button>
+        </form>
     }
     else
     {
-        <p>Your cart is empty.</p>
+        <h3>Your cart is empty.</h3>
+        <a href="/" class="btn btn-primary">Go to Main Page</a>
     }
-
-    <!-- Display the Form with Non-Editable Amount -->
-    <form method="post">
-
-        <input type="hidden" asp-for="Order.time" />
-@*         <div class="form-group">
-            <label>Time of Checkout (24h format)</label>
-            <p class="form-control-plaintext">@Model.Order.time</p>
-        </div> *@
-
-        <input type="hidden" asp-for="Order.date" />
-@*         <div class="form-group">
-            <label>Month of Transaction</label>
-            <p class="form-control-plaintext">@Model.Order.date</p>
-        </div> *@
-
-        <div class="form-group">
-            <label asp-for="Order.entry_mode">Entry Mode</label>
-            <select asp-for="Order.entry_mode" class="form-control">
-                <option value="PIN">PIN</option>
-                <option value="Other">Tap</option>
-                <option value="Other">CVC</option>
-                <option value="Other">Other</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="Order.country_of_transaction">Country of Transaction</label>
-            <input asp-for="Order.country_of_transaction" class="form-control" type="text" />
-        </div>
-
-        <div class="form-group">
-            <label asp-for="Customer.country_of_residence">Country of Residence</label>
-            <input asp-for="Customer.country_of_residence" class="form-control" type="text" />
-        </div>
-        <button type="submit" class="btn btn-primary">Place Order</button>
-    </form>
 </div>
 
 @if (Model.Prediction != null)
