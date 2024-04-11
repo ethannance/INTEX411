@@ -84,7 +84,7 @@ namespace AuthLab2.Controllers
             return View("ProductsEditAdmin", productToEdit); 
         }
         [HttpPost]
-        public IActionResult ProductsEditAdmin(Product updatedProduct)
+        public IActionResult ProductsEditAdmin(Product updatedProduct) //Saved edits to DB
         {
             _repo.EditProduct(updatedProduct);
 

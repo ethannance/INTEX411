@@ -30,7 +30,7 @@ namespace AuthLab2.Controllers
 
 
 
-        public IActionResult Index(int pageNum = 1, string? productType = null, int pageSize = 5, string? productColor = null)
+        public IActionResult Products(int pageNum = 1, string? productType = null, int pageSize = 5, string? productColor = null)
         {
             // Validate and set pageSize based on user input or default to 5 if the input is outside the allowed range
             pageSize = (new[] { 5, 10, 20 }).Contains(pageSize) ? pageSize : 5;
@@ -136,7 +136,7 @@ namespace AuthLab2.Controllers
         }
 
 
-        public IActionResult Test()
+        public IActionResult Index()
         {
             var viewModel = new TestViewModel
             {

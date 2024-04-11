@@ -37,23 +37,23 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Test">Home</a>
                     </li>
-                    <li class="nav-item">
+                    @* <li class="nav-item">
                         <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                    </li>
-                    <li class="nav-item">
+                    </li> *@
+                    @* <li class="nav-item">
                         <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Secrets">Secrets</a>
+                    </li> *@
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Our Products</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" asp-area="" asp-controller="Home" asp-action="About">About Me</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Test">Test</a>
-                    </li>
-                    <li class="nav-item">
+                    @* <li class="nav-item">
                         <a asp-page="/Predict" class="nav-link">Predictions</a>
-                    </li>
+                    </li> *@
                     <li class="nav-item">
                         <a asp-page="/Cart" class="nav-link">View Cart</a>
                     </li>
@@ -94,7 +94,23 @@
     
     <div class="row">
         <div class="copyright py-4 text-white p-4">
-            <p>Copyright &copy; Aurora Bricks 2024 | <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy Policy</a></p>
+            @if (User.Identity.IsAuthenticated)
+            {
+                // Footer content for authenticated users (customer or admin)
+                if (User.IsInRole("Admin"))
+                {
+                    <p>Copyright &copy; Aurora Bricks 2024 | <a asp-area="" asp-controller="Admin" asp-action="PrivacyAdmin">Privacy Policy</a></p>
+                }
+                else
+                {
+                    <p>Copyright &copy; Aurora Bricks 2024 | <a asp-area="" asp-controller="Customer" asp-action="PrivacyCust">Privacy Policy</a></p>
+                }
+            }
+            else
+            {
+                // Footer content for visitors
+                <p>Copyright &copy; Aurora Bricks 2024 | <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy Policy</a></p>
+            }
         </div>
     </div>
 </footer>
