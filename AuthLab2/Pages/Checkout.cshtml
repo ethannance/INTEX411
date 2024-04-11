@@ -1,11 +1,10 @@
 ﻿@page
 @model AuthLab2.Pages.PredictModel
 @{
-    // ViewData["Title"] = "Fraud Predictions";
+    ViewData["Title"] = "Order Checkout";
 }
 
 <div class="container mt-5">
-
     <!-- Back button -->
     <a href="javascript:history.back()" class="btn btn-secondary mb-3">Back to Cart</a>
     <h2 class="mb-3">@ViewData["Title"]</h2>
@@ -13,7 +12,7 @@
     <!-- Display Cart Items -->
     @if (Model.Cart?.Lines.Count > 0)
     {
-        <h3>Items in Your Cart:</h3> 
+        <h3>Items in Your Cart:</h3>
         <div class="table-responsive">
             <table class="table">
                 <thead>
@@ -38,79 +37,66 @@
             </table>
         </div>
 
-
         <h3>Additional Information Required:</h3>
         <!-- Display the Form with Non-Editable Amount -->
         <form method="post">
-            <div class="form-group">
-                <input asp-for="Order.customer_ID" type="hidden" value="420" />
+            <div class="form-row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Order.type_of_transaction">Type of Transaction</label>
+                        <select asp-for="Order.type_of_transaction" class="form-control" required>
+                            <option value="">Select Type of Transaction</option>
+                            <option value="POS">POS</option>
+                            <option value="ATM">ATM</option>
+                            <option value="Online">Online</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Order.entry_mode">Entry Mode</label>
+                        <select asp-for="Order.entry_mode" class="form-control" required>
+                            <option value="">Select Entry Mode</option>
+                            <option value="PIN">PIN</option>
+                            <option value="Tap">Tap</option>
+                            <option value="CVC">CVC</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Order.country_of_transaction">Country of Transaction</label>
+                        <input asp-for="Order.country_of_transaction" class="form-control" required />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Order.shipping_address">Shipping Address</label>
+                        <input asp-for="Order.shipping_address" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Order.bank">Bank</label>
+                        <input asp-for="Order.bank" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Order.type_of_card">Type of Card</label>
+                        <select asp-for="Order.type_of_card" class="form-control">
+                            <option value="Visa">Visa</option>
+                            <option value="MasterCard">MasterCard</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Customer.country_of_residence">Country of Residence</label>
+                        <input asp-for="Customer.country_of_residence" class="form-control" required />
+                    </div>
+                </div>
             </div>
-
-            @* Hidden field for transaction_ID if it's auto-generated *@
+            <input asp-for="Order.customer_ID" type="hidden" value="420" />
             <input asp-for="Order.transaction_ID" type="hidden" />
-
-            @* Assuming date and day_of_week are auto-set or calculated, but you can adjust if needed *@
             <input asp-for="Order.date" type="hidden" />
             <input asp-for="Order.day_of_week" type="hidden" />
-
-            <label asp-for="Order.type_of_transaction">Type of Transaction</label>
-            <select asp-for="Order.type_of_transaction" class="form-control" required>
-                <option value="">Select Type of Transaction</option>
-                <option value="POS">POS</option>
-                <option value="ATM">ATM</option>
-                <option value="Online">Online</option>
-            </select>
-
-            <label asp-for="Order.shipping_address">Shipping Address</label>
-            <input asp-for="Order.shipping_address" />
-
-            <label asp-for="Order.bank">Bank</label>
-            <input asp-for="Order.bank" />
-
-            <label asp-for="Order.type_of_card">Type of Card</label>
-            <select asp-for="Order.type_of_card">
-                <option value="Visa">Visa</option>
-                <option value="MasterCard">MasterCard</option>
-            </select>
-
-            @* Hidden field for fraud since it's determined after submission *@
             <input asp-for="Order.fraud" type="hidden" />
-
-
-            <br />
-
             <input type="hidden" asp-for="Order.time" />
-
             <input type="hidden" asp-for="Order.date" />
-
             <input type="hidden" asp-for="Order.amount" />
-
-            <div class="form-group">
-                <label asp-for="Order.entry_mode">Type of Transaction</label>
-                <select asp-for="Order.entry_mode" class="form-control" required>
-                    <option value="">Select Type of Payment</option>
-                    <option value="PIN">PIN</option>
-                    <option value="Other">Tap</option>
-                    <option value="Other">CVC</option>
-                    <option value="Other">Other</option>
-                </select>
-                <div class="invalid-feedback">Please select an entry mode.</div>
-            </div>
-            <br />
-
-            <div class="form-group">
-                <label asp-for="Order.country_of_transaction">In which country are you making this purchase?</label>
-                <input asp-for="Order.country_of_transaction" class="form-control" type="text" required />
-                <div class="invalid-feedback">Please provide the country of transaction.</div>
-            </div>
-            <br />
-            <div class="form-group">
-                <label asp-for="Customer.country_of_residence">In which country to you live in?</label>
-                <input asp-for="Customer.country_of_residence" class="form-control" type="text" required />
-                <div class="invalid-feedback">Please provide the country of residence.</div>
-            </div>
-            <br />
-            <button type="submit" class="btn btn-primary">Place Order</button>
+            <button type="submit" class="btn btn-primary mt-3">Place Order</button>
         </form>
     }
     else
