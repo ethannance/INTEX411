@@ -31,7 +31,6 @@
                 <input type="hidden" name="productColor" value="@Model.CurrentProductColor" />
             </form>
             <br />
-
             <!--Filters here-->
             <form method="get" asp-controller="Customer" asp-action="ProductsCust">
                 @await Component.InvokeAsync("ProductColors")
