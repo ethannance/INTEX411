@@ -26,7 +26,7 @@ namespace AuthLab2.Controllers
 
         public IActionResult AboutAdmin() { return View(); }
         [HttpGet]
-        public IActionResult OrderDeleteAdmin(int id) // Delete confirmation view
+        public IActionResult OrdersDeleteAdmin(int id) // Delete confirmation view
         {
             var orderToDelete = _repo.Orders
                 .Single(x => x.transaction_ID == id);
@@ -34,7 +34,7 @@ namespace AuthLab2.Controllers
             return View(orderToDelete);
         }
         [HttpPost]
-        public IActionResult OrdersDeleteAdmin(Order orderToDelete)
+        public IActionResult OrdersDeleteAdmin(Order orderToDelete) // Double check deletion
         {
             _repo.DeleteOrder(orderToDelete);
             return View("ConfirmationAdmin", orderToDelete);
@@ -44,6 +44,7 @@ namespace AuthLab2.Controllers
             
             //Linq
             var orders = _repo.Orders
+                .Take(50)
                 .OrderBy(x => x.transaction_ID)
                 .ToList();
 
