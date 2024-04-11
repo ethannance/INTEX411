@@ -16,7 +16,7 @@
 <div class="container-fluid m-4">
     <br />
     <br />
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered">
         <thead class="fw-bold text-center">
             <tr>
                 <td>Transaction Number</td>
@@ -31,7 +31,7 @@
         @foreach (Order o in Model)
         {
             <tbody>
-                <tr>
+                <tr class="@((Model.IndexOf(o) % 2 == 0) ? "even-row" : "odd-row")">
                     <td>@o.transaction_ID</td>
                     <td>@o.date</td>
                     <td>@o.amount</td>
