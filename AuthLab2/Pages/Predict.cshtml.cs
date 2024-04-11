@@ -12,7 +12,7 @@ namespace AuthLab2.Pages
 {
     public class PredictModel : PageModel
     {
-        private readonly InferenceSession _session;
+        private readonly InferenceSession _session; 
         public Cart? Cart { get; set; }
 
         public PredictModel()
@@ -34,6 +34,7 @@ namespace AuthLab2.Pages
 
             Order = new Order
             {
+
                 amount = Cart.CalculateTotal(),
                 time = DateTime.Now.Hour,
                 date = DateTime.Now.Month.ToString()

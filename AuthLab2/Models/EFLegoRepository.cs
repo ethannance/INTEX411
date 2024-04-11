@@ -9,6 +9,7 @@ namespace AuthLab2.Models
             _context = temp;
         }
         public IQueryable<Product> Products => _context.Products;
+        public IQueryable<Order> Orders => _context.Orders;
 
         public IQueryable<content_recs> content_Recs => _context.content_recs;
 
