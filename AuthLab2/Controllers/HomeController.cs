@@ -167,7 +167,7 @@ namespace AuthLab2.Controllers
             }
             else
             {
-                var userId = 157;//default user recommendations
+                var userId = 29135; //default user recommendations
                 var userRecs = _repo.user_recommendations.FirstOrDefault(ur => ur.customer_ID == userId);
 
                 // You may want to handle the scenario when userRecs is null by showing default recommendations
