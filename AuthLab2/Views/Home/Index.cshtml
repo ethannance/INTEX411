@@ -176,11 +176,9 @@
             <!-- Portfolio Section Heading-->
             <h2 class="page-section-heading text-center text-uppercase text-black mb-0">This Week's Top Picks</h2>
             <br />
-            @{
-                var headerText = Model.IsUserLoggedIn && Model.Product != null ? $"Because you liked @Model.Product.name:" : "Trending Now";
-            }
+            
 
-            <h2>@headerText</h2>
+            <h2>Trending Now</h2>
             <div class="row recommendations">
                 @foreach (var product in Model.uRecommendedProducts)
                 {
@@ -200,31 +198,6 @@
             </div>
 
             <br />
-            <!-- INSERT PRODUCT ITEMS HERE-->
-            <h2>Because you liked @Model.Product.name:</h2>
-
-            <div>
-                <br />
-                <a href="@ViewBag.RefererUrl">Back</a>
-                <br />
-            </div>
-            <div class="row recommendations">
-                @foreach (var recommendedProduct in Model.uRecommendedProducts)
-                {
-                    <div class="col-md-2">
-                        <a href="@Url.Action("ProductDetails", "Home", new { id = recommendedProduct.product_ID })">
-                            <div class="card" style="height: 300px; width: 200px;">
-                                <img src="@recommendedProduct.img_link" class="card-img-top" alt="@recommendedProduct.name">
-                                <div class="card-body">
-                                    <h6 class="card-title">@recommendedProduct.name</h6>
-                                    <p class="card-text">Price: $@recommendedProduct.price.00</p>
-                                    <!-- Add other product details as needed -->
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                }
-            </div>
 
 
             @* <div>
