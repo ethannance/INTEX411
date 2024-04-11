@@ -83,7 +83,7 @@ namespace AuthLab2.Controllers
             // If the user is logged in, fetch personalized recommendations
             if (viewModel.IsUserLoggedIn)
             {
-                var userId = int.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value);
+                var userId = 123; // the code isnt working so im hard coding a logged in user for now //int.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value);
                 var userRecs = _repo.user_recommendations.FirstOrDefault(ur => ur.customer_ID == userId);
 
                 // You may want to handle the scenario when userRecs is null by showing default recommendations
