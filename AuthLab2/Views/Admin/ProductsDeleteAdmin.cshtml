@@ -13,13 +13,22 @@
 <vc:submenu-types view="Default"></vc:submenu-types>
 
 <div class="container text-center">
-    <h3>Confirm Deletion of product:</h3>
+    <br />
+    <!-- Icon Divider-->
+    <div class="divider-custom">
+        <div class="divider-custom-line"></div>
+        <div class="divider-custom-icon"><img src="~/img/lego brick.png" width="50px" /></div>
+        <div class="divider-custom-line"></div>
+    </div>
+    <br />
+    <h3>Please confirm deletion of product:</h3>
     <h4>@Model.name</h4>
     <form asp-controller="Admin" asp-action="ProductsDeleteAdmin" method="post">
         <input type="hidden" asp-for="row_ID" />
-        <div class="text-center mt-4">
+        <br />
+        <div class="text-center mt-4 m-2">
             <button type="submit" class="btn btn-danger">Delete</button>
-            <a class="btn btn-info" asp-controller="Admin" asp-action="ProductsAdmin">Cancel</a>
+            <a class="btn btn-info text-white" asp-controller="Admin" asp-action="ProductsAdmin">Cancel</a>
         </div>
     </form>
 </div>

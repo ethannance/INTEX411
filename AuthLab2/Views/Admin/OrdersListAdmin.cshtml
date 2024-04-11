@@ -40,7 +40,7 @@
                 <tr class="@((Model.IndexOf(o) % 2 == 0) ? "even-row" : "odd-row")">
                     <td>@o.transaction_ID</td>
                     <td>@o.date</td>
-                    <td>@o.amount</td>
+                    <td>$@o.amount</td>
                     <td>@o.shipping_address</td>
                     <td>
                         @if (o.fraud)
