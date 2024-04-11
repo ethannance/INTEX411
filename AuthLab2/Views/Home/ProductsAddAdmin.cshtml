@@ -15,8 +15,9 @@
 
 <div class="container m-5">
     <form method="post" asp-controller="Home" asp-action="ProductsAddAdmin">
+        <label asp-for="row_ID">ID</label>
+        <input type="int" asp-for="row_ID" placeholder="Please choose a number greater than 200"/>
         <input type="int" asp-for="product_ID" hidden/>
-        <input type="int" asp-for="row_ID" hidden/>
         <br />
         <label asp-for="name">Product Name: </label>
         <input type="text" asp-for="name" />
