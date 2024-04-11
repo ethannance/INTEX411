@@ -12,12 +12,14 @@
 <vc:nav-bar-types user="Admin"></vc:nav-bar-types>
 <vc:submenu-types view="Default"></vc:submenu-types>
 
-<div class="container">
+<div class="container text-center">
     <h3>Confirm Deletion of product:</h3>
     <h4>@Model.name</h4>
     <form asp-controller="Admin" asp-action="ProductsDeleteAdmin" method="post">
         <input type="hidden" asp-for="row_ID" />
-        <button type="submit" class="btn btn-danger">Delete</button>
-        <a class="btn btn-info" asp-controller="Admin" asp-action="ProductsAdmin">Cancel</a>
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-danger">Delete</button>
+            <a class="btn btn-info" asp-controller="Admin" asp-action="ProductsAdmin">Cancel</a>
+        </div>
     </form>
 </div>

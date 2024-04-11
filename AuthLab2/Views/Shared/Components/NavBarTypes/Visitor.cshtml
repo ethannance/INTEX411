@@ -12,7 +12,7 @@
         <!-- Brand/logo -->
         <div class="col-6">
             <img src="~/img/aurora.jpg" height="50px" />
-            <a class="navbar-brand" asp-controller="Home" asp-action="Test">Aurora Bricks</a> <!-- Updated to Test -->
+            <a class="navbar-brand" asp-controller="Home" asp-action="Test"> | Aurora Bricks</a> <!-- Updated to Test -->
         </div>
 
         <!-- Navbar links -->
@@ -27,9 +27,9 @@
                 <li class="nav-item">
                     <a class="nav-link" asp-area="" asp-controller="Home" asp-action="About">About Me</a>
                 </li>
-                <li class="nav-item">
+               @*  <li class="nav-item">
                     <a asp-page="/Cart" class="nav-link">View Cart</a>
-                </li>
+                </li> *@
             </ul>
             <partial name="_LoginPartial" />
         </div>
