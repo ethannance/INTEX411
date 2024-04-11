@@ -20,7 +20,7 @@ namespace AuthLab2.Pages
 
         public void OnGet(string returnUrl)
         {
-            ReturnUrl = returnUrl ?? "/";
+            ReturnUrl = returnUrl ?? "/Customer/ProductsCust";
             Cart = HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
        
         }
@@ -61,7 +61,6 @@ namespace AuthLab2.Pages
 
             return RedirectToPage(new { returnUrl = returnUrl });
         }
-
 
 
 
