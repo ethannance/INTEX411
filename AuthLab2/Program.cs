@@ -66,6 +66,21 @@ internal class Program
         app.UseHttpsRedirection();
         app.UseStaticFiles();
 
+        app.Use(async (context, next) =>
+        {
+            context.Response.Headers.Add("Content-Security-Policy",
+                "default-src 'self' * data: blob:;" +
+                "script-src 'self' * 'unsafe-inline' 'unsafe-eval' 'https://use.fontawesome.com' 'https://ajax.googleapis.com';" +
+                "style-src 'self' * 'https://fonts.googleapis.com' 'unsafe-inline';" +
+                "img-src 'self' * data: blob:;" +
+                "font-src 'self' * data: 'https://fonts.gstatic.com' 'https://use.fontawesome.com';" +
+                "connect-src 'self' *;" +
+                "object-src 'self' *;" +
+                "frame-src 'self' *;");
+            await next();
+        });
+
+
         app.UseRouting();
 
         app.UseSession(); // Add UseSession middleware
