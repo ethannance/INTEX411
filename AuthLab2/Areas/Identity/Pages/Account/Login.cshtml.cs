@@ -115,7 +115,22 @@ namespace AuthLab2.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    return LocalRedirect(returnUrl);
+                    // Get the authenticated user
+                    var user = await _signInManager.UserManager.FindByEmailAsync(Input.Email);
+
+                    // Check user's role(s) and redirect accordingly
+                    if (await _signInManager.UserManager.IsInRoleAsync(user, "Admin"))
+                    {
+                        return LocalRedirect("~/Admin/Index");
+                    }
+                    else if (await _signInManager.UserManager.IsInRoleAsync(user, "Customer"))
+                    {
+                        return LocalRedirect("~/Customer/Index");
+                    }
+                    else
+                    {
+                        return LocalRedirect(returnUrl);
+                    }
                 }
                 if (result.RequiresTwoFactor)
                 {
