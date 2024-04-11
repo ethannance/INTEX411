@@ -93,6 +93,7 @@ namespace AuthLab2.Pages
 
             if (Order.fraud)
             {
+                HttpContext.Session.Remove("cart"); // Clear the cart session after successful order placement
                 return RedirectToPage("FraudOrder");
             }
             else
