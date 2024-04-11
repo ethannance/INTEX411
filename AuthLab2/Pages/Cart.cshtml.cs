@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization; // Make sure this using directive matc
 
 namespace AuthLab2.Pages
 {
-    [Authorize]
+    [Authorize(Roles = "Customer")]
     public class CartModel : PageModel
     {
         private ILegoRepository _repo;
