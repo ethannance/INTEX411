@@ -1,4 +1,5 @@
 ﻿using AuthLab2.Models;
+using AuthLab2.Models.ViewModels;
 using Azure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.ML.OnnxRuntime;
@@ -23,7 +24,26 @@ namespace AuthLab2.Controllers
 
         public IActionResult AboutAdmin() { return View(); }
         public IActionResult OrderDeleteAdmin() { return View(); }
-        public IActionResult OrdersListAdmin() { return View(); }
+        public IActionResult OrdersListAdmin() 
+        {
+            
+
+            //Linq
+            var orders = _repo.Orders
+                .OrderBy(x => x.date)
+                .ToList();
+
+            var orderViewModels = orders.Select(o => new OrderViewModel
+            {
+                transaction_ID = o.transaction_ID,
+                date = o.date,
+                amount = (int)o.amount,
+                shipping_address = o.shipping_address,
+                fraud = o.fraud
+            }).ToList();
+
+            return View(orderViewModels);
+        }
         public IActionResult PrivacyAdmin() { return View(); }
         [HttpGet]
         public IActionResult ProductsDeleteAdmin(int id) 

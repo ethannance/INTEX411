@@ -10,3 +10,48 @@
 
 <vc:nav-bar-types user="Admin"></vc:nav-bar-types>
 <vc:submenu-types view="Default"></vc:submenu-types>
+
+@model List<OrderViewModel>
+
+<vc:nav-bar-types user="Admin"></vc:nav-bar-types>
+<vc:submenu-types view="Default"></vc:submenu-types>
+
+<div class="container-fluid m-2">
+    <br />
+    <br />
+    <table class="table table-bordered table-striped">
+        <thead class="fw-bold text-center">
+            <tr>
+                <td>Transaction Number</td>
+                <td>Date</td>
+                <td>Amount</td>
+                <td>Shipping Address</td>
+                <td>Possible Fraud</td>
+                <td>Delete</td>
+            </tr>
+
+        </thead>
+        @foreach (OrderViewModel o in Model)
+        {
+            <tbody>
+                <tr>
+                    <td>@o.transaction_ID</td>
+                    <td>@o.date</td>
+                    <td>@o.amount</td>
+                    <td>@o.shipping_address</td>
+                    <td>
+                        @if (o.fraud)
+                        {
+                            <i class="fas fa-flag text-danger"></i>
+                        }
+                    </td>
+                    <td>
+                        <a class="btn btn-danger" asp-controller="Admin" asp-action="OrdersDeleteAdmin" asp-route-id="@o.transaction_ID">Delete</a>
+                    </td>
+
+                </tr>
+            </tbody>
+        }
+    </table>
+    <br />
+</div>
