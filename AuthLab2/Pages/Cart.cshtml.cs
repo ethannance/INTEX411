@@ -13,7 +13,7 @@ namespace AuthLab2.Pages
         {
             _repo = temp;
         }
-        public Cart? Cart { get; set; }
+        public Cart? Cart { get; set; } 
         public string ReturnUrl { get; set; } = "/";
 
         public void OnGet(string returnUrl)

@@ -74,9 +74,11 @@
         text-align: center;
     }
 
-    .recommendations {
+    .recommendations .col-md-2 {
+        margin: 10px; /* Adds space around each column */
         display: flex;
-        flex-wrap: wrap;
+        flex: 1 0 auto;
+        justify-content: center; /* Center the cards horizontally */
     }
 
         .recommendations .col-lg-2, .recommendations .col-md-3, .recommendations .col-sm-4, .recommendations .col-6 {
@@ -88,10 +90,18 @@
         width: 100%; /* Makes sure the card takes up the space of its flex container */
         display: flex;
         flex-direction: column; /* Aligns content from top to bottom */
+        margin: 10px; /* Add margin around the card */
+        border: 1px solid #ddd; /* Optional: adds a border around the card */
+        box-shadow: 2px 2px 5px rgba(0,0,0,0.2); /* Optional: adds shadow for depth */
+        transition: transform 0.2s; /* Optional: adds animation on hover */
     }
 
     .card-body {
         flex-grow: 1; /* Allows the card body to expand and push down the footer/content below */
+    }
+
+    .card:hover {
+            transform: scale(1.05); /* Optional: makes the card grow on hover */
     }
 
 </style>
@@ -165,8 +175,31 @@
         <div class="container">
             <!-- Portfolio Section Heading-->
             <h2 class="page-section-heading text-center text-uppercase text-black mb-0">This Week's Top Picks</h2>
-            
-            
+            <br />
+            @{
+                var headerText = Model.IsUserLoggedIn && Model.Product != null ? $"Because you liked @Model.Product.name:" : "Trending Now";
+            }
+
+            <h2>@headerText</h2>
+            <div class="row recommendations">
+                @foreach (var product in Model.uRecommendedProducts)
+                {
+                    <div class="col-md-2">
+                        <a href="@Url.Action("ProductDetails", "Home", new { id = product.product_ID })">
+                            <div class="card" style="height: 300px; width: 100%; margin: 10px;">
+                                <img src="@product.img_link" class="card-img-top" alt="@product.name">
+                                <div class="card-body">
+                                    <h6 class="card-title">@product.name</h6>
+                                    <p class="card-text">Price: $@product.price.00</p>
+                                    <!-- Add other product details as needed -->
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+            </div>
+
+            <br />
             <!-- INSERT PRODUCT ITEMS HERE-->
             <h2>Because you liked @Model.Product.name:</h2>
 
