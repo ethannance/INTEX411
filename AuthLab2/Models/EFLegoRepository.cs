@@ -10,6 +10,7 @@ namespace AuthLab2.Models
         }
         public IQueryable<Product> Products => _context.Products;
         public IQueryable<Order> Orders => _context.Orders;
+        public IQueryable<Customer> Customers => _context.Customers;
 
         public IQueryable<content_recs> content_Recs => _context.content_recs;
 
@@ -33,6 +34,11 @@ namespace AuthLab2.Models
         public void DeleteOrder(Order order)
         {
             _context.Orders.Remove(order);
+            _context.SaveChanges();
+        }
+        public void AddCustomerAsync(Customer customer)
+        {
+            _context.Customers.Add(customer);
             _context.SaveChanges();
         }
     }

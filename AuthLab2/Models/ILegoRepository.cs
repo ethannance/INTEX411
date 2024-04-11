@@ -10,5 +10,6 @@
         public void EditProduct(Product product);
         public void DeleteProduct(Product product);
         public void DeleteOrder(Order order);
+        public void AddCustomerAsync(Customer customer);
     }
 }
