@@ -8,7 +8,7 @@
     ViewData["Title"] = "Welcome, LEGO Fans!";
 }
 
-@model Product
+@model AuthLab2.Models.ViewModels.TestViewModel
 
 <vc:nav-bar-types user="Visitor"></vc:nav-bar-types>
 <vc:submenu-types view="Default"></vc:submenu-types>
@@ -83,11 +83,32 @@
             
             
             <!-- INSERT PRODUCT ITEMS HERE-->
-            @{
-                var displayedNames = new HashSet<string>();
-            }
+            <h2>Because you liked @Model.Product.name:</h2>
 
-            <p>Insert product details here</p>
+            <div>
+                <br />
+                <a href="@ViewBag.RefererUrl">Back</a>
+                <br />
+            </div>
+            <div class="row recommendations">
+                @foreach (var recommendedProduct in Model.uRecommendedProducts)
+                {
+                    <div class="col-md-2">
+                        <a href="@Url.Action("ProductDetails", "Home", new { id = recommendedProduct.product_ID })">
+                            <div class="card" style="height: 300px; width: 200px;">
+                                <img src="@recommendedProduct.img_link" class="card-img-top" alt="@recommendedProduct.name">
+                                <div class="card-body">
+                                    <h6 class="card-title">@recommendedProduct.name</h6>
+                                    <p class="card-text">Price: $@recommendedProduct.price.00</p>
+                                    <!-- Add other product details as needed -->
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+            </div>
+
+
             @* <div>
                 @foreach (Product p in Model.Products)
                 {
