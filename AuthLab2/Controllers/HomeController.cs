@@ -76,7 +76,7 @@ namespace AuthLab2.Controllers
             return View(viewModel);
         }
 
-        public IActionResult ProductDetails(int id)
+        public IActionResult ProductDetails(int id, string returnUrl = null)
         {
             var product = _repo.Products.FirstOrDefault(x => x.product_ID == id);
             var contentRecs = _repo.content_Recs.FirstOrDefault(r => r.ProductID == id);
