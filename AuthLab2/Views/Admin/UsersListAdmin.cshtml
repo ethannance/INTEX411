@@ -10,4 +10,42 @@
 <vc:nav-bar-types user="Admin"></vc:nav-bar-types>
 <vc:submenu-types view="Default"></vc:submenu-types>
 
-<h1>are you in the right spot? hehe</h1>
+@model List<Customer>
+
+@* To edit with users/customers *@
+
+
+<div class="container-fluid m-4">
+    <br />
+    <br />
+    <table class="table table-bordered table-striped">
+        <thead class="fw-bold text-center">
+            <tr>
+                <td>Name</td>
+                <td>Birthday</td>
+                <td>Country</td>
+                <td>Gender</td>
+                <td>Age</td>
+                <td>Manage Roles</td>
+            </tr>
+
+        </thead>
+        @foreach (Customer c in Model)
+        {
+            <tbody>
+                <tr>
+                    <td>@c.first_name @c.last_name</td>
+                    <td>@c.birth_date</td>
+                    <td>@c.country_of_residence</td>
+                    <td>@c.gender</td>
+                    <td>@c.age</td>
+                    <td>
+                        <a class="btn btn-info" asp-controller="Admin" asp-action="UsersListEditAdmin" asp-route-id="@c.customer_ID">Edit</a>
+                    </td>
+
+                </tr>
+            </tbody>
+        }
+    </table>
+    <br />
+</div>

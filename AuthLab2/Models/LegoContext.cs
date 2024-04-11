@@ -19,6 +19,7 @@ public partial class LegoContext : DbContext
 
     public virtual DbSet<Product> Products { get; set; }
     public virtual DbSet<Order> Orders { get; set; }
+    public virtual DbSet<Customer> Customers { get; set; }
     public DbSet<content_recs> content_recs { get; set; }
     public DbSet<user_recommendations> user_recommendations { get; set; }
 

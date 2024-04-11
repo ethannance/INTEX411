@@ -93,7 +93,15 @@ namespace AuthLab2.Controllers
 
             return View("ConfirmationAdmin", updatedProduct);
         }
-        public IActionResult UsersListAdmin() { return View(); }
+        public IActionResult UsersListAdmin() 
+        {
+            var users = _repo.Customers
+                .Take(50)
+                .OrderBy(x => x.customer_ID)
+                .ToList();
+
+            return View(users); 
+        }
         public IActionResult UsersListEditAdmin() { return View(); }
         public IActionResult UsersListEditConfirmation() { return View(); }
         public IActionResult ProductsAdmin() //Lists all of the products to the admin
