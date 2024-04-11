@@ -18,7 +18,7 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Product Name</th> 
+                        <th>Product Name</th>
                         <th>Quantity</th>
                     </tr>
                 </thead>
@@ -46,6 +46,37 @@
                 <input asp-for="Order.customer_ID" type="hidden" value="420" />
             </div>
 
+            @* Hidden field for transaction_ID if it's auto-generated *@
+            <input asp-for="Order.transaction_ID" type="hidden" />
+
+            @* Assuming date and day_of_week are auto-set or calculated, but you can adjust if needed *@
+            <input asp-for="Order.date" type="hidden" />
+            <input asp-for="Order.day_of_week" type="hidden" />
+
+            <label asp-for="Order.type_of_transaction">Type of Transaction</label>
+            <select asp-for="Order.type_of_transaction" class="form-control" required>
+                <option value="">Select Type of Transaction</option>
+                <option value="POS">POS</option>
+                <option value="ATM">ATM</option>
+                <option value="Online">Online</option>
+            </select>
+
+            <label asp-for="Order.shipping_address">Shipping Address</label>
+            <input asp-for="Order.shipping_address" />
+
+            <label asp-for="Order.bank">Bank</label>
+            <input asp-for="Order.bank" />
+
+            <label asp-for="Order.type_of_card">Type of Card</label>
+            <select asp-for="Order.type_of_card">
+                <option value="Visa">Visa</option>
+                <option value="MasterCard">MasterCard</option>
+            </select>
+
+            @* Hidden field for fraud since it's determined after submission *@
+            <input asp-for="Order.fraud" type="hidden" />
+
+
             <br />
 
             <input type="hidden" asp-for="Order.time" />
@@ -57,7 +88,7 @@
             <div class="form-group">
                 <label asp-for="Order.entry_mode">Type of Transaction</label>
                 <select asp-for="Order.entry_mode" class="form-control" required>
-                    <option value="">Select Type of Transaction</option>
+                    <option value="">Select Type of Payment</option>
                     <option value="PIN">PIN</option>
                     <option value="Other">Tap</option>
                     <option value="Other">CVC</option>
