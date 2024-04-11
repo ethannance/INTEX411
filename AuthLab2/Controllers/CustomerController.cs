@@ -78,10 +78,10 @@ namespace AuthLab2.Controllers
         public IActionResult Index()
         {
             var userId = User.Identity.IsAuthenticated
-                         ? int.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value ?? "157") // Default to 157 if parsing fails
-                         : 157; // Default user ID for recommendations if not logged in // recs if this works are 23, 19, 21, 22, 20, and "if you liked" is 2
+                         ? User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value ?? "default-user-id"
+                         : "default-user-id";
 
-            var userRecs = _repo.user_recommendations.FirstOrDefault(ur => ur.customer_ID == userId)
+            var userRecs = _repo.user_recommendations.FirstOrDefault(ur => ur.customer_ID.ToString() == userId)
                            ?? _repo.user_recommendations.FirstOrDefault(ur => ur.customer_ID == 157); // Fallback to default user recommendations
 
             var viewModel = new TestViewModel
