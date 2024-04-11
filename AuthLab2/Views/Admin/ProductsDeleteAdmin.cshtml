@@ -7,6 +7,17 @@
 @{
     ViewData["Title"] = "Delete Product";
 }
+@model Product
 
 <vc:nav-bar-types user="Admin"></vc:nav-bar-types>
 <vc:submenu-types view="Default"></vc:submenu-types>
+
+<div class="container">
+    <h3>Confirm Deletion of product:</h3>
+    <h4>@Model.name</h4>
+    <form asp-controller="Admin" asp-action="ProductsDeleteAdmin" method="post">
+        <input type="hidden" asp-for="row_ID" />
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a class="btn btn-info" asp-controller="Admin" asp-action="ProductsAdmin">Cancel</a>
+    </form>
+</div>

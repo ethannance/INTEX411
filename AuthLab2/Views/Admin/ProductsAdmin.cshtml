@@ -11,7 +11,7 @@
     <br />
 
     <div class="text-center">
-        <a class="btn btn-primary btn-xl" asp-controller="Home" asp-action="ProductsAddAdmin">
+        <a class="btn btn-primary btn-xl" asp-controller="Admin" asp-action="ProductsAddAdmin">
             Add Product
         </a>
     </div>
@@ -42,10 +42,10 @@
                         <td>@p.primary_color / @p.secondary_color</td>
                         <td>@p.category</td>
                         <td>
-                            <a class="btn btn-info" style="text-white" asp-controller="Home" asp-action="EditProduct">Edit</a>
+                            <a class="btn btn-info" style="text-white" asp-controller="Admin" asp-action="ProductsEditAdmin" asp-route-id="@p.row_ID">Edit</a>
                         </td>
                         <td>
-                            <a class="btn btn-danger" asp-controller="Home" asp-action="DeleteProduct">Delete</a>
+                            <a class="btn btn-danger" asp-controller="Admin" asp-action="ProductsDeleteAdmin" asp-route-id="@p.row_ID">Delete</a>
                         </td>
                         
                     </tr>

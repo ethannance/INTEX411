@@ -4,7 +4,7 @@
 @{
 }
 @{
-    ViewData["Title"] = "Edit Product";
+    ViewData["Title"] = "Add a New Product";
 }
 
 @model Product
@@ -23,7 +23,7 @@
     <div class="row justify-content-center">
         <div class="col-md-9">
             <!--Adding a product form-->
-            <form method="post" asp-controller="Admin" asp-action="ProductsEditAdmin">
+            <form method="post" asp-controller="Admin" asp-action="ProductsAddAdmin">
                 <div class="row">
                     <div class="col-3">
                         <label asp-for="row_ID">Product ID</label>
@@ -122,7 +122,7 @@
                         <label asp-for="img_link">Link to Image</label>
                         <input type="text" asp-for="img_link" style="width: 465px; border-radius: 5px;" />
                     </div>
-                </div>
+                </div>                
                 <br />
                 <div class="row">
                     <div class="col-12">
@@ -137,12 +137,40 @@
                 <br />
                 <br />
                 <div class="text-center mt-4">
-                    <button type="submit" class="btn btn-primary btn-lg">Save Changes</button>
+                    <button type="submit" class="btn btn-primary btn-lg">Add Product</button>
                 </div>
                 <br />
                 <div asp-validation-summary="All"></div>
             </form>
         </div>
     </div>
-
+    
 </div>
+
+@* <select asp-for="primary_color">
+    <option value="" selected>Select Category</option>
+    <option>Animal</option>
+    <option>Building</option>
+    <option>Car</option>
+    <option>Character</option>
+    <option>Colorful</option>
+    <option>DC</option>
+    <option>Disney</option>
+    <option>Energy</option>
+    <option>Farm</option>
+    <option>Flight</option>
+    <option>Floral</option>
+    <option>Food</option>
+    <option>Game</option>
+    <option>Harry Potter</option>
+    <option>Minifig</option>
+    <option>Motorbike</option>
+    <option>Part</option>
+    <option>Person</option>
+    <option>Personal</option>
+    <option>Promotional</option>
+    <option>Star Wars</option>
+    <option>Structure</option>
+    <option>Train</option>
+    <option>Vehicle</option>
+</select> *@
