@@ -50,5 +50,11 @@ namespace AuthLab2.Models
             _context.Customers.Add(customer);
             _context.SaveChanges();
         }
+        public void EditUser(Customer customer)
+        {
+            _context.Customers.Update(customer);
+            _context.SaveChanges();
+        }
+
     }
 }

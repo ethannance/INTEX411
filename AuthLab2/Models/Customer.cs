@@ -11,7 +11,7 @@ namespace AuthLab2.Models
         public string  birth_date { get; set; }
         public string country_of_residence { get; set; }
         public string gender { get; set; }
-        public float age { get; set; }
+        public double age { get; set; }
         public string UserId { get; set; }
 
     }
