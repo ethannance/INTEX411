@@ -183,12 +183,23 @@
                 @foreach (var product in Model.uRecommendedProducts)
                 {
                     <div class="col-md-2">
-                        <a href="@Url.Action("ProductDetails", "Home", new { id = product.product_ID })">
-                            <div class="card" style="height: 300px; width: 100%; margin: 10px;">
+                        <a href="@Url.Action("ProductDetails", "Home", new { id = product.product_ID })" style="text-decoration: none; color: inherit;">
+                            <div class="card bg-light" style="height: 300px; width: 100%; margin: 10px;">
                                 <img src="@product.img_link" class="card-img-top" alt="@product.name">
-                                <div class="card-body">
-                                    <h6 class="card-title">@product.name</h6>
-                                    <p class="card-text">Price: $@product.price.00</p>
+                                <div class="card-body text-center">
+                                    <h4 class="card-title">@product.name</h4>
+                                    <div class="price-and-button-container">
+                                        <div class="price">
+                                            <h6 class="btn-primary btn-sm">$@product.price.00</h6>
+                                        </div>
+                                       @*  <form id="form-@product.product_ID" method="post" asp-page="/Cart">
+                                            <input type="hidden" name="productId" value="@product.product_ID" />
+                                            <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+                                            <button type="submit" class="btn btn-primary float-end">Add to Cart</button>
+                                            <td><a class="btn btn-info" style="margin-right: 4px;" asp-controller="Home" asp-action="ProductDetails" asp-route-id="@Model.product_ID">View Details</a></td>
+
+                                        </form> *@
+                                    </div>
                                     <!-- Add other product details as needed -->
                                 </div>
                             </div>
