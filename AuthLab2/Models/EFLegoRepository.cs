@@ -1,4 +1,6 @@
 ﻿
+using Microsoft.EntityFrameworkCore;
+
 namespace AuthLab2.Models
 {
     public class EFLegoRepository : ILegoRepository
@@ -15,6 +17,13 @@ namespace AuthLab2.Models
         public IQueryable<content_recs> content_Recs => _context.content_recs;
 
         public IQueryable<user_recommendations> user_recommendations => _context.user_recommendations;
+        public async Task<int> GetLastCustomerIdAsync()
+        {
+            // Query the Customers table to get the maximum customer ID
+            var lastCustomerId = await _context.Customers.MaxAsync(c => (int?)c.customer_ID) ?? 0;
+
+            return lastCustomerId;
+        }
 
         public void AddProduct(Product product) 
         { 

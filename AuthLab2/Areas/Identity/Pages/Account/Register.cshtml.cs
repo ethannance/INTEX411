@@ -109,6 +109,24 @@ namespace AuthLab2.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Display(Name = "First Name")]
+            public string FirstName { get; set; }
+
+            [Display(Name = "Last Name")]
+            public string LastName { get; set; }
+
+            [Display(Name = "Birth Date")]
+            public string BirthDate { get; set; }
+
+            [Display(Name = "Country of Residence")]
+            public string CountryOfResidence { get; set; }
+
+            [Display(Name = "Gender")]
+            public string Gender { get; set; }
+
+            [Display(Name = "Age")]
+            public float Age { get; set; }
         }
 
 
@@ -137,16 +155,22 @@ namespace AuthLab2.Areas.Identity.Pages.Account
 
                     _logger.LogInformation("User created a new account with password.");
 
+                    // Get the last customer ID from the database
+                    var lastCustomerId = await _custRepo.GetLastCustomerIdAsync();
+
+                    // Increment the last customer ID by one
+                    var newCustomerId = lastCustomerId + 1;
+
                     var customer = new Customer
                     {
                         UserId = user.Id, // Set the UserId to the Id of the newly created user
-                        customer_ID = 29135,         // Set other properties of the customer as needed
-                        first_name = "Jake",
-                        last_name = "Nelson",
-                        birth_date = "6/17/2001",
-                        country_of_residence = "USA",
-                        gender = "M",
-                        age = 22
+                        customer_ID = newCustomerId,  // Set other properties of the customer as needed
+                        first_name = Input.FirstName,
+                        last_name = Input.LastName,
+                        birth_date = Input.BirthDate,
+                        country_of_residence = Input.CountryOfResidence,
+                        gender = Input.Gender,
+                        age = Input.Age
 
                     };
 
