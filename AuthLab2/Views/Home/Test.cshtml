@@ -74,9 +74,11 @@
         text-align: center;
     }
 
-    .recommendations {
+    .recommendations .col-md-2 {
+        margin: 10px; /* Adds space around each column */
         display: flex;
-        flex-wrap: wrap;
+        flex: 1 0 auto;
+        justify-content: center; /* Center the cards horizontally */
     }
 
         .recommendations .col-lg-2, .recommendations .col-md-3, .recommendations .col-sm-4, .recommendations .col-6 {
@@ -88,10 +90,18 @@
         width: 100%; /* Makes sure the card takes up the space of its flex container */
         display: flex;
         flex-direction: column; /* Aligns content from top to bottom */
+        margin: 10px; /* Add margin around the card */
+        border: 1px solid #ddd; /* Optional: adds a border around the card */
+        box-shadow: 2px 2px 5px rgba(0,0,0,0.2); /* Optional: adds shadow for depth */
+        transition: transform 0.2s; /* Optional: adds animation on hover */
     }
 
     .card-body {
         flex-grow: 1; /* Allows the card body to expand and push down the footer/content below */
+    }
+
+    .card:hover {
+            transform: scale(1.05); /* Optional: makes the card grow on hover */
     }
 
 </style>
