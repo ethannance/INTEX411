@@ -10,6 +10,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading;
 using System.Threading.Tasks;
+using AuthLab2.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -30,6 +31,8 @@ namespace AuthLab2.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly RoleManager<IdentityRole> _roleManager; // Inject RoleManager
+        private readonly ILegoRepository _custRepo; // Inject your customer repository
+
 
 
         public RegisterModel(
@@ -38,7 +41,9 @@ namespace AuthLab2.Areas.Identity.Pages.Account
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            RoleManager<IdentityRole> roleManager) // Inject RoleManager
+            RoleManager<IdentityRole> roleManager, // Inject RoleManager
+            ILegoRepository custRepo) // Inject your customer repository
+
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -47,14 +52,16 @@ namespace AuthLab2.Areas.Identity.Pages.Account
             _logger = logger;
             _emailSender = emailSender;
             _roleManager = roleManager; // Assign RoleManager
+            _custRepo = custRepo; // Assign your customer repository
+
 
         }
 
-    /// <summary>
-    ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-    ///     directly from your code. This API may change or be removed in future releases.
-    /// </summary>
-    [BindProperty]
+        /// <summary>
+        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+        ///     directly from your code. This API may change or be removed in future releases.
+        /// </summary>
+        [BindProperty]
         public InputModel Input { get; set; }
 
         /// <summary>
@@ -102,6 +109,24 @@ namespace AuthLab2.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Display(Name = "First Name")]
+            public string FirstName { get; set; }
+
+            [Display(Name = "Last Name")]
+            public string LastName { get; set; }
+
+            [Display(Name = "Birth Date")]
+            public string BirthDate { get; set; }
+
+            [Display(Name = "Country of Residence")]
+            public string CountryOfResidence { get; set; }
+
+            [Display(Name = "Gender")]
+            public string Gender { get; set; }
+
+            [Display(Name = "Age")]
+            public float Age { get; set; }
         }
 
 
@@ -129,6 +154,28 @@ namespace AuthLab2.Areas.Identity.Pages.Account
                     await AssignCustomerRole(user);
 
                     _logger.LogInformation("User created a new account with password.");
+
+                    // Get the last customer ID from the database
+                    var lastCustomerId = await _custRepo.GetLastCustomerIdAsync();
+
+                    // Increment the last customer ID by one
+                    var newCustomerId = lastCustomerId + 1;
+
+                    var customer = new Customer
+                    {
+                        UserId = user.Id, // Set the UserId to the Id of the newly created user
+                        customer_ID = newCustomerId,  // Set other properties of the customer as needed
+                        first_name = Input.FirstName,
+                        last_name = Input.LastName,
+                        birth_date = Input.BirthDate,
+                        country_of_residence = Input.CountryOfResidence,
+                        gender = Input.Gender,
+                        age = Input.Age
+
+                    };
+
+                    _custRepo.AddCustomerAsync(customer); // Add the customer using your repository
+
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
