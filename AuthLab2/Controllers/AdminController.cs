@@ -51,15 +51,6 @@ namespace AuthLab2.Controllers
                 .OrderBy(x => x.transaction_ID)
                 .ToList();
 
-            //var orderViewModels = orders.Select(o => new OrderViewModel
-            //{
-            //    transaction_ID = o.transaction_ID,
-            //    date = o.date,
-            //    amount = (int)o.amount,
-            //    shipping_address = o.shipping_address,
-            //    fraud = o.fraud
-            //}).ToList();
-
             return View(orders);
         }
         public IActionResult PrivacyAdmin() { return View(); }
@@ -102,7 +93,21 @@ namespace AuthLab2.Controllers
 
             return View(users); 
         }
-        public IActionResult UsersListEditAdmin() { return View(); }
+        [HttpGet]
+        public IActionResult UsersListEditAdmin(int id) 
+        {
+            var userToEdit = _repo.Customers
+                .Single(x => x.customer_ID == id);
+
+            return View("UsersListEditAdmin", userToEdit);
+        }
+        [HttpPost]
+        public IActionResult UsersListEditAdmin(Customer updatedCustomer)
+        {
+            _repo.EditUser(updatedCustomer);
+
+            return View("ConfirmationAdmin", updatedCustomer);
+        }
         public IActionResult UsersListEditConfirmation() { return View(); }
         public IActionResult ProductsAdmin() //Lists all of the products to the admin
         {
