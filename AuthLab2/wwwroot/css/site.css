@@ -129,6 +129,11 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
+.navbar-nav .nav-item .nav-link:hover,
+.navbar-nav .nav-item:hover .nav-link {
+    color: #41C520; /* Change text color to green (#41C520) on hover */
+}
+
 /*.price-and-button-container {
     display: flex;
     justify-content: space-between;

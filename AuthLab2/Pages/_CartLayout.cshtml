@@ -50,13 +50,16 @@
             </div>
         </div>
     </nav>
-
+    <br />
+    <br />
+    <br />
+    <br />
     <div class="masthead text-center">
         <div class="d-flex align-items-center flex-column">
             <!-- Masthead Avatar Image-->
             <img src="~/img/xavi-cabrera-kn-umdzqdjm-unsplash.jpg" alt="Legos" class="masthead-bg" height="200px" width="100%" />
             <!-- Masthead Heading-->
-            <h1 class="masthead-heading text-uppercase mb-0">@ViewData["Title"]</h1>
+            <h1 class="masthead-heading text-uppercase mb-0">Cart Summary</h1>
         </div>
     </div>
 
@@ -71,11 +74,12 @@
     <!-- Content -->
     <div class="container-fluid">
         <main role="main" class="pb-3">
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
+            <!-- Icon Divider-->
+            <div class="divider-custom">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><img src="~/img/lego brick.png" width="50px" /></div>
+                <div class="divider-custom-line"></div>
+            </div>
             @RenderBody()
         </main>
     </div>
