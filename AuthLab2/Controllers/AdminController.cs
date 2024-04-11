@@ -1,11 +1,13 @@
 ﻿using AuthLab2.Models;
 using AuthLab2.Models.ViewModels;
 using Azure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.ML.OnnxRuntime;
 
 namespace AuthLab2.Controllers
 {
+    
     public class AdminController : Controller
     {
         private readonly ILogger<AdminController> _logger;

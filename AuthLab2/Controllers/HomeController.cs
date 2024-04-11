@@ -14,7 +14,6 @@ using System.Security.Claims;
 
 namespace AuthLab2.Controllers
 {
-
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
