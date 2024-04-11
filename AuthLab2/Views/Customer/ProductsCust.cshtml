@@ -25,14 +25,30 @@
                     <option value="10">10</option>
                     <option value="20">20</option>
                 </select>
+
                 <input type="hidden" name="pageNum" value="@Model.PaginationInfo.CurrentPage" />
                 <input type="hidden" name="productType" value="@Model.CurrentProductType" />
                 <input type="hidden" name="productColor" value="@Model.CurrentProductColor" />
             </form>
             <br />
-            @await Component.InvokeAsync("ProductColors")
+
+            <!--Filters here-->
+            <form method="get" asp-controller="Customer" asp-action="ProductsCust">
+                @await Component.InvokeAsync("ProductColors")
+
+                <input type="hidden" name="pageNum" value="@Model.PaginationInfo.CurrentPage" />
+                <input type="hidden" name="productType" value="@Model.CurrentProductType" />
+                <input type="hidden" name="productColor" value="@Model.CurrentProductColor" />
+            </form>
             <br />
-            @await Component.InvokeAsync("ProductTypes")
+            <form method="get" asp-controller="Customer" asp-action="ProductsCust">
+                @await Component.InvokeAsync("ProductTypes")
+
+                <input type="hidden" name="pageNum" value="@Model.PaginationInfo.CurrentPage" />
+                <input type="hidden" name="productType" value="@Model.CurrentProductType" />
+                <input type="hidden" name="productColor" value="@Model.CurrentProductColor" />
+            </form>
+
         </div>
 
         <!-- Main content area for products -->
@@ -57,8 +73,9 @@
             <!-- Pagination tag helpers here -->
             <div page-model="@Model.PaginationInfo" page-action="ProductsCust" page-classes-enabled="true" page-class="btn"
                  page-class-normal="btn-outline-dark" page-class-selected="btn-primary"
-                 page-url-productType="@Model.CurrentProductType" page-url-pageSize="@Model.PaginationInfo.ItemsPerPage" class="btn-group pull-right m-1">
+                 page-url-productType="@Model.CurrentProductType" page-url-productColor="@Model.CurrentProductColor" page-url-pageSize="@Model.PaginationInfo.ItemsPerPage" class="btn-group pull-right m-1">
             </div>
+
 
         </div>
     </div>
