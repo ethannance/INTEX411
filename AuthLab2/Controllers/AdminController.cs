@@ -30,7 +30,7 @@ namespace AuthLab2.Controllers
 
             //Linq
             var orders = _repo.Orders
-                .OrderBy(x => x.date)
+                .OrderBy(x => x.transaction_ID)
                 .ToList();
 
             var orderViewModels = orders.Select(o => new OrderViewModel
