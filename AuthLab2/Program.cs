@@ -3,81 +3,122 @@ using AuthLab2.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-var builder = WebApplication.CreateBuilder(args);
-var services = builder.Services;
-var configuration = builder.Configuration;
-
-services.AddAuthentication().AddGoogle(googleOptions =>
+internal class Program
 {
-    googleOptions.ClientId = configuration["Authentication:Google:ClientId"];
-    googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
-});
+    private static async Task Main(string[] args)
+    {
+        var builder = WebApplication.CreateBuilder(args);
+        var services = builder.Services;
+        var configuration = builder.Configuration;
 
-services.Configure<CookiePolicyOptions>(options =>
-{
-    options.CheckConsentNeeded = context => true; // This lambda determines whether user consent is needed for this request.
-    options.MinimumSameSitePolicy = SameSiteMode.None;
-});
+        services.AddAuthentication().AddGoogle(googleOptions =>
+        {
+            googleOptions.ClientId = configuration["Authentication:Google:ClientId"];
+            googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
+        });
 
-// Add services to the container.
-var connectionString = configuration.GetConnectionString("DefaultConnection")
-    ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+        services.Configure<CookiePolicyOptions>(options =>
+        {
+            options.CheckConsentNeeded = context => true; // This lambda determines whether user consent is needed for this request.
+            options.MinimumSameSitePolicy = SameSiteMode.None;
+        });
 
-services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
+        // Add services to the container.
+        var connectionString = configuration.GetConnectionString("DefaultConnection")
+            ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
-services.AddDatabaseDeveloperPageExceptionFilter();
+        services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseSqlServer(connectionString));
 
-services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+        services.AddDatabaseDeveloperPageExceptionFilter();
 
-services.AddControllersWithViews();
+        services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+            .AddRoles<IdentityRole>()
+            .AddEntityFrameworkStores<ApplicationDbContext>();
 
-services.AddDbContext<LegoContext>(options =>
-{
-    options.UseSqlServer(configuration["ConnectionStrings:DefaultConnection"]);
-});
+        services.AddControllersWithViews();
 
-services.AddScoped<ILegoRepository, EFLegoRepository>();
+        services.AddDbContext<LegoContext>(options =>
+        {
+            options.UseSqlServer(configuration["ConnectionStrings:DefaultConnection"]);
+        });
 
-services.AddRazorPages();
+        services.AddScoped<ILegoRepository, EFLegoRepository>();
 
-services.AddDistributedMemoryCache();
-services.AddSession(); // Register session services
+        services.AddRazorPages();
 
-var app = builder.Build();
+        services.AddDistributedMemoryCache();
+        services.AddSession(); // Register session services
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseMigrationsEndPoint();
+        var app = builder.Build();
+
+        // Configure the HTTP request pipeline.
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseMigrationsEndPoint();
+        }
+        else
+        {
+            app.UseExceptionHandler("/Home/Error");
+            app.UseHsts();
+        }
+
+        app.UseHttpsRedirection();
+        app.UseStaticFiles();
+
+        app.UseRouting();
+
+        app.UseSession(); // Add UseSession middleware
+
+        app.UseAuthentication();
+        app.UseAuthorization();
+
+        app.UseCookiePolicy();
+
+        app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
+
+        app.MapControllerRoute("pagenumandtype", "{bookType}/{pageNum}", new { Controller = "Home", action = "Index" });
+        app.MapControllerRoute("pagination", "{pageNum}", new { Controller = "Home", action = "Index", pageNum = 1 });
+        app.MapControllerRoute("bookType", "{bookType}", new { Controller = "Home", action = "Index", pageNum = 1 });
+
+
+        app.MapDefaultControllerRoute();
+        app.MapRazorPages();
+
+        using (var scope = app.Services.CreateScope())
+        {
+            var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+            var roles = new[] { "Admin", "Customer", "Visitor" };
+
+            foreach (var role in roles)
+            {
+                if (!await roleManager.RoleExistsAsync(role))
+                    await roleManager.CreateAsync(new IdentityRole(role));
+            }
+        }
+
+        using (var scope = app.Services.CreateScope())
+        {
+            var userManager = 
+                scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+
+            string email = "aurora@gmail.com";
+            string password = "Bricks123!";
+
+            if (await userManager.FindByEmailAsync(email)==null)
+            {
+                var user = new IdentityUser();
+                user.UserName = email;
+                user.Email = email;
+
+                await userManager.CreateAsync(user, password);
+
+                await userManager.AddToRoleAsync(user, "Admin");
+
+            }
+        }
+
+        app.Run();
+    }
 }
-else
-{
-    app.UseExceptionHandler("/Home/Error");
-    app.UseHsts();
-}
-
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-
-app.UseRouting();
-
-app.UseSession(); // Add UseSession middleware
-
-app.UseAuthentication();
-app.UseAuthorization();
-
-app.UseCookiePolicy();
-
-app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
-
-app.MapControllerRoute("pagenumandtype", "{bookType}/{pageNum}", new { Controller = "Home", action = "Index" });
-app.MapControllerRoute("pagination", "{pageNum}", new { Controller = "Home", action = "Index", pageNum = 1 });
-app.MapControllerRoute("bookType", "{bookType}", new { Controller = "Home", action = "Index", pageNum = 1 });
-
-
-app.MapDefaultControllerRoute();
-app.MapRazorPages();
-
-app.Run();
