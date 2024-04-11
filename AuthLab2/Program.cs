@@ -100,6 +100,18 @@ internal class Program
 
         using (var scope = app.Services.CreateScope())
         {
+            var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+            // Seed the "Visitor" role if it doesn't exist
+            if (!await roleManager.RoleExistsAsync("Visitor"))
+            {
+                var role = new IdentityRole("Visitor");
+                await roleManager.CreateAsync(role);
+            }
+        }
+
+        using (var scope = app.Services.CreateScope())
+        {
             var userManager = 
                 scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
 
