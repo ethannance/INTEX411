@@ -12,6 +12,8 @@ namespace AuthLab2.Models
 
         public IQueryable<content_recs> content_Recs => _context.content_recs;
 
+        public IQueryable<user_recommendations> user_recommendations => _context.user_recommendations;
+
         public void AddProduct(Product product) 
         { 
             _context.Products.Add(product);
