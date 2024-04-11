@@ -15,7 +15,6 @@ using System.Security.Claims;
 namespace AuthLab2.Controllers
 
 {
-    //[Authorize(Roles ="Admin")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -123,7 +122,7 @@ namespace AuthLab2.Controllers
             return View();
         }
 
-        [Authorize]
+        
         public IActionResult Secrets()
         {
             return View();

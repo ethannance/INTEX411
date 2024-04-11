@@ -29,13 +29,16 @@ namespace AuthLab2.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<IdentityUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly RoleManager<IdentityRole> _roleManager; // Inject RoleManager
+
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             IUserStore<IdentityUser> userStore,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            RoleManager<IdentityRole> roleManager) // Inject RoleManager
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -43,13 +46,15 @@ namespace AuthLab2.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _roleManager = roleManager; // Assign RoleManager
+
         }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
-        [BindProperty]
+    /// <summary>
+    ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+    ///     directly from your code. This API may change or be removed in future releases.
+    /// </summary>
+    [BindProperty]
         public InputModel Input { get; set; }
 
         /// <summary>
@@ -120,6 +125,9 @@ namespace AuthLab2.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
+                    // Assign "Customer" role to the user
+                    await AssignCustomerRole(user);
+
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);
@@ -143,6 +151,9 @@ namespace AuthLab2.Areas.Identity.Pages.Account
                         await _signInManager.SignInAsync(user, isPersistent: false);
                         return LocalRedirect(returnUrl);
                     }
+
+                    
+
                 }
                 foreach (var error in result.Errors)
                 {
@@ -152,6 +163,16 @@ namespace AuthLab2.Areas.Identity.Pages.Account
 
             // If we got this far, something failed, redisplay form
             return Page();
+        }
+
+        private async Task AssignCustomerRole(IdentityUser user)
+        {
+            if (!await _roleManager.RoleExistsAsync("Customer"))
+            {
+                await _roleManager.CreateAsync(new IdentityRole("Customer"));
+            }
+
+            await _userManager.AddToRoleAsync(user, "Customer");
         }
 
         private IdentityUser CreateUser()

@@ -119,6 +119,27 @@ internal class Program
             }
         }
 
+        using (var scope = app.Services.CreateScope())
+        {
+            var userManager =
+                scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+
+            string email = "aurora@gmail.com";
+            string password = "Bricks123!";
+
+            if (await userManager.FindByEmailAsync(email) == null)
+            {
+                var user = new IdentityUser();
+                user.UserName = email;
+                user.Email = email;
+
+                await userManager.CreateAsync(user, password);
+
+                await userManager.AddToRoleAsync(user, "Admin");
+
+            }
+        }
+
         app.Run();
     }
 }
