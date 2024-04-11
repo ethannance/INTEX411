@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using AuthLab2.Infrastructure;
-using AuthLab2.Models; // Make sure this using directive matches the namespace of your Cart class
+using AuthLab2.Models;
+using Microsoft.AspNetCore.Authorization; // Make sure this using directive matches the namespace of your Cart class
 
 namespace AuthLab2.Pages
 {
+    [Authorize]
     public class CartModel : PageModel
     {
         private ILegoRepository _repo;
