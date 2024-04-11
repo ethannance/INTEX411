@@ -75,59 +75,33 @@ namespace AuthLab2.Controllers
         }
         public IActionResult Index()
         {
+            var userId = User.Identity.IsAuthenticated
+                         ? int.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value ?? "157") // Default to 157 if parsing fails
+                         : 157; // Default user ID for recommendations if not logged in
+
+            var userRecs = _repo.user_recommendations.FirstOrDefault(ur => ur.customer_ID == userId)
+                           ?? _repo.user_recommendations.FirstOrDefault(ur => ur.customer_ID == 157); // Fallback to default user recommendations
+
             var viewModel = new TestViewModel
             {
-                IsUserLoggedIn = User.Identity.IsAuthenticated // This will check if the user is logged in
+                // Based on either the user's recommendations or the default
+                user_recommendations = userRecs,
+                Product = _repo.Products.FirstOrDefault(p => p.product_ID == userRecs.if_you_liked),
+                uRecommendedProducts = new List<Product>
+        {
+            _repo.Products.FirstOrDefault(p => p.product_ID == userRecs.Recommendation_1),
+            _repo.Products.FirstOrDefault(p => p.product_ID == userRecs.Recommendation_2),
+            _repo.Products.FirstOrDefault(p => p.product_ID == userRecs.Recommendation_3),
+            _repo.Products.FirstOrDefault(p => p.product_ID == userRecs.Recommendation_4),
+            _repo.Products.FirstOrDefault(p => p.product_ID == userRecs.Recommendation_5)
+        }.Where(p => p != null).ToList()
             };
-
-            // If the user is logged in, fetch personalized recommendations
-            if (viewModel.IsUserLoggedIn)
-            {
-                var userId = 123; // the code isnt working so im hard coding a logged in user for now //int.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value);
-                var userRecs = _repo.user_recommendations.FirstOrDefault(ur => ur.customer_ID == userId);
-
-                // You may want to handle the scenario when userRecs is null by showing default recommendations
-                if (userRecs != null)
-                {
-                    viewModel.user_recommendations = userRecs;
-                    viewModel.Product = _repo.Products.FirstOrDefault(p => p.product_ID == userRecs.if_you_liked);
-                    viewModel.uRecommendedProducts = new List<Product>
-                    {
-                            _repo.Products.FirstOrDefault(p => p.product_ID == userRecs.Recommendation_1),
-                            _repo.Products.FirstOrDefault(p => p.product_ID == userRecs.Recommendation_2),
-                            _repo.Products.FirstOrDefault(p => p.product_ID == userRecs.Recommendation_3),
-                            _repo.Products.FirstOrDefault(p => p.product_ID == userRecs.Recommendation_4),
-                            _repo.Products.FirstOrDefault(p => p.product_ID == userRecs.Recommendation_5)
-
-                        }.Where(p => p != null).ToList();
-                }
-            }
-            else
-            {
-                var userId = 157;//default user recommendations
-                var userRecs = _repo.user_recommendations.FirstOrDefault(ur => ur.customer_ID == userId);
-
-                // You may want to handle the scenario when userRecs is null by showing default recommendations
-                if (userRecs != null)
-                {
-                    viewModel.user_recommendations = userRecs;
-                    viewModel.Product = _repo.Products.FirstOrDefault(p => p.product_ID == userRecs.if_you_liked);
-                    viewModel.uRecommendedProducts = new List<Product>
-                    {
-                            _repo.Products.FirstOrDefault(p => p.product_ID == userRecs.Recommendation_1),
-                            _repo.Products.FirstOrDefault(p => p.product_ID == userRecs.Recommendation_2),
-                            _repo.Products.FirstOrDefault(p => p.product_ID == userRecs.Recommendation_3),
-                            _repo.Products.FirstOrDefault(p => p.product_ID == userRecs.Recommendation_4),
-                            _repo.Products.FirstOrDefault(p => p.product_ID == userRecs.Recommendation_5)
-
-                        }.Where(p => p != null).ToList();
-                }
-            }
 
             ViewBag.RefererUrl = Request.Headers["Referer"].ToString();
 
             return View(viewModel);
         }
+
         public IActionResult ProductDetailsCust(int id, string returnUrl = null)
         {
             var product = _repo.Products.FirstOrDefault(x => x.product_ID == id);
