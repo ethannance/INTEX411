@@ -43,9 +43,9 @@
         <!-- Display the Form with Non-Editable Amount -->
         <form method="post">
             <div class="form-group">
-                <label asp-for="Order.customer_ID">Enter Customer ID Manually (until we can add users)</label>
-                <input asp-for="Order.customer_ID" class="form-control" type="number" min="0" required />
+                <input asp-for="Order.customer_ID" type="hidden" value="420" />
             </div>
+
             <br />
 
             <input type="hidden" asp-for="Order.time" />
