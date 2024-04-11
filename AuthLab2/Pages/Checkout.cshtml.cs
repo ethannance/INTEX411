@@ -99,7 +99,7 @@ namespace AuthLab2.Pages
             else
             {
                 HttpContext.Session.Remove("cart"); // Clear the cart session after successful order placement
-                return RedirectToPage("OrderConfirmation", new { id = Order.transaction_ID });
+                return RedirectToPage("NotFraudOrder", new { id = Order.transaction_ID });
             }
         }
     }
