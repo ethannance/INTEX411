@@ -1,5 +1,6 @@
 ﻿using AuthLab2.Models;
 using AuthLab2.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.ML.OnnxRuntime;
 using System.Drawing.Printing;
@@ -7,6 +8,7 @@ using System.Security.Claims;
 
 namespace AuthLab2.Controllers
 {
+    [Authorize(Roles = "Customer")]
     public class CustomerController : Controller
     {
         private readonly ILogger<CustomerController> _logger;

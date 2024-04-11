@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -17,6 +18,7 @@
     <!-- Your additional styles -->
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/AuthLab2.styles.css" asp-append-version="true" />
+
 </head>
 <body id="page-top">
     <!-- Navigation-->
@@ -35,23 +37,23 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Test">Home</a>
                     </li>
+                    @* <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                    </li> *@
+                    @* <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Secrets">Secrets</a>
+                    </li> *@
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Secrets">Secrets</a>
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Our Products</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" asp-area="" asp-controller="Home" asp-action="About">About Me</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Test">Test</a>
-                    </li>
-                    <li class="nav-item">
-                        <a asp-page="/Predict" class="nav-link">Predictions</a>
-                    </li>
+                    @* <li class="nav-item">
+                    <a asp-page="/Predict" class="nav-link">Predictions</a>
+                    </li> *@
                     <li class="nav-item">
                         <a asp-page="/Cart" class="nav-link">View Cart</a>
                     </li>
@@ -60,17 +62,22 @@
             <partial name="_LoginPartial" />
         </div>
     </nav>
-    <div class="masthead text-center">
-        <div class="container d-flex align-items-center flex-column">
-            <!-- Masthead Avatar Image-->
-            <img src="~/img/xavi-cabrera-kn-umdzqdjm-unsplash.jpg" alt="Legos" class="masthead-bg" height="200px" width="100%" />
-            <!-- Masthead Heading-->
-            <h1 class="masthead-heading text-uppercase mb-0">@ViewData["Title"]</h1>
-        </div>
+    @*     <div class="masthead text-center">
+    <div class="container d-flex align-items-center flex-column">
+    <!-- Masthead Avatar Image-->
+    <img src="~/img/xavi-cabrera-kn-umdzqdjm-unsplash.jpg" alt="Legos" class="masthead-bg" height="200px" width="100%" />
+    <!-- Masthead Heading-->
+    <h1 class="masthead-heading text-uppercase mb-0">@ViewData["Title"]</h1 >
     </div>
+    </div>  *@
     <!-- Content -->
     <div class="container-fluid">
         <main role="main" class="pb-3">
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
             @RenderBody()
         </main>
     </div>
@@ -81,11 +88,29 @@
     <script src="~/js/scripts.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+<partial name="_CookieConsentPartial" />
+
 <footer>
+
     <div class="row">
         <div class="copyright py-4 text-white p-4">
-            <small>Copyright &copy; Aurora Bricks 2024</small>
-            <small asp-controller="Home" asp-action="Privacy">  |  Privacy Policy</small>
+            @if (User.Identity.IsAuthenticated)
+            {
+                // Footer content for authenticated users (customer or admin)
+                if (User.IsInRole("Admin"))
+                {
+                    <p>Copyright &copy; Aurora Bricks 2024 | <a asp-area="" asp-controller="Admin" asp-action="PrivacyAdmin">Privacy Policy</a></p>
+                }
+                else
+                {
+                    <p>Copyright &copy; Aurora Bricks 2024 | <a asp-area="" asp-controller="Customer" asp-action="PrivacyCust">Privacy Policy</a></p>
+                }
+            }
+            else
+            {
+                // Footer content for visitors
+                <p>Copyright &copy; Aurora Bricks 2024 | <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy Policy</a></p>
+            }
         </div>
     </div>
 </footer>
