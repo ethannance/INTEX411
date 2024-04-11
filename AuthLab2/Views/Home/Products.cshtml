@@ -17,22 +17,37 @@
         <div class="col-md-3">
             <h3>Filter Products:</h3>
             <br />
-            <form method="get" action="/Home/Index">
-                <label class="mr-2">Results:     </label>
+            <form method="get" asp-controller="Home" asp-action="Products">
+                <label class="mr-2">Results: </label>
                 <select name="pageSize" onchange="this.form.submit()">
-                    <option value="">Select # of Records to Display</option>
+                    <option value="">Select an option</option>
                     <option value="5">5</option>
                     <option value="10">10</option>
                     <option value="20">20</option>
                 </select>
+
                 <input type="hidden" name="pageNum" value="@Model.PaginationInfo.CurrentPage" />
                 <input type="hidden" name="productType" value="@Model.CurrentProductType" />
                 <input type="hidden" name="productColor" value="@Model.CurrentProductColor" />
             </form>
             <br />
-            @await Component.InvokeAsync("ProductColors")
+            <!--Filters here-->
+            <form method="get" asp-controller="Home" asp-action="Products">
+                @await Component.InvokeAsync("ProductColors")
+
+                <input type="hidden" name="pageNum" value="@Model.PaginationInfo.CurrentPage" />
+                <input type="hidden" name="productType" value="@Model.CurrentProductType" />
+                <input type="hidden" name="productColor" value="@Model.CurrentProductColor" />
+            </form>
             <br />
-            @await Component.InvokeAsync("ProductTypes")
+            <form method="get" asp-controller="Home" asp-action="Products">
+                @await Component.InvokeAsync("ProductTypes")
+
+                <input type="hidden" name="pageNum" value="@Model.PaginationInfo.CurrentPage" />
+                <input type="hidden" name="productType" value="@Model.CurrentProductType" />
+                <input type="hidden" name="productColor" value="@Model.CurrentProductColor" />
+            </form>
+
         </div>
 
         <!-- Main content area for products -->
