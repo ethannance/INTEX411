@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "All Products";
+    ViewData["Title"] = "Products";
 }
 
 @model List<Product>
@@ -7,18 +7,26 @@
 <vc:nav-bar-types user="Admin"></vc:nav-bar-types>
 <vc:submenu-types view="Default"></vc:submenu-types>
 
+<!--Table with all of the products to add, edit, or delete as needed-->
+
 <div class="container-fluid m-2">
     <br />
-
+    
     <div class="text-center">
         <a class="btn btn-primary btn-xl" asp-controller="Admin" asp-action="ProductsAddAdmin">
             Add Product
         </a>
     </div>
     <br />
+    <!-- Icon Divider-->
+    <div class="divider-custom">
+        <div class="divider-custom-line"></div>
+        <div class="divider-custom-icon"><img src="~/img/lego brick.png" width="50px" /></div>
+        <div class="divider-custom-line"></div>
+    </div>
     <br />
-    <table class="table table-bordered table-striped">
-        <thead class="fw-bold text-center">
+    <table class="table table-bordered">
+        <thead class="fw-bold text-center"> <!--Headings-->
             <tr>
                 <td>Name</td>
                 <td>Year</td>
@@ -30,14 +38,14 @@
                 <td>Delete</td>
             </tr>
             
-        </thead>
+        </thead> <!--Rows-->
             @foreach (Product p in Model)
             {
                 <tbody>
-                    <tr>
+                    <tr class="@((Model.IndexOf(p) % 2 == 0) ? "even-row" : "odd-row")">
                         <td>@p.name</td>
                         <td>@p.year</td>
-                        <td>@p.price</td>
+                        <td>$@p.price.00</td>
                         <td>@p.img_link</td>
                         <td>@p.primary_color / @p.secondary_color</td>
                         <td>@p.category</td>

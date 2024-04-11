@@ -15,8 +15,14 @@
 
 <div class="container-fluid m-4">
     <br />
+    <!-- Icon Divider-->
+    <div class="divider-custom">
+        <div class="divider-custom-line"></div>
+        <div class="divider-custom-icon"><img src="~/img/lego brick.png" width="50px" /></div>
+        <div class="divider-custom-line"></div>
+    </div>
     <br />
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered">
         <thead class="fw-bold text-center">
             <tr>
                 <td>Transaction Number</td>
@@ -31,7 +37,7 @@
         @foreach (Order o in Model)
         {
             <tbody>
-                <tr>
+                <tr class="@((Model.IndexOf(o) % 2 == 0) ? "even-row" : "odd-row")">
                     <td>@o.transaction_ID</td>
                     <td>@o.date</td>
                     <td>@o.amount</td>

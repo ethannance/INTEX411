@@ -56,36 +56,37 @@
             <!-- About Section Content-->
             <div class="row">
                 <div class="col-lg-8 mx-auto text-center">
-                    <p class="lead" style="margin-left: 0px;">
+                    <h6 class="lead" style="margin-left: 0px;">
                         Welcome Aurora, what would you like to do?
-                    </p>
+                    </h6>
                 </div>
             </div>
             <!-- About Section Button-->
-            <div class="text-center mt-4">
-                <a class="btn btn-primary btn-xl" asp-controller="Admin" asp-action="UsersListAdmin">
+            <div class="text-center mt-4 m-4">
+                <a class="btn btn-primary btn-xl" asp-controller="Admin" asp-action="UsersListAdmin" style="margin-right: 30px;">
                     View Users
                 </a>
-                <a class="btn btn-primary btn-xl" asp-controller="Admin" asp-action="ProductsAdmin">
+                <a class="btn btn-primary btn-xl" asp-controller="Admin" asp-action="ProductsAdmin" style="margin-right: 30px;">
                     View Products
                 </a>
-                <a class="btn btn-primary btn-xl" asp-controller="Admin" asp-action="OrdersListAdmin">
+                <a class="btn btn-primary btn-xl" asp-controller="Admin" asp-action="OrdersListAdmin" style="margin-right: 30px;">
                     View Orders
                 </a>
             </div>
         </div>
     </section>
+    <!-- Icon Divider-->
+    <div class="divider-custom">
+        <div class="divider-custom-line"></div>
+        <div class="divider-custom-icon"><img src="~/img/lego brick.png" width="50px" /></div>
+        <div class="divider-custom-line"></div>
+    </div>
     <!-- Portfolio Section-->
     <section class="page-section portfolio" id="portfolio">
         <div class="container">
             <!-- Portfolio Section Heading-->
-            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">This Week's Top Picks</h2>
-            <!-- Icon Divider-->
-            <div class="divider-custom">
-                <div class="divider-custom-line"></div>
-                <div class="divider-custom-icon"><img src="~/img/lego brick.png" width="50px" /></div>
-                <div class="divider-custom-line"></div>
-            </div>
+            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0 text-black">This Week's Top Picks</h2>
+            
             <!-- INSERT PRODUCT ITEMS HERE-->
             @{
                 var displayedNames = new HashSet<string>();
