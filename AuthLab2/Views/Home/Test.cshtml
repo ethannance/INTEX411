@@ -13,6 +13,91 @@
 <vc:nav-bar-types user="Visitor"></vc:nav-bar-types>
 <vc:submenu-types view="Default"></vc:submenu-types>
 
+<style>
+    .product-detail {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 20px;
+    }
+
+    .back-link a {
+        color: #007bff;
+        text-decoration: none;
+        font-size: 16px;
+    }
+
+    .product-image img {
+        margin: 20px 0;
+    }
+
+    .product-info {
+        text-align: center;
+    }
+
+    .price h5 span {
+        color: #28a745;
+        font-weight: bold;
+    }
+
+    .add-to-cart-form button {
+        margin-top: 20px;
+    }
+
+    .item-description, .additional-info {
+        margin-top: 20px;
+    }
+
+        .additional-info h5 {
+            margin-top: 15px;
+        }
+
+    .back-button {
+        display: inline-block;
+        padding: 8px 12px;
+        background-color: #007bff; /* Bootstrap primary color */
+        color: #ffffff !important; /* Force white text */
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 16px;
+        transition: background-color 0.2s;
+    }
+
+        .back-button:hover {
+            background-color: #0056b3; /* A darker shade for hover */
+            color: #ffffff !important; /* Keep text white on hover */
+        }
+
+
+
+    .product-title {
+        text-align: center;
+    }
+
+    .recommendations {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+        .recommendations .col-lg-2, .recommendations .col-md-3, .recommendations .col-sm-4, .recommendations .col-6 {
+            display: flex;
+            flex: 1 0 auto;
+        }
+
+    .card {
+        width: 100%; /* Makes sure the card takes up the space of its flex container */
+        display: flex;
+        flex-direction: column; /* Aligns content from top to bottom */
+    }
+
+    .card-body {
+        flex-grow: 1; /* Allows the card body to expand and push down the footer/content below */
+    }
+
+</style>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
