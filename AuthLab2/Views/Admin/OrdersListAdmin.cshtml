@@ -11,7 +11,7 @@
 <vc:nav-bar-types user="Admin"></vc:nav-bar-types>
 <vc:submenu-types view="Default"></vc:submenu-types>
 
-@model List<OrderViewModel>
+@model List<Order>
 
 <vc:nav-bar-types user="Admin"></vc:nav-bar-types>
 <vc:submenu-types view="Default"></vc:submenu-types>
@@ -31,7 +31,7 @@
             </tr>
 
         </thead>
-        @foreach (OrderViewModel o in Model)
+        @foreach (Order o in Model)
         {
             <tbody>
                 <tr>

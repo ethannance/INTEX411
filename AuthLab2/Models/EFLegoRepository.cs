@@ -30,5 +30,10 @@ namespace AuthLab2.Models
             _context.Products.Remove(product);
             _context.SaveChanges();
         }
+        public void DeleteOrder(Order order)
+        {
+            _context.Orders.Remove(order);
+            _context.SaveChanges();
+        }
     }
 }

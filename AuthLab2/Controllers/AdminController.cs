@@ -23,30 +23,42 @@ namespace AuthLab2.Controllers
         }
 
         public IActionResult AboutAdmin() { return View(); }
-        public IActionResult OrderDeleteAdmin() { return View(); }
-        public IActionResult OrdersListAdmin() 
+        [HttpGet]
+        public IActionResult OrderDeleteAdmin(int id) // Delete confirmation view
+        {
+            var orderToDelete = _repo.Orders
+                .Single(x => x.transaction_ID == id);
+
+            return View(orderToDelete);
+        }
+        [HttpPost]
+        public IActionResult OrdersDeleteAdmin(Order orderToDelete)
+        {
+            _repo.DeleteOrder(orderToDelete);
+            return View("ConfirmationAdmin", orderToDelete);
+        }
+        public IActionResult OrdersListAdmin()  // Lists some order information
         {
             
-
             //Linq
             var orders = _repo.Orders
                 .OrderBy(x => x.transaction_ID)
                 .ToList();
 
-            var orderViewModels = orders.Select(o => new OrderViewModel
-            {
-                transaction_ID = o.transaction_ID,
-                date = o.date,
-                amount = (int)o.amount,
-                shipping_address = o.shipping_address,
-                fraud = o.fraud
-            }).ToList();
+            //var orderViewModels = orders.Select(o => new OrderViewModel
+            //{
+            //    transaction_ID = o.transaction_ID,
+            //    date = o.date,
+            //    amount = (int)o.amount,
+            //    shipping_address = o.shipping_address,
+            //    fraud = o.fraud
+            //}).ToList();
 
-            return View(orderViewModels);
+            return View(orders);
         }
         public IActionResult PrivacyAdmin() { return View(); }
         [HttpGet]
-        public IActionResult ProductsDeleteAdmin(int id) 
+        public IActionResult ProductsDeleteAdmin(int id)  // Delete confirmation view
         { 
             var productToDelete = _repo.Products
                 .Single(x => x.row_ID == id);
@@ -54,7 +66,7 @@ namespace AuthLab2.Controllers
             return View("ProductsDeleteAdmin", productToDelete); 
         }
         [HttpPost]
-        public IActionResult ProductsDeleteAdmin(Product productToDelete)
+        public IActionResult ProductsDeleteAdmin(Product productToDelete) // Double checks deletion
         {
             _repo.DeleteProduct(productToDelete);
 
