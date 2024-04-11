@@ -13,7 +13,9 @@ using System.Drawing.Printing;
 using System.Security.Claims;
 
 namespace AuthLab2.Controllers
+
 {
+    //[Authorize(Roles ="Admin")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
