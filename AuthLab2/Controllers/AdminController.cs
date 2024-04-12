@@ -29,8 +29,21 @@ namespace AuthLab2.Controllers
         }
         public IActionResult Index()
         {
+            var totalRevenue = _repo.Orders
+                                    .Where(o => o.fraud == false)
+                                    .Sum(o => o.amount);
+            var countFraudOrders = _repo.Orders
+                                        .Count(o => o.fraud == true);
+            var countOutstandingOrders = _repo.Orders
+                                              .Count(o => o.fraud == false);
+
+            // Pass these data to the view
+            ViewBag.TotalRevenue = totalRevenue;
+            ViewBag.CountFraudOrders = countFraudOrders;
+            ViewBag.CountOutstandingOrders = countOutstandingOrders;
             return View();
         }
+
 
         public IActionResult AboutAdmin() { return View(); }
         [HttpGet]

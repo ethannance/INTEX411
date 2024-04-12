@@ -13,6 +13,25 @@
 
 @model AuthLab2.Models.ViewModels.TestViewModel
 
+<style>
+    .card {
+        border: 1px solid #ddd;
+        box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+        transition: transform 0.2s;
+        width: 100%;
+        margin: 10px;
+    }
+
+    .card-body {
+        padding: 20px;
+        text-align: center;
+    }
+
+    .card:hover {
+        transform: scale(1.05);
+    }
+</style>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,12 +73,48 @@
     <section class="page-section bg-white text-black mb-0" id="about">
         <div class="container">
             <!-- About Section Content-->
-            <div class="row">
-                <div class="col-lg-8 mx-auto text-center">
-                    <h6 class="lead" style="margin-left: 0px;">
-                        Welcome Aurora, what would you like to do?
-                    </h6>
+            <h2 class="page-section-heading text-center text-uppercase text-black mb-0">Welcome Aurora, here's what's going on with your site:</h2>
+           <br />
+            <div class="container">
+                <div class="row">
+                    <!-- Total Revenue Card -->
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4>Monthly Revenue:</h4>
+                                <h6 style ="color: green;">@Math.Round(ViewBag.TotalRevenue / 11, 2)</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Fraudulent Orders Card -->
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4>Fraudulent Orders:</h4>
+                                <h6 style="color: red;" >@ViewBag.CountFraudOrders</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Outstanding Orders Card -->
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4>Outstanding Orders:</h4>
+                                <h6>@ViewBag.CountOutstandingOrders</h6>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+            </div>
+            <!-- Icon Divider-->
+            <div class="divider-custom">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><img src="~/img/lego brick.png" width="50px" /></div>
+                <div class="divider-custom-line"></div>
+            </div>
+            <div>
+            <h2 class="page-section-heading text-center text-uppercase text-black mb-0">What would you like to do today?</h2>
             </div>
             <!-- About Section Button-->
             <div class="text-center mt-4 m-4">
@@ -72,6 +127,9 @@
                 <a class="btn btn-primary btn-xl" asp-controller="Admin" asp-action="OrdersListAdmin" style="margin-right: 30px;">
                     View Orders
                 </a>
+                </div>
+                    
+                </div>
             </div>
         </div>
     </section>
