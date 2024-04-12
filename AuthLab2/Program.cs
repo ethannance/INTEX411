@@ -72,7 +72,7 @@ internal class Program
         else
         {
             app.UseExceptionHandler("/Home/Error");
-            app.UseHsts();
+            app.UseHsts(); //HSTS
         }
 
         app.UseHttpsRedirection();
@@ -80,7 +80,7 @@ internal class Program
 
         app.Use(async (context, next) =>
         {
-            context.Response.Headers.Add("Content-Security-Policy",
+            context.Response.Headers.Add("Content-Security-Policy", //CSP Header
                 "default-src 'self' * data: blob:;" +
                 "script-src 'self' * 'unsafe-inline' 'unsafe-eval' 'https://use.fontawesome.com' 'https://ajax.googleapis.com';" +
                 "style-src 'self' * 'https://fonts.googleapis.com' 'unsafe-inline';" +
