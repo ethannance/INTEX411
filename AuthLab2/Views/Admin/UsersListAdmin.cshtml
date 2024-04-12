@@ -27,12 +27,12 @@
     <table class="table table-bordered">
         <thead class="fw-bold text-center">
             <tr>
-                <td>Name</td>
+                <td style="width: 300px;">Name</td>
                 <td>Birthday</td>
-                <td>Country</td>
-                <td>Gender</td>
+                <td style="width: 300px;">Country</td>
+                <td style="width: 20px;">Gender</td>
                 <td>Age</td>
-                <td>Manage Roles</td>
+                <td style="width: 200px;">Manage Roles</td>
             </tr>
 
         </thead>
@@ -43,9 +43,9 @@
                     <td>@c.first_name @c.last_name</td>
                     <td>@c.birth_date</td>
                     <td>@c.country_of_residence</td>
-                    <td>@c.gender</td>
+                    <td class="text-center">@c.gender</td>
                     <td>@c.age</td>
-                    <td>
+                    <td class="text-center">
                         <a class="btn btn-info text-white" asp-controller="Admin" asp-action="UsersListEditAdmin" asp-route-id="@c.customer_ID">Edit</a>
                     </td>
 
