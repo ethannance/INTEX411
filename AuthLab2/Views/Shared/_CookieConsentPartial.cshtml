@@ -18,6 +18,10 @@
         (function () {
             var button = document.querySelector("#cookieConsent button[data-cookie-string]");
             button.addEventListener("click", function (event) {
+                // Remove the cookie consent notification from the DOM
+                var cookieConsent = document.getElementById("cookieConsent");
+                cookieConsent.parentNode.removeChild(cookieConsent);
+                // Set the cookie to remember user's consent
                 document.cookie = button.dataset.cookieString;
             }, false);
         })();
