@@ -18,13 +18,15 @@
             <h3>Filter Products:</h3>
             <br />
             <form method="get" asp-controller="Customer" asp-action="ProductsCust">
-                <label class="mr-2">Results: </label>
-                <select name="pageSize" onchange="this.form.submit()">
-                    <option value="">Select an option</option>
+                <label class="mr-2">Number of results to display: </label>
+                <br />
+                <select name="pageSize" onchange="this.form.submit()" style="padding: 5px; font-size: 16px; border: 1px solid #ccc; border-radius: 5px; background-color: #fff; color: #333;">
+                    <option value="">Default (5)</option>
                     <option value="5">5</option>
                     <option value="10">10</option>
                     <option value="20">20</option>
                 </select>
+
 
                 <input type="hidden" name="pageNum" value="@Model.PaginationInfo.CurrentPage" />
                 <input type="hidden" name="productType" value="@Model.CurrentProductType" />
