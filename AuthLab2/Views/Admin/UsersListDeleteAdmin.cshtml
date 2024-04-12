@@ -1,0 +1,34 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@{
+    ViewData["Title"] = "Delete User";
+}
+@model Customer
+
+<vc:nav-bar-types user="Admin"></vc:nav-bar-types>
+<vc:submenu-types view="Default"></vc:submenu-types>
+
+<div class="container text-center">
+    <br />
+    <!-- Icon Divider-->
+    <div class="divider-custom">
+        <div class="divider-custom-line"></div>
+        <div class="divider-custom-icon"><img src="~/img/lego brick.png" width="50px" /></div>
+        <div class="divider-custom-line"></div>
+    </div>
+    <br />
+    <h3>Please confirm deletion of product:</h3>
+    <h4>@Model.first_name @Model.last_name</h4>
+    <form asp-controller="Admin" asp-action="UsersListDeleteAdmin" method="post">
+        <input type="hidden" asp-for="customer_ID" />
+        <br />
+        <div class="text-center mt-4 m-2">
+            <button type="submit" class="btn btn-danger">Delete</button>
+            <a class="btn btn-info text-white" asp-controller="Admin" asp-action="UsersListAdmin">Cancel</a>
+        </div>
+    </form>
+</div>

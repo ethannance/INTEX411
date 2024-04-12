@@ -47,6 +47,7 @@
                     <td>@c.age</td>
                     <td class="text-center">
                         <a class="btn btn-info text-white" asp-controller="Admin" asp-action="UsersListEditAdmin" asp-route-id="@c.customer_ID">Edit</a>
+                        <a class="btn btn-danger text-white" asp-controller="Admin" asp-action="UsersListDeleteAdmin" asp-route-id="@c.customer_ID">Delete</a>
                         <form method="post" asp-controller="Admin" asp-action="MakeAdmin">
                             <input type="hidden" name="userId" value="@c.UserId" />
                             <button type="submit" class="btn btn-primary">Make Admin</button>
