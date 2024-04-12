@@ -11,10 +11,10 @@ internal class Program
         var services = builder.Services;
         var configuration = builder.Configuration;
 
-        services.AddAuthentication().AddGoogle(googleOptions =>
+        services.AddAuthentication().AddMicrosoftAccount(microsoftOptions =>
         {
-            googleOptions.ClientId = configuration["Authentication:Google:ClientId"];
-            googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
+            microsoftOptions.ClientId = configuration["Authentication:Microsoft:ClientId"];
+            microsoftOptions.ClientSecret = configuration["Authentication:Microsoft:ClientSecret"];
         });
 
         services.Configure<CookiePolicyOptions>(options =>
