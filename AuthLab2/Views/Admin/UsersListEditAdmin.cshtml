@@ -24,43 +24,42 @@
             <!--Adding a product form-->
             <form method="post" asp-controller="Admin" asp-action="UsersListEditAdmin">
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col-md-6">
                         <input type="int" asp-for="customer_ID" hidden />
                     </div>
-                    <br />
                 </div>
                 <br />
                 <div class="row">
-                    <div class="col-6">
-                        <label asp-for="first_name">First Name: </label>
-                        <input type="text" asp-for="first_name" style="width: 300px; border-radius: 5px;"/>
+                    <div class="col-md-6">
+                        <label asp-for="first_name">First Name:</label>
+                        <input type="text" asp-for="first_name" class="form-control" style="border-radius: 5px;" />
                     </div>
-                    <div class="col-4">
-                        <label asp-for="last_name">Last Name: </label>
-                        <input type="text" asp-for="last_name" style="width: 100px; border-radius: 5px;"/>
+                    <div class="col-md-4">
+                        <label asp-for="last_name">Last Name:</label>
+                        <input type="text" asp-for="last_name" class="form-control" style="border-radius: 5px;" />
                     </div>
-                    <div class="col-2">
-                        <label asp-for="age">Age: </label>
-                        <input type="int" asp-for="age" placeholder="ex: 60" style="width: 50px; border-radius: 5px;" />
+                    <div class="col-md-2">
+                        <label asp-for="age">Age:</label>
+                        <input type="int" asp-for="age" placeholder="ex: 60" class="form-control" style="border-radius: 5px;" />
                     </div>
                 </div>
                 <br />
                 <div class="row">
-                    <div class="col-4">
-                        <label asp-for="birth_date">Birthday: </label>
-                        <input type="text" asp-for="birth_date" style="width: 100px; border-radius: 5px;" />
+                    <div class="col-md-4">
+                        <label asp-for="birth_date">Birthday:</label>
+                        <input type="text" asp-for="birth_date" class="form-control" style="border-radius: 5px;" />
                     </div>
-                    <div class="col-4">
-                        <label asp-for="gender">Gender</label>
-                        <select asp-for="gender" style="border-radius: 5px;">
+                    <div class="col-md-4">
+                        <label asp-for="gender">Gender:</label>
+                        <select asp-for="gender" class="form-select" style="border-radius: 5px;">
                             <option value="">Select a Gender</option>
                             <option>M</option>
                             <option>F</option>
                         </select>
                     </div>
-                    <div class="col-4">
-                        <label asp-for="country_of_residence">Country</label>
-                        <select asp-for="country_of_residence" style="border-radius: 5px;">
+                    <div class="col-md-4">
+                        <label asp-for="country_of_residence">Country:</label>
+                        <select asp-for="country_of_residence" class="form-select" style="border-radius: 5px;">
                             <option value="">Select a Country</option>
                             <option>China</option>
                             <option>India</option>
@@ -73,9 +72,9 @@
                 </div>
                 <br />
                 <div class="row">
-                    <div class="col-4 text-center">
-                        <label for="user_role">User Role</label>
-                        <select id="user_role" style="border-radius: 5px;">
+                    <div class="col-md-4">
+                        <label for="user_role">User Role:</label>
+                        <select id="user_role" class="form-select" style="border-radius: 5px;">
                             <option value="" selected>Select a Role</option>
                             <option>Customer</option>
                             <option>Admin</option>
@@ -86,11 +85,11 @@
                 <br />
                 <div class="text-center mt-4">
                     <button type="submit" class="btn btn-primary btn-lg">Save Changes</button>
-                    <a class="btn btn-info text-white btn-lg m-2" asp-controller="Admin" asp-action="UsersListAdmin">Cancel</a>
+                    <a class="btn btn-info btn-lg ms-2 text-white" asp-controller="Admin" asp-action="UsersListAdmin">Cancel</a>
                 </div>
-                <br />
                 <div asp-validation-summary="All"></div>
             </form>
+
         </div>
     </div>
 
