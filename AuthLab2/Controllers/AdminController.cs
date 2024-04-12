@@ -78,6 +78,7 @@ namespace AuthLab2.Controllers
             return View("ProductsEditAdmin", productToEdit); 
         }
         [HttpPost]
+        [ValidateAntiForgeryToken] //Secure form data
         public IActionResult ProductsEditAdmin(Product updatedProduct) //Saved edits to DB
         {
             _repo.EditProduct(updatedProduct);
@@ -102,6 +103,7 @@ namespace AuthLab2.Controllers
             return View("UsersListEditAdmin", userToEdit);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken] //Secure form data
         public IActionResult UsersListEditAdmin(Customer updatedCustomer)
         {
             _repo.EditUser(updatedCustomer);
@@ -133,6 +135,7 @@ namespace AuthLab2.Controllers
             return View(new Product());
         }
         [HttpPost]
+        [ValidateAntiForgeryToken] //Secure form data
         public IActionResult ProductsAddAdmin(Product response) //Add the new product
         {
             if (ModelState.IsValid)

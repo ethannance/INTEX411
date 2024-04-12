@@ -23,6 +23,7 @@
         <div class="col-md-9" style="background-color: #e5ffe5; padding: 20px; border-radius: 10px;">
             <!--Adding a product form-->
             <form method="post" asp-controller="Admin" asp-action="UsersListEditAdmin">
+                @Html.AntiForgeryToken()
                 <div class="row">
                     <div class="col-md-6">
                         <input type="int" asp-for="customer_ID" hidden />

@@ -7,6 +7,11 @@ using Microsoft.Extensions.Configuration;
 
 internal class Program
 {
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.AddMvc();
+        services.AddAntiforgery(options => options.HeaderName = "X-CSRF-TOKEN");
+    }
     private static async Task Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);

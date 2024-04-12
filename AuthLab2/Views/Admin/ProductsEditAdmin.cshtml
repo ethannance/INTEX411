@@ -24,6 +24,7 @@
         <div class="col-md-9">
             <!--Editing a product form-->
             <form method="post" asp-controller="Admin" asp-action="ProductsEditAdmin">
+                @Html.AntiForgeryToken()
                 <div class="row">
                     <div class="col-md-6">
                         <div class="row mb-3">
