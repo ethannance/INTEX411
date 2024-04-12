@@ -93,7 +93,7 @@
 <br />
 
 <div class="back-link">
-    <a href="@ViewBag.RefererUrl" class="back-button">← Back</a>
+    <a href="@ViewBag.RefererUrl" class="btn btn-primary text-white">← Back</a>
 </div>
 
 <h2 class="product-title">@Model.Product.name</h2>
@@ -182,7 +182,12 @@
         </div>
     </div>
 </div>
-
+<!-- Icon Divider-->
+<div class="divider-custom">
+    <div class="divider-custom-line"></div>
+    <div class="divider-custom-icon"><img src="~/img/lego brick.png" width="50px" /></div>
+    <div class="divider-custom-line"></div>
+</div>
 <!-- Recommendations code -->
 <br />
 <div class="container-fluid">
@@ -193,12 +198,16 @@
                 @foreach (var recommendedProduct in Model.RecommendedProducts)
                 {
                     <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-4">
-                        <a href="@Url.Action("ProductDetails", "Home", new { id = recommendedProduct.product_ID })" class="text-decoration-none">
-                            <div class="card">
+                        <a href="@Url.Action("ProductDetails", "Home", new { id = recommendedProduct.product_ID })" class="text-decoration-none" style="text-decoration: none; color: inherit;">
+                            <div class="card bg-light" style="height: 300px; width: 100%; margin: 10px;" >
                                 <img src="@recommendedProduct.img_link" class="card-img-top" alt="@recommendedProduct.name">
-                                <div class="card-body">
-                                    <h6 class="card-title">@recommendedProduct.name</h6>
-                                    <p class="card-text">Price: $@recommendedProduct.price.00</p>
+                                <div class="card-body text-center">
+                                    <h4 class="card-title">@recommendedProduct.name</h4>
+                                    <div class="price-and-button-container">
+                                        <div class="price">
+                                            <h6 class="btn-primary btn-sm">$@recommendedProduct.price.00</h6>
+                                        </div>
+                                    </div>
                                     <!-- Add other product details as needed -->
                                 </div>
                             </div>
