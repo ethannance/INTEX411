@@ -6,7 +6,7 @@
 
 <div class="container mt-5">
     <!-- Back button -->
-    <a href="javascript:history.back()" class="btn btn-secondary mb-3">Back to Cart</a>
+    <a href="javascript:history.back()" class="btn btn-primary mb-3">Back to Cart</a>
     <h2 class="mb-3">@ViewData["Title"]</h2>
 
     <!-- Display Cart Items -->
@@ -102,7 +102,7 @@
     else
     {
         <h3>Your cart is empty.</h3>
-        <a href="/" class="btn btn-primary">Go to Main Page</a>
+        <a asp-controller="Customer" asp-action="Index" class="btn btn-primary">Go to Main Page</a>
     }
 </div>
 
