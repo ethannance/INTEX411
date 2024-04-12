@@ -151,24 +151,61 @@
                     </p>
                 </div>
             </div>
+            <!-- Icon Divider-->
+            <div class="divider-custom">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><img src="~/img/lego brick.png" width="50px" /></div>
+                <div class="divider-custom-line"></div>
+            </div>
             <!-- About Section Button-->
-            <div class="text-center mt-4">
-                <a class="btn btn-primary btn-xl" asp-controller="Customer" asp-action="ProductsCust">
-                    Shop Now!
-                </a>
+            <div class="text-center">
+                <div class="row justify-content-center">
+                    <div class="col-md-7">
+                        <div id="mainbox" class="mainbox">
+                            <div id="box" class="box">
+                                <div class="box1">
+                                    <span class="span1"><b>10% Off</b></span>
+                                    <span class="span2"><b>BOGO Free</b></span>
+                                    <span class="span3"><b>20% Off</b></span>
+                                    <span class="span4"><b>Free Minifig</b></span>
+                                </div>
+                                <div class="box2">
+                                    <span class="span1"><b>10% Off</b></span>
+                                    <span class="span2"><b>Free 2x2</b></span>
+                                    <span class="span3"><b>35% Off</b></span>
+                                    <span class="span4"><b>Free Shipping</b></span>
+                                </div>
+                            </div>
+
+                            <button class="spin" onclick="myfunction()">SPIN</button>
+                        </div>
+                        <br />
+                        <h6 id="result">Share what you won with #AuroraBricksWheel!</h6>
+                    </div>
+                </div>
             </div>
-            <div id="discount-wheel-container">
-                <div id="discount-wheel"></div>
-                <button id="spin-button">Spin</button>
-            </div>
+            
             <script>
-                document.getElementById("spin-button").addEventListener("click", function () {
-                    // Add spinning animation here
-                    // Example: Change the background color of the wheel for visual effect
-                    document.getElementById("discount-wheel").style.backgroundColor = "yellow";
-                    // You can also add more complex spinning animations using CSS animations or JavaScript
-                });
+                function myfunction() {
+
+
+                    var x = 1024; //min value
+                    var y = 9999; // max value
+
+                    var deg = Math.floor(Math.random() * (x - y)) + y;
+
+                    document.getElementById('box').style.transform = "rotate(" + deg + "deg)";
+
+                    var element = document.getElementById('mainbox');
+                    element.classList.remove('animate');
+                    setTimeout(function () {
+                        element.classList.add('animate');
+                    }, 5000); //5000 = 5 second
+                }
+
             </script>
+
+
 
         </div>
     </section>
