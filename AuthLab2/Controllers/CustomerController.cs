@@ -75,53 +75,35 @@ namespace AuthLab2.Controllers
         {
             return View();
         }
+
         public IActionResult Index()
         {
             var viewModel = new TestViewModel();
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var customer = _repo.Customers.FirstOrDefault(c => c.UserId == userId);
+            viewModel.FirstName = customer?.first_name;
+            viewModel.LastName = customer?.last_name;
 
-            if (User.Identity.IsAuthenticated)
-            {
-                // Get the user's identity ID
-                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            // If customer is null, or they have no personal recommendations, use default
+            int customerID = customer?.customer_ID ?? 29135;
+            var userRecs = _repo.user_recommendations.FirstOrDefault(ur => ur.customer_ID == customerID);
 
-                // Find the customer that has a matching UserId
-                var customer = _repo.Customers.FirstOrDefault(c => c.UserId == userId);
-
-                if (customer != null)
-                {
-                    // Find the user's recommendations based on the Customer_ID
-                    viewModel.FirstName = customer.first_name;
-                    viewModel.LastName = customer.last_name;
-                    var userRecs = _repo.user_recommendations.FirstOrDefault(ur => ur.customer_ID == customer.customer_ID);
-
-                    if (userRecs != null)
-                    {
-                        // Populate the viewModel based on the user's recommendations
-                        viewModel.user_recommendations = userRecs;
-                        viewModel.Product = _repo.Products.FirstOrDefault(p => p.product_ID == userRecs.if_you_liked);
-                        viewModel.uRecommendedProducts = new List<Product>
-                {
-                    _repo.Products.FirstOrDefault(p => p.product_ID == userRecs.Recommendation_1),
-                    _repo.Products.FirstOrDefault(p => p.product_ID == userRecs.Recommendation_2),
-                    _repo.Products.FirstOrDefault(p => p.product_ID == userRecs.Recommendation_3),
-                    _repo.Products.FirstOrDefault(p => p.product_ID == userRecs.Recommendation_4),
-                    _repo.Products.FirstOrDefault(p => p.product_ID == userRecs.Recommendation_5)
-                }.Where(p => p != null).ToList();
-                    }
-                }
-            }
-
-            // Fallback to default recommendations if no customer or user recommendations were found
-            if (viewModel.uRecommendedProducts == null || !viewModel.uRecommendedProducts.Any())
-            {
-                var defaultUserRecs = _repo.user_recommendations.FirstOrDefault(ur => ur.customer_ID == 29135);
-                viewModel.user_recommendations = defaultUserRecs;
-                // ... populate viewModel.uRecommendedProducts based on defaultUserRecs
-            }
+            viewModel.user_recommendations = userRecs ?? _repo.user_recommendations.FirstOrDefault(ur => ur.customer_ID == 29135);
+            viewModel.Product = _repo.Products.FirstOrDefault(p => p.product_ID == viewModel.user_recommendations.if_you_liked);
+            viewModel.uRecommendedProducts = new List<Product>
+    {
+        _repo.Products.FirstOrDefault(p => p.product_ID == viewModel.user_recommendations.Recommendation_1),
+        _repo.Products.FirstOrDefault(p => p.product_ID == viewModel.user_recommendations.Recommendation_2),
+        _repo.Products.FirstOrDefault(p => p.product_ID == viewModel.user_recommendations.Recommendation_3),
+        _repo.Products.FirstOrDefault(p => p.product_ID == viewModel.user_recommendations.Recommendation_4),
+        _repo.Products.FirstOrDefault(p => p.product_ID == viewModel.user_recommendations.Recommendation_5)
+    }.Where(p => p != null).ToList();
 
             ViewBag.RefererUrl = Request.Headers["Referer"].ToString();
             return View(viewModel);
         }
+
+
 
 
         public IActionResult ProductDetailsCust(int id, string returnUrl = null)

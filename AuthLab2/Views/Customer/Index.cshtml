@@ -1,5 +1,6 @@
 ﻿@{
-    ViewData["Title"] = $"Welcome back, {Model.FirstName} {Model.LastName}!";
+    var welcomeName = string.IsNullOrWhiteSpace(Model.FirstName) && string.IsNullOrWhiteSpace(Model.LastName) ? "Lego Fan" : $"{Model.FirstName} {Model.LastName}";
+    ViewData["Title"] = $"Welcome back, {welcomeName}!";
 }
 
 
@@ -224,7 +225,15 @@
             <br />
             <br />
             <!-- INSERT PRODUCT ITEMS HERE-->
-            <h2>Because you liked @Model.Product.name:</h2>
+            @if (Model.Product != null && Model.Product.name != "Flying Ford Anglia") // assuming "Flying Ford Anglia" indicates default recommendations
+            {
+                <h2>Because you liked @Model.Product.name:</h2>
+            }
+            else
+            {
+                <h2>Trending Now:</h2>
+            }
+
 
             <div>
                 
