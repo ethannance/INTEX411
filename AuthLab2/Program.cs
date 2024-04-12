@@ -25,12 +25,17 @@ internal class Program
             options.MinimumSameSitePolicy = SameSiteMode.None;
         });
 
-        // Add services to the container.
-        var connectionString = configuration.GetConnectionString("DefaultConnection")
-            ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+        // AZURE CONNECTION STRING.
+        var connectionString = configuration.GetConnectionString("LegoDBConnectionString")
+            ?? throw new InvalidOperationException("The connection string 'LegoDBConnectionString' was not found.");
 
         services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(connectionString));
+
+        services.AddDbContext<LegoContext>(options =>
+            options.UseSqlServer(connectionString));
+
+        //
 
         services.AddDatabaseDeveloperPageExceptionFilter();
 
