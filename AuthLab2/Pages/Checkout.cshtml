@@ -33,6 +33,11 @@
                         <td><b>Subtotal:</b></td>
                         <td><b>@Model.Order.amount.ToString("C")</b></td>
                     </tr>
+                    <!-- Aurora Points Row -->
+                    <tr>
+                        <td><b>Aurora Points:</b></td>
+                        <td><b>@((int)(Model.Order.amount * 3)) Points</b></td>
+                    </tr>
                 </tbody>
             </table>
         </div>
