@@ -29,7 +29,7 @@
                 <td>Date</td>
                 <td>Amount</td>
                 <td>Shipping Address</td>
-                <td>Possible Fraud</td>
+                <td style="width: 20px;">Possible Fraud</td>
                 <td>Delete</td>
             </tr>
 
@@ -42,7 +42,7 @@
                     <td>@o.date</td>
                     <td>$@o.amount</td>
                     <td>@o.shipping_address</td>
-                    <td>
+                    <td class="text-center">
                         @if (o.fraud)
                         {
                             <i class="fas fa-flag text-danger"></i>

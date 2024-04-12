@@ -28,11 +28,11 @@
     <table class="table table-bordered">
         <thead class="fw-bold text-center"> <!--Headings-->
             <tr>
-                <td>Name</td>
+                <td style="width: 300px;">Name</td>
                 <td>Year</td>
                 <td>Price</td>
-                <td>Link</td>
-                <td>Colors</td>
+                <td style="width: 90px;">Link</td>
+                <td style="width: 125px;">Colors</td>
                 <td>Category</td>
                 <td>Edit</td>
                 <td>Delete</td>
@@ -49,10 +49,10 @@
                         <td>@p.img_link</td>
                         <td>@p.primary_color / @p.secondary_color</td>
                         <td>@p.category</td>
-                        <td>
+                        <td class="text-center">
                             <a class="btn btn-info text-white" asp-controller="Admin" asp-action="ProductsEditAdmin" asp-route-id="@p.row_ID">Edit</a>
                         </td>
-                        <td>
+                        <td class="text-center">
                             <a class="btn btn-danger" asp-controller="Admin" asp-action="ProductsDeleteAdmin" asp-route-id="@p.row_ID">Delete</a>
                         </td>
                         
