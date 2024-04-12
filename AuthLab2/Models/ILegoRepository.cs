@@ -15,5 +15,6 @@
         public void AddCustomerAsync(Customer customer);
         public void EditUser(Customer customer);
         public void DeleteUser(Customer customer);
+        public void AddUser(Customer customer);
     }
 }

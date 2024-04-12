@@ -1,0 +1,100 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@{
+    ViewData["Title"] = "Edit User";
+}
+
+<vc:nav-bar-types user="Admin"></vc:nav-bar-types>
+<vc:submenu-types view="Default"></vc:submenu-types>
+
+@model Customer
+
+
+<!-- Icon Divider-->
+<div class="divider-custom">
+    <div class="divider-custom-line"></div>
+    <div class="divider-custom-icon"><img src="~/img/lego brick.png" width="50px" /></div>
+    <div class="divider-custom-line"></div>
+</div>
+<div class="container m-5 p-5">
+    <div class="row justify-content-center">
+        <div class="col-md-9" style="background-color: #e5ffe5; padding: 20px; border-radius: 10px;">
+            <!--Adding a product form-->
+            <form method="post" asp-controller="Admin" asp-action="UsersListAddAdmin">
+                @Html.AntiForgeryToken()
+                <div class="row">
+                    <div class="col-md-6">
+                        <label asp-for="customer_ID">Customer ID:</label>
+                        <input type="int" asp-for="customer_ID" class="form-control" style="border-radius: 5px;" />
+                        <input type="int" asp-for="UserId" hidden />
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-6">
+                        <label asp-for="first_name">First Name:</label>
+                        <input type="text" asp-for="first_name" class="form-control" style="border-radius: 5px;" />
+                    </div>
+                    <div class="col-md-4">
+                        <label asp-for="last_name">Last Name:</label>
+                        <input type="text" asp-for="last_name" class="form-control" style="border-radius: 5px;" />
+                    </div>
+                    <div class="col-md-2">
+                        <label asp-for="age">Age:</label>
+                        <input type="int" asp-for="age" placeholder="ex: 60" class="form-control" style="border-radius: 5px;" />
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-4">
+                        <label asp-for="birth_date">Birthday:</label>
+                        <input type="text" asp-for="birth_date" class="form-control" style="border-radius: 5px;" />
+                    </div>
+                    <div class="col-md-4">
+                        <label asp-for="gender">Gender:</label>
+                        <select asp-for="gender" class="form-select" style="border-radius: 5px;">
+                            <option value="" selected>Select a Gender</option>
+                            <option>M</option>
+                            <option>F</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label asp-for="country_of_residence">Country:</label>
+                        <select asp-for="country_of_residence" class="form-select" style="border-radius: 5px;">
+                            <option value="" selected>Select a Country</option>
+                            <option>China</option>
+                            <option>India</option>
+                            <option>Russia</option>
+                            <option>United Kingdom</option>
+                            <option>USA</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="user_role">User Role:</label>
+                        <select id="user_role" class="form-select" style="border-radius: 5px;">
+                            <option value="" selected>Select a Role</option>
+                            <option>Customer</option>
+                            <option>Admin</option>
+                        </select>
+                    </div>
+                </div>
+                <br />
+                <br />
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary btn-lg">Save Changes</button>
+                    <a class="btn btn-info btn-lg ms-2 text-white" asp-controller="Admin" asp-action="UsersListAdmin">Cancel</a>
+                </div>
+                <div asp-validation-summary="All"></div>
+            </form>
+
+        </div>
+    </div>
+
+</div>

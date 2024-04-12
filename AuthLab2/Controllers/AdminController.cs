@@ -199,6 +199,27 @@ namespace AuthLab2.Controllers
             return View("ConfirmationAdmin", customerToDelete);
         }
 
+        [HttpGet]
+        public IActionResult UsersListAddAdmin()
+        {
+            return View(new Customer());
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult UsersListAddAdmin(Customer response)
+        {
+            if (ModelState.IsValid)
+            {
+                _repo.AddUser(response);
+
+                return View("ConfirmationAdmin", response);
+            }
+            else
+            {
+                return View(response);
+            }
+        }
+
         public IActionResult UsersListEditConfirmation() { return View(); }
         public IActionResult ProductsAdmin() //Lists all of the products to the admin
         {
