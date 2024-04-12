@@ -186,9 +186,6 @@ namespace AuthLab2.Controllers
             return View("ConfirmationAdmin", customerToDelete);
         }
 
-        [HttpGet]
-        public IAction
-
         public IActionResult UsersListEditConfirmation() { return View(); }
         public IActionResult ProductsAdmin() //Lists all of the products to the admin
         {
