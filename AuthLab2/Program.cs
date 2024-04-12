@@ -2,6 +2,8 @@ using AuthLab2.Data;
 using AuthLab2.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+
 
 internal class Program
 {
