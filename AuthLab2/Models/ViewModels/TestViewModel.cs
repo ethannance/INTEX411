@@ -9,5 +9,7 @@ namespace AuthLab2.Models.ViewModels
         public Product Product { get; set; }
         public List<Product> uRecommendedProducts { get; set; }
         public bool IsUserLoggedIn { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
     }
 }
