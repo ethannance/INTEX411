@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 
 internal class Program
 {
-    public void ConfigureServices(IServiceCollection services)
+    public void ConfigureServices(IServiceCollection services) //CSRF Token
     {
         services.AddMvc();
         services.AddAntiforgery(options => options.HeaderName = "X-CSRF-TOKEN");
