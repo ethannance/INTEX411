@@ -1,0 +1,181 @@
+﻿@{
+    ViewData["Title"] = "Aurora Points Rewards";
+}
+
+<vc:nav-bar-types user="Customer"></vc:nav-bar-types>
+<vc:submenu-types view="Default"></vc:submenu-types>
+
+<style>
+    .container {
+        max-width: 960px; /* Adjust as necessary for your design */
+        margin: auto; /* Centers the container horizontally */
+    }
+
+    .card-header {
+        background-color: #007bff;
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+        padding: 10px;
+    }
+
+    .card {
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        border: none;
+        border-radius: 8px;
+    }
+
+    .card-body {
+        padding: 20px;
+        background-color: #f8f9fa;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+    }
+
+    .card-deck {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center; /* Centers cards within the deck */
+        align-items: stretch; /* Aligns cards vertically */
+    }
+
+        .card-deck .card {
+            margin: 10px;
+            flex: 1 0 21%; /* Adjusts the 'flex-basis' to fit four cards */
+            /* Ensure that margins are considered, total width = 4 * 21% + margins must be <= 100% */
+        }
+
+    .card-header {
+        background-color: #007bff; /* Primary color */
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+        padding: 10px;
+    }
+
+    .card {
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        border: none;
+        border-radius: 8px;
+    }
+
+    .card-body {
+        padding: 20px;
+        background-color: #f8f9fa; /* Light grey background */
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+    }
+
+    .card ul {
+        padding-left: 20px;
+    }
+
+    .divider-custom {
+        display: flex;
+        justify-content: center; /* Center the divider content horizontally */
+        align-items: center; /* Center the divider content vertically */
+    }
+
+    .divider-custom-icon img {
+        width: 50px;
+    }
+</style>
+
+<body>
+    <div class="divider-custom" style="padding-left: 55px;">
+        <div class="divider-custom-line"></div>
+        <div class="divider-custom-icon"><img src="~/img/lego brick.png" width="50px" /></div>
+        <div class="divider-custom-line"></div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2>Aurora Points</h2>
+                <p>Earn points as you engage with Aurora's world of LEGO, and redeem them for exciting rewards!</p>
+            </div>
+        </div>
+        <br />
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <h4 text-center>How It Works</h4>
+                <p text-center>Every purchase, social media interaction, or event participation earns you Aurora Points. Accumulate these points to unlock various tiers of rewards, from discounts and exclusive merchandise to unique experiences!</p>
+            </div>
+            <div class="divider-custom" style="padding-left: 55px;">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><img src="~/img/lego brick.png" width="50px" /></div>
+                <div class="divider-custom-line"></div>
+            </div>
+            <h2 text-center>Your Total Aurora Points: 127</h2>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-12">
+                <h3>Reward Tiers</h3>
+                <br />
+                <div class="card-deck">
+                    <div class="card">
+                        <div class="card-header" style="background-color: #ffdd57;">Bronze (100 - 500 Points)</div>
+                        <div class="card-body">
+                            <ul>
+                                <li>5% Discount on next purchase</li>
+                                <li>Free Shipping on your next order</li>
+                                <li>Exclusive monthly newsletter</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="card">
+                        <div class="card-header" style="background-color: #c0c0c0;">Silver (501 - 1000 Points)</div>
+                        <div class="card-body">
+                            <ul>
+                                <li>10% Discount on all purchases</li>
+                                <li>Early access to new products</li>
+                                <li>Join the private "Brick Club" forum</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="card">
+                        <div class="card-header" style="background-color: #ffd700;">Gold (1001 - 5000 Points)</div>
+                        <div class="card-body">
+                            <ul>
+                                <li>Personalized video message from Aurora</li>
+                                <li>Custom LEGO portrait</li>
+                                <li>Free entry to an annual LEGO fan event</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="card">
+                        <div class="card-header" style="background-color: #e5e4e2;">Platinum (5001+ Points)</div>
+                        <div class="card-body">
+                            <ul>
+                                <li>One-on-one virtual building session with Aurora</li>
+                                <li>Featured in Aurora's social media</li>
+                                <li>Lifetime 15% discount on all products</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider-custom" style="padding-left: 55px;">
+        <div class="divider-custom-line"></div>
+        <div class="divider-custom-icon"><img src="~/img/lego brick.png" width="50px" /></div>
+        <div class="divider-custom-line"></div>
+    </div>
+    </div>
+</body>

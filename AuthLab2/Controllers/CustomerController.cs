@@ -103,7 +103,11 @@ namespace AuthLab2.Controllers
             return View(viewModel);
         }
 
-
+        public IActionResult AuroraPoints()
+        {
+            
+            return View();
+        }
 
 
         public IActionResult ProductDetailsCust(int id, string returnUrl = null)
