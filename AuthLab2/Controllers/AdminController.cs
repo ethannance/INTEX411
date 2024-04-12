@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.ML.OnnxRuntime;
 using System.Data;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 
 namespace AuthLab2.Controllers
@@ -16,11 +17,15 @@ namespace AuthLab2.Controllers
         private readonly ILogger<AdminController> _logger;
         private readonly ILegoRepository _repo;
         private readonly InferenceSession _session;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public AdminController(ILogger<AdminController> logger, ILegoRepository repo)
+        public AdminController(ILogger<AdminController> logger, ILegoRepository repo, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _logger = logger;
             _repo = repo;
+            _userManager = userManager;
+            _roleManager = roleManager;
         }
         public IActionResult Index()
         {
@@ -110,6 +115,62 @@ namespace AuthLab2.Controllers
 
             return View("ConfirmationAdmin", updatedCustomer);
         }
+        [HttpPost]
+        public async Task<IActionResult> MakeAdmin(string userId)
+        {
+            // Find the user by id
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                // Handle user not found
+                return NotFound();
+            }
+
+            // Check if the user is already in the "Admin" role
+            if (!await _userManager.IsInRoleAsync(user, "Admin"))
+            {
+                // Add the user to the "Admin" role
+                await _userManager.AddToRoleAsync(user, "Admin");
+            }
+
+            // Remove the user from the "Customer" role (if they are in it)
+            if (await _userManager.IsInRoleAsync(user, "Customer"))
+            {
+                await _userManager.RemoveFromRoleAsync(user, "Customer");
+            }
+
+            // Redirect or return appropriate response
+            return RedirectToAction("UsersListAdmin");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> MakeCustomer(string userId)
+        {
+            // Find the user by id
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                // Handle user not found
+                return NotFound();
+            }
+
+            // Check if the user is already in the "Customer" role
+            if (!await _userManager.IsInRoleAsync(user, "Customer"))
+            {
+                // Add the user to the "Customer" role
+                await _userManager.AddToRoleAsync(user, "Customer");
+            }
+
+            // Remove the user from the "Admin" role (if they are in it)
+            if (await _userManager.IsInRoleAsync(user, "Admin"))
+            {
+                await _userManager.RemoveFromRoleAsync(user, "Admin");
+            }
+
+            // Redirect or return appropriate response
+            return RedirectToAction("UsersListAdmin");
+        }
+
         public IActionResult UsersListEditConfirmation() { return View(); }
         public IActionResult ProductsAdmin() //Lists all of the products to the admin
         {
