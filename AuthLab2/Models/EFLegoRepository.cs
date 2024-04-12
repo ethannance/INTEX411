@@ -60,6 +60,11 @@ namespace AuthLab2.Models
             _context.Customers.Remove(customer);
             _context.SaveChanges();
         }
+        public void AddUser(Customer customer)
+        {
+            _context.Customers.Add(customer);
+            _context.SaveChanges();
+        }
 
     }
 }
