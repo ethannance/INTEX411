@@ -11,7 +11,7 @@
 <vc:nav-bar-types user="Admin"></vc:nav-bar-types>
 <vc:submenu-types view="Default"></vc:submenu-types>
 
-@model Product
+@model AuthLab2.Models.ViewModels.TestViewModel
 
 <!DOCTYPE html>
 <html lang="en">
@@ -75,7 +75,7 @@
             </div>
         </div>
     </section>
-    <!-- Icon Divider-->
+@*     <!-- Icon Divider-->
     <div class="divider-custom">
         <div class="divider-custom-line"></div>
         <div class="divider-custom-icon"><img src="~/img/lego brick.png" width="50px" /></div>
@@ -92,22 +92,32 @@
                 var displayedNames = new HashSet<string>();
             }
 
-            <p>Insert product details here</p>
-            @* <div>
-                @foreach (Product p in Model.Products)
+            <div class="row recommendations">
+                @foreach (var product in Model.uRecommendedProducts)
                 {
-                    if (displayedNames.Add(p.name)) // Only displays the product if its name is unique so far
-                    {
-                        <div class="card-container">
-                            <partial name="ProductSummary" model="p" />
-                        </div>
-                    }
+                    <div class="col-md-2">
+                        <a href="@Url.Action("ProductDetails", "Home", new { id = product.product_ID })" style="text-decoration: none; color: inherit;">
+                            <div class="card bg-light" style="height: 300px; width: 100%; margin: 10px;">
+                                <img src="@product.img_link" class="card-img-top" alt="@product.name">
+                                <div class="card-body text-center">
+                                    <h4 class="card-title">@product.name</h4>
+                                    <div class="price-and-button-container">
+                                        <div class="price">
+                                            <h6 class="btn-primary btn-sm">$@product.price.00</h6>
+                                        </div>
+                                       
+                                    </div>
+                                    <!-- Add other product details as needed -->
+                                </div>
+                            </div>
+                        </a>
+                    </div>
                 }
-            </div> *@
+            </div>
             
 
         </div>
-    </section>
+    </section> *@
    
     <!-- Portfolio Modals-->
     <!-- Portfolio Modal 1-->

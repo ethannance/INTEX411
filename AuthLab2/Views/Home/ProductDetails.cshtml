@@ -112,7 +112,8 @@
         <form method="post" asp-page="/Cart" class="add-to-cart-form" id="add-to-cart-form">
             <input type="hidden" name="productId" value="@Model.Product.product_ID" />
             <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.Path" />
-            <button type="submit" class="btn btn-primary">Add to Cart</button>
+            <a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Login">Add to Cart</a>
+                @* </a><button type="submit" class="btn btn-primary">Add to Cart</button> *@
         </form>
 
         <!-- Other HTML elements -->
