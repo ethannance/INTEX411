@@ -170,6 +170,21 @@ namespace AuthLab2.Controllers
             // Redirect or return appropriate response
             return RedirectToAction("UsersListAdmin");
         }
+        [HttpGet] //Delete Customers
+        public IActionResult UsersListDeleteAdmin(int id)
+        {
+            var userToDelete = _repo.Customers
+                .Single(x => x.customer_ID == id);
+
+            return View("UsersListDeleteAdmin", userToDelete);
+        }
+        [HttpPost]
+        public IActionResult UsersListDeleteAdmin(Customer customerToDelete)
+        {
+            _repo.DeleteUser(customerToDelete);
+
+            return View("ConfirmationAdmin", customerToDelete);
+        }
 
         public IActionResult UsersListEditConfirmation() { return View(); }
         public IActionResult ProductsAdmin() //Lists all of the products to the admin
